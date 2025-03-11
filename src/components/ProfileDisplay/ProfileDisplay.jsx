@@ -8,20 +8,17 @@ const ProfileDisplay = () => {
         <div className="profile-container">
             <div className="profile-menu">
                 <InteractiveBorder
-                    innerSize={'62px'}
-                    outerSize={'70px'}
+                    outerSize={70}
                     backColorStartLiner={'#F5A623'}
                     backColorEndLiner={'#D18B17'}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
-                    innerSize={'130px'}
-                    outerSize={'140px'}
+                    outerSize={140}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
-                    innerSize={'62px'}
-                    outerSize={'70px'}
+                    outerSize={70}
                     backColorStartLiner={'#EA8E8E'}
                     backColorEndLiner={'#D64636'}
                 >

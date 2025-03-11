@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 14px;
+    padding: 20px;
 }
 
 .profile-menu {
@@ -14,16 +14,10 @@
     padding-bottom: 20px;
 }
 
-.avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
 .progress-container {
     font-family: 'Inria Sans', sans-serif;
     font-size: 23px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 20px;
     letter-spacing: 0.05em;
     text-align: left;
@@ -32,7 +26,7 @@
     flex-direction: row;
     width: 100%;
     color: white;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .progress-label {
@@ -42,16 +36,16 @@
 .progress-bar {
     position: relative; /* Это нужно для абсолютного позиционирования текста */
     font-family: 'Inria Sans', sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.10em;
     text-align: center;
-    width: 70%;
-    height: 15px;
+    width: 65%;
+    height: 20px;
     background: #FFF8F8;
-    border-radius: 8px;
-    margin: 5px 0;
+    border-radius: 10px;
+    margin: 1px 0;
 }
 
 .progress-value {
@@ -70,5 +64,5 @@
 .progress-fill {
     height: 100%;
     background: orange;
-    border-radius: 8px;
+    border-radius: 10px;
 }

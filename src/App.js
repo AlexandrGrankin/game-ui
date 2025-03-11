@@ -1,6 +1,7 @@
 import './styles/App.css';
 import ScoreDisplay from "./components/ScoreDisplay/ScoreDisplay";
 import ProfileDisplay from "./components/ProfileDisplay/ProfileDisplay";
+import CardSection from "./components/CardSection/CardSection";
 
 function App() {
     return (
@@ -13,11 +14,7 @@ function App() {
             <ProfileDisplay></ProfileDisplay>
 
             {/* Кнопки выбора */}
-            <div className="game-buttons">
-                <button className="game-option rock">Камень</button>
-                <button className="game-option scissors">Ножницы</button>
-                <button className="game-option paper">Бумага</button>
-            </div>
+            <CardSection></CardSection>
 
             {/* Кнопка клика */}
             <button className="click-button">Click<br/>9/10<br/>00:01:12</button>
