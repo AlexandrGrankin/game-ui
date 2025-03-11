@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #1e1e1e;
+}
+
+.container {
+    position: relative; /* создаём контекст для псевдо-элемента */
+    width: 375px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    z-index: 0;
+}
+
+.container::before {
+    content: ""; /* псевдо-элемент без содержания */
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, #0A4589, #062A55);
+    z-index: -1;
+}
+
+.container::after {
+    content: ""; /* псевдо-элемент без содержания */
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, #FFFDFD, #ADADAD);
+    z-index: -1;
+}
+
+img {
+    display: flex;
+    justify-content: center; /* Центрирование по вертикали */
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.progress-container {
+    width: 100%;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+
+.progress-fill {
+    height: 10px;
+    background: orange;
+    border-radius: 5px;
+}
+
+.game-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.game-option {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.click-button {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 18px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.battle-button, .rules-button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
