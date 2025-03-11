@@ -1,5 +1,6 @@
 import './styles/App.css';
 import ScoreDisplay from "./components/ScoreDisplay/ScoreDisplay";
+import ProfileDisplay from "./components/ProfileDisplay/ProfileDisplay";
 
 function App() {
     return (
@@ -9,16 +10,7 @@ function App() {
             <ScoreDisplay></ScoreDisplay>
 
             {/* Аватар и прогресс */}
-            <div className="profile">
-                <img src="/avatar.png" alt="Avatar" className="avatar"/>
-                <div className="progress-container">
-                    <span className="progress-label">Щегол:</span>
-                    <div className="progress-bar">
-                        <div className="progress-fill" style={{width: "23%"}}></div>
-                    </div>
-                    <span className="progress-value">23/100</span>
-                </div>
-            </div>
+            <ProfileDisplay></ProfileDisplay>
 
             {/* Кнопки выбора */}
             <div className="game-buttons">
@@ -33,7 +25,7 @@ function App() {
             {/* Нижние кнопки */}
             <div className="bottom-buttons">
                 <button className="battle-button">Бои</button>
-                <button className="rules-button">Правила</button>
+                <button className="rules-button">Задания</button>
             </div>
         </div>
     );
