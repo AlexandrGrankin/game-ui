@@ -1,0 +1,74 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+}
+
+.profile-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.progress-container {
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    color: white;
+    padding-bottom: 30px;
+}
+
+.progress-label {
+    margin-right: 14px; /* Добавим отступ между меткой и прогресс-баром */
+}
+
+.progress-bar {
+    position: relative; /* Это нужно для абсолютного позиционирования текста */
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.12em;
+    text-align: center;
+    width: 70%;
+    height: 15px;
+    background: #FFF8F8;
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование текста внутри прогресс-бара */
+    font-weight: bold;
+    z-index: 1; /* Убедимся, что текст поверх */
+    background: linear-gradient(to bottom, #064DA0, #0A4488); /* Линейный градиент */
+    -webkit-background-clip: text; /* Важно для поддерживаемых браузеров */
+    background-clip: text; /* Для других браузеров */
+    color: transparent; /* Прозрачный цвет текста */
+}
+
+.progress-fill {
+    height: 100%;
+    background: orange;
+    border-radius: 8px;
+}
