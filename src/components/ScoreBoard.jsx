@@ -7,11 +7,11 @@ const ScoreBoard = ({label, value, iconStart, iconEnd}) => {
             <span className="label">{label}</span>
             <div className="scoreboard-counter">
                 <div className="icon-container">
-                    {iconStart && <img src={iconStart} alt="Icon" width="36" height="36"/>}
+                    {iconStart && <img className="icon" src={iconStart} alt="Icon"/>}
                 </div>
                 <span className="value">{value}</span>
                 <div className="icon-container">
-                    {iconEnd && <img src={iconEnd} alt="Icon" width="36" height="36"/>}
+                    {iconEnd && <img className="icon" src={iconEnd} alt="Icon"/>}
                 </div>
             </div>
         </div>
