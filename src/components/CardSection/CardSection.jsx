@@ -7,17 +7,17 @@ const CardSection = () => {
     return (
         <div className="card__section">
             <InteractiveBorderCard
-                outerSize={100}
+                outerSize={25}
                 backColorStartLiner={'#9AC9FF'}
                 backColorEndLiner={'#4387D6'}
             ></InteractiveBorderCard>
             <InteractiveBorderCard
-                outerSize={100}
+                outerSize={25}
                 backColorStartLiner={'#EA8E8E'}
                 backColorEndLiner={'#D64636'}
             ></InteractiveBorderCard>
             <InteractiveBorderCard
-                outerSize={100}
+                outerSize={25}
                 backColorStartLiner={'#EAC17E'}
                 backColorEndLiner={'#D18B17'}></InteractiveBorderCard>
         </div>

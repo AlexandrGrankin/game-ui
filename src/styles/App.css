@@ -10,8 +10,8 @@ body {
 
 .container {
     position: relative; /* создаём контекст для псевдо-элемента */
-    max-width: 1440px;
     min-width: 375px;
+    width: 100vw;
     padding: 0;
     margin: 0;
     text-align: center;
