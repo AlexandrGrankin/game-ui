@@ -14,18 +14,21 @@ const CardSection = () => {
                 backColorStartLiner={'#9AC9FF'}
                 backColorEndLiner={'#4387D6'}
                 icons={stone}
+                size={16}
             ></InteractiveBorderCard>
             <InteractiveBorderCard
                 outerSize={26}
                 backColorStartLiner={'#EA8E8E'}
                 backColorEndLiner={'#D64636'}
                 icons={cut}
+                size={14}
             ></InteractiveBorderCard>
             <InteractiveBorderCard
                 outerSize={26}
                 backColorStartLiner={'#EAC17E'}
                 backColorEndLiner={'#D18B17'}
                 icons={paper}
+                size={14}
             >
             </InteractiveBorderCard>
         </div>

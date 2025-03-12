@@ -11,21 +11,23 @@ const ButtonSection = () => {
         <div className="button__container">
             <div className="button__section">
                 <InteractiveBorder
-                    outerSize={12}
-                    backColorStartLiner={'#4A90E2'}
-                    backColorEndLiner={'#357ABD'}
+                    outerSize={14}
+                    backColorStartLiner={'#EA8E8E'}
+                    backColorEndLiner={'#D64636'}
                     icons={swords}
+                    size={9}
                 ></InteractiveBorder>
                 <InteractiveBorderClick
-                    outerSize={20}
+                    outerSize={22}
                     backColorStartLiner={'#4A90E2'}
                     backColorEndLiner={'#357ABD'}
                 ></InteractiveBorderClick>
                 <InteractiveBorder
-                    outerSize={12}
-                    backColorStartLiner={'#4A90E2'}
-                    backColorEndLiner={'#357ABD'}
+                    outerSize={14}
+                    backColorStartLiner={'#F5A623'}
+                    backColorEndLiner={'#D18B17'}
                     icons={task}
+                    size={11}
                 ></InteractiveBorder>
             </div>
         </div>

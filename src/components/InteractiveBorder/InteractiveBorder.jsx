@@ -1,7 +1,7 @@
 import React from 'react';
 import "./InteractiveBorder.css"
 
-const InteractiveBorder = ({outerSize, backColorStartLiner, backColorEndLiner, icons}) => {
+const InteractiveBorder = ({outerSize, backColorStartLiner, backColorEndLiner, icons, size}) => {
 
     return (
         <div className="interactive__border">
@@ -18,7 +18,11 @@ const InteractiveBorder = ({outerSize, backColorStartLiner, backColorEndLiner, i
                 }}
                      className='interactive__border__inner'
                 >
-                    {icons && <img className="icon__border" src={icons} alt="Icon"/>}
+                    {icons && <img style={{
+                        height: size + 'vh',
+                        // width: size + 'vh',
+                    }}
+                                   className="icon__border" src={icons} alt="Icon"/>}
                 </div>
             </div>
         </div>
