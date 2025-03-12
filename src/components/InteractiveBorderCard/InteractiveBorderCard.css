@@ -5,6 +5,8 @@
     background: #fff;
     border-radius: 2vw;
     box-shadow: 0 3vw 5vw 1vw rgba(0, 0, 0, 0.2);
+    height: 28vh;
+    width: 27vw;
 }
 
 .interactive__border__card__inner {
@@ -14,4 +16,6 @@
     box-shadow: inset 0 0 0.8vw 0.2vw rgba(0, 0, 0, 0.35);
     background: #fff;
     border-radius: 1vw;
+    height: 26vh;
+    width: 24vw;
 }
