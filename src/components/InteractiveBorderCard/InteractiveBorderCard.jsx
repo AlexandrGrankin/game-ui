@@ -5,10 +5,7 @@ const InteractiveBorderCard = ({outerSize, backColorStartLiner, backColorEndLine
 
     return (
         <div className="interactive__border__card">
-            <div style={{
-            }}
-                 className='interactive__border__card__outer'
-            >
+            <div className='interactive__border__card__outer'>
                 <div style={{
                     background: `linear-gradient(to bottom, ${backColorStartLiner}, ${backColorEndLiner})` // Линейный градиент от #0A4589 до #062A55
                 }}
