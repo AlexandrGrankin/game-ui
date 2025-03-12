@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 1rem;
 }
 
 .profile-menu {
@@ -10,8 +10,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 0.5rem;
 }
 
 .progress-container {
@@ -26,7 +25,6 @@
     flex-direction: row;
     width: 100%;
     color: white;
-    padding-bottom: 20px;
 }
 
 .progress-label {

@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between;
     color: white;
-    padding-top: 14px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-top: 1vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
 }
 
 .score-display div {
@@ -22,7 +22,7 @@
     line-height: 20px;
     letter-spacing: 0.12em;
     text-align: left;
-    padding-bottom: 4px;
+    padding-bottom: 0.4vh;
 }
 
 .value {
@@ -49,5 +49,5 @@
     height: 38px;
     justify-content: left; /* Центрирование по вертикали */
     align-items: center;
-    padding: 0 4px;
+    padding: 0 0.2rem;
 }
