@@ -18,7 +18,7 @@ const InteractiveBorder = ({outerSize, backColorStartLiner, backColorEndLiner, i
                 }}
                      className='interactive__border__inner'
                 >
-
+                    {icons && <img className="icon__border" src={icons} alt="Icon"/>}
                 </div>
             </div>
         </div>

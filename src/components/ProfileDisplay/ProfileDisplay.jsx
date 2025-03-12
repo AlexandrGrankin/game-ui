@@ -1,6 +1,9 @@
 import React from 'react';
 import './ProfileDisplay.css';
 import InteractiveBorder from "../InteractiveBorder/InteractiveBorder";
+import wallet from "../../assets/icons/wallet.png";
+import social from "../../assets/icons/social.png";
+import avatar from "../../assets/icons/avatar.png";
 
 const ProfileDisplay = () => {
 
@@ -11,16 +14,19 @@ const ProfileDisplay = () => {
                     outerSize={14}
                     backColorStartLiner={'#F5A623'}
                     backColorEndLiner={'#D18B17'}
+                    icons={wallet}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
                     outerSize={24}
+                    icons={avatar}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
                     outerSize={14}
                     backColorStartLiner={'#EA8E8E'}
                     backColorEndLiner={'#D64636'}
+                    icons={social}
                 >
                 </InteractiveBorder>
             </div>

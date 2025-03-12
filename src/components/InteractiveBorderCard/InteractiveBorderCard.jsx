@@ -11,6 +11,8 @@ const InteractiveBorderCard = ({backColorStartLiner, backColorEndLiner, icons}) 
                 }}
                      className='interactive__border__card__inner'
                 >
+                    {icons && <img className="icon__card" src={icons} alt="Icon"/>}
+
                 </div>
             </div>
         </div>
