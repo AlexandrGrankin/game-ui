@@ -1,7 +1,8 @@
 .button__container {
     display: flex;
     align-items: center;
-    padding: 3vh 3vw 0 3vw;
+    padding: 0 3vw 3vh 3vw;
+    margin-top: auto;
 }
 
 .button__section {
