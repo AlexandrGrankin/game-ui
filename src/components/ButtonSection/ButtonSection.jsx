@@ -8,17 +8,17 @@ const ButtonSection = () => {
         <div className="button__container">
             <div className="button__section">
                 <InteractiveBorderClick
-                    outerSize={20}
-                    backColorStartLiner={'#4A90E2'}
-                    backColorEndLiner={'#357ABD'}
-                ></InteractiveBorderClick>
-                <InteractiveBorderClick
-                    outerSize={30}
+                    outerSize={12}
                     backColorStartLiner={'#4A90E2'}
                     backColorEndLiner={'#357ABD'}
                 ></InteractiveBorderClick>
                 <InteractiveBorderClick
                     outerSize={20}
+                    backColorStartLiner={'#4A90E2'}
+                    backColorEndLiner={'#357ABD'}
+                ></InteractiveBorderClick>
+                <InteractiveBorderClick
+                    outerSize={12}
                     backColorStartLiner={'#4A90E2'}
                     backColorEndLiner={'#357ABD'}
                 ></InteractiveBorderClick>

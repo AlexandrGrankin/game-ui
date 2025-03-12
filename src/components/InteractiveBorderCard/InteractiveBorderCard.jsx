@@ -1,7 +1,7 @@
 import React from 'react';
 import "./InteractiveBorderCard.css"
 
-const InteractiveBorderCard = ({outerSize, backColorStartLiner, backColorEndLiner, icons}) => {
+const InteractiveBorderCard = ({backColorStartLiner, backColorEndLiner, icons}) => {
 
     return (
         <div className="interactive__border__card">
