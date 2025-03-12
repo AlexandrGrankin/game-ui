@@ -15,7 +15,7 @@ const ProfileDisplay = () => {
                     backColorStartLiner={'#F5A623'}
                     backColorEndLiner={'#D18B17'}
                     icons={wallet}
-                    size={7}
+                    size={6.5}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
