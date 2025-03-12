@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3vw;
+    padding: 3vh 3vw 3vh 3vw;
 }
 
 .profile-menu {

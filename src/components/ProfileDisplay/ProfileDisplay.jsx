@@ -14,7 +14,7 @@ const ProfileDisplay = () => {
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
-                    outerSize={40}
+                    outerSize={35}
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
