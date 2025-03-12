@@ -17,7 +17,7 @@
 
 .label {
     font-family: 'Inria Sans', sans-serif;
-    font-size: 1.5vw;
+    font-size: 4vw;
     font-weight: 400;
     letter-spacing: 0.32vw;
     text-align: left;
@@ -26,7 +26,7 @@
 
 .value {
     font-family: 'Inria Sans', sans-serif;
-    font-size: 3vw;
+    font-size: 4vw;
     font-weight: 400;
     width: 100%;
     align-items: center;
@@ -44,13 +44,13 @@
     display: flex;
     background: #FFFFFF;
     border-radius: 2vw;
-    height: 3.5vw;
+    height: 5vw;
     justify-content: left; /* Центрирование по вертикали */
     align-items: center;
     padding: 0 0.6vw;
 }
 
 .icon{
-    height: 3vw;
-    width: 3vw;
+    height: 5vw;
+    width: 5vw;
 }
