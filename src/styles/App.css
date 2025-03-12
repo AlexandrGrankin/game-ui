@@ -11,6 +11,7 @@ body {
 .container {
     position: relative; /* создаём контекст для псевдо-элемента */
     min-width: 375px;
+    height: 100vh;
     width: 100vw;
     padding: 0;
     margin: 0;
@@ -25,21 +26,33 @@ body {
     bottom: 50%;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 80vw;
     background: linear-gradient(to bottom, #0A4589, #062A55);
     z-index: -1;
+}
+
+@media (max-width: 500px) {
+    .container::before {
+        height: 105vw;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 700px) {
+    .container::before {
+        height: 95vw;
+    }
 }
 
 .container::after {
     content: ""; /* псевдо-элемент без содержания */
     position: absolute;
-    top: 50%;
+    top: 20%;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 80%;
     background: linear-gradient(to bottom, #FFFDFD, #ADADAD);
-    z-index: -1;
+    z-index: -2;
 }
 
 img {
