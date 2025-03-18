@@ -1,20 +1,14 @@
 import React from 'react';
 import "./InteractiveBorderCard.css"
 
-const InteractiveBorderCard = ({backColorStartLiner, backColorEndLiner, icons, size}) => {
-
+const InteractiveBorderCard = ({icon, name}) => {
+    const iconName = `${name}__icon`;
+    const iconBackground = `${name}__background`;
     return (
         <div className="interactive__border__card">
             <div className='interactive__border__card__outer'>
-                <div style={{
-                    background: `linear-gradient(to bottom, ${backColorStartLiner}, ${backColorEndLiner})` // Линейный градиент от #0A4589 до #062A55
-                }}
-                     className='interactive__border__card__inner'
-                >
-                    {icons && <img style={{
-                        height: size + 'vh',
-                    }} className="icon__card" src={icons} alt="Icon"/>}
-
+                <div className={`interactive__border__card__inner ${iconBackground}`}>
+                    {icon && <img className={iconName} src={icon} alt={name}/>}
                 </div>
             </div>
         </div>

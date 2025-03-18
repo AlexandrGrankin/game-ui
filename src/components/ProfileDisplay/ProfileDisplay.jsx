@@ -11,25 +11,28 @@ const ProfileDisplay = () => {
         <div className="profile-container">
             <div className="profile-menu">
                 <InteractiveBorder
-                    outerSize={11}
+                    outerSize={20}
                     backColorStartLiner={'#F5A623'}
                     backColorEndLiner={'#D18B17'}
                     icons={wallet}
-                    size={6.5}
+                    size={12}
+                    name="wallet"
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
-                    outerSize={22}
+                    outerSize={38}
                     icons={avatar}
-                    size={21}
+                    size={36}
+                    name="avatar"
                 >
                 </InteractiveBorder>
                 <InteractiveBorder
-                    outerSize={11}
+                    outerSize={20}
                     backColorStartLiner={'#EA8E8E'}
                     backColorEndLiner={'#D64636'}
                     icons={social}
-                    size={7}
+                    size={14}
+                    name="social"
                 >
                 </InteractiveBorder>
             </div>

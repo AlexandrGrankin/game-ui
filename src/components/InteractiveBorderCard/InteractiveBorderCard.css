@@ -19,3 +19,27 @@
     height: 37vw;
     width: 24vw;
 }
+
+.stone__icon {
+    height: 24vw;
+}
+
+.stone__background {
+    background: linear-gradient(to bottom, #9AC9FF, #4387D6)
+}
+
+.cut__icon {
+    height: 20vw;
+}
+
+.cut__background {
+    background: linear-gradient(to bottom, #EA8E8E,#D64636)
+}
+
+.paper__icon {
+    height: 20vw;
+}
+
+.paper__background {
+    background: linear-gradient(to bottom, #EAC17E,#D18B17)
+}
