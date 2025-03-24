@@ -1,16 +1,27 @@
+// components/CardSection/CardSection.jsx
 import React from 'react';
-import "./CardSection.css"
+import "./CardSection.css";
 import InteractiveBorderCard from "../InteractiveBorderCard/InteractiveBorderCard";
-import paper from "../../assets/icons/paper.png";
-import stone from "../../assets/icons/stone.png";
-import cut from "../../assets/icons/cut.png";
+import {GRADIENTS, ICONS} from "../../constants/appConstants";
 
 const CardSection = () => {
     return (
-        <div className="card__section">
-            <InteractiveBorderCard icon={stone} name="stone"></InteractiveBorderCard>
-            <InteractiveBorderCard icon={cut} name="cut"></InteractiveBorderCard>
-            <InteractiveBorderCard icon={paper} name="paper"></InteractiveBorderCard>
+        <div className="card-section">
+            <InteractiveBorderCard
+                gradient={GRADIENTS.BLUE}
+                iconName={ICONS.STONE}
+                isClickable={false}
+            />
+            <InteractiveBorderCard
+                gradient={GRADIENTS.RED}
+                iconName={ICONS.CUT}
+                isClickable={false}
+            />
+            <InteractiveBorderCard
+                gradient={GRADIENTS.ORANGE}
+                iconName={ICONS.PAPER}
+                isClickable={false}
+            />
         </div>
     );
 };

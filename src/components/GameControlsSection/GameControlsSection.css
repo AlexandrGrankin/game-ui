@@ -1,0 +1,38 @@
+/* components/GameControlsSection/GameControlsSection.css */
+.game-controls-container {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+    margin-top: auto;
+}
+
+.game-controls-section {
+    justify-content: space-between;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    width: 100%;
+    gap: 0.5rem; /* Добавляем отступ между кнопками */
+}
+
+/* Для средних экранов */
+@media (min-width: 768px) {
+    .game-controls-section {
+        gap: 1rem; /* Увеличиваем отступ на больших экранах */
+    }
+
+    .game-controls-container {
+        padding: 1rem 0.5rem 1.5rem 0.5rem;
+    }
+}
+
+/* Для больших экранов */
+@media (min-width: 1200px) {
+    .game-controls-section {
+        gap: 1.5rem; /* Еще больше увеличиваем отступ */
+    }
+
+    .game-controls-container {
+        padding: 1.5rem 0.5rem 2rem 0.5rem;
+    }
+}

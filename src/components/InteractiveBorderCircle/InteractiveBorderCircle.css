@@ -1,0 +1,161 @@
+/* components/InteractiveBorderCircle/InteractiveBorderCircle.css */
+.interactive-border-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.interactive-border-circle-outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--white);
+    border-radius: var(--border-radius-circle);
+    box-shadow: var(--shadow-outer);
+}
+
+.interactive-border-circle-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-inner);
+    border-radius: var(--border-radius-circle);
+    width: 90%;
+    height: 90%;
+}
+
+/* Градиенты */
+.gradient-blue {
+    background: var(--gradient-blue);
+}
+
+.gradient-orange {
+    background: var(--gradient-orange);
+}
+
+.gradient-red {
+    background: var(--gradient-red);
+}
+
+.gradient-none {
+    background: var(--white);
+}
+
+/* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+.interactive-border-circle-small .interactive-border-circle-outer {
+    width: 20vw;
+    height: 20vw;
+    max-width: none;
+    max-height: none;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+}
+
+.interactive-border-circle-medium .interactive-border-circle-outer {
+    width: 25vw;
+    height: 25vw;
+    max-width: none;
+    max-height: none;
+    min-width: 5rem;
+    min-height: 5rem;
+}
+
+.interactive-border-circle-large .interactive-border-circle-outer {
+    width: 33vw;
+    height: 33vw;
+    max-width: none;
+    max-height: none;
+    min-width: 7rem;
+    min-height: 7rem;
+}
+
+.interactive-border-circle-avatar .interactive-border-circle-outer {
+    width: 35vw;
+    height: 35vw;
+    max-width: none;
+    max-height: none;
+    min-width: 7.5rem;
+    min-height: 7.5rem;
+}
+
+/* Иконки масштабируем относительно родительского контейнера */
+.circle-icon {
+    width: 60%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Специфические стили для аватара */
+.interactive-border-circle-avatar .circle-icon {
+    width: 74%;
+    height: auto;
+}
+
+/* Медиа-запросы для дополнительных настроек на больших экранах */
+@media (min-width: 768px) {
+    .interactive-border-circle-small .interactive-border-circle-outer {
+        min-width: 4.5rem;
+        min-height: 4.5rem;
+    }
+
+    .interactive-border-circle-medium .interactive-border-circle-outer {
+        min-width: 6rem;
+        min-height: 6rem;
+    }
+
+    .interactive-border-circle-large .interactive-border-circle-outer {
+        min-width: 8rem;
+        min-height: 8rem;
+    }
+
+    .interactive-border-circle-avatar .interactive-border-circle-outer {
+        min-width: 8.5rem;
+        min-height: 8.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .interactive-border-circle-small .interactive-border-circle-outer {
+        min-width: 5.5rem;
+        min-height: 5.5rem;
+    }
+
+    .interactive-border-circle-medium .interactive-border-circle-outer {
+        min-width: 7rem;
+        min-height: 7rem;
+    }
+
+    .interactive-border-circle-large .interactive-border-circle-outer {
+        min-width: 9.5rem;
+        min-height: 9.5rem;
+    }
+
+    .interactive-border-circle-avatar .interactive-border-circle-outer {
+        min-width: 10rem;
+        min-height: 10rem;
+    }
+}
+
+/* Добавляем ограничения только для очень больших экранов */
+@media (min-width: 1600px) {
+    .interactive-border-circle-small .interactive-border-circle-outer {
+        max-width: 7rem;
+        max-height: 7rem;
+    }
+
+    .interactive-border-circle-medium .interactive-border-circle-outer {
+        max-width: 9rem;
+        max-height: 9rem;
+    }
+
+    .interactive-border-circle-large .interactive-border-circle-outer {
+        max-width: 12rem;
+        max-height: 12rem;
+    }
+
+    .interactive-border-circle-avatar .interactive-border-circle-outer {
+        max-width: 14rem;
+        max-height: 14rem;
+    }
+}

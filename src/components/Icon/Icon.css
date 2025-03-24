@@ -1,0 +1,30 @@
+/* components/Icon/Icon.css */
+.app-icon {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Мы больше не устанавливаем фиксированные размеры здесь,
+   так как они будут управляться родительскими контейнерами */
+
+/* Только для особых случаев, когда требуется специфическое соотношение */
+.icon-stone {
+    max-width: 100%;
+}
+
+.icon-cut, .icon-paper {
+    max-width: 90%;
+}
+
+.scoreboard-icon {
+    height: 2.2rem;
+    width: auto;
+    margin-right: 0.3rem;
+}
+
+.scoreboard-icon-end {
+    margin-right: 0;
+    margin-left: 0.3rem;
+}

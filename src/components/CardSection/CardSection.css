@@ -1,6 +1,26 @@
-.card__section {
+/* components/CardSection/CardSection.css */
+.card-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2vh 4vw 1vh 4vw;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 0.5rem; /* Добавляем отступ между карточками */
+}
+
+/* Для средних экранов увеличиваем отступ между карточками */
+@media (min-width: 768px) {
+    .card-section {
+        gap: 1rem;
+        padding: 1.5rem 0;
+    }
+}
+
+/* Для больших экранов еще больше увеличиваем отступ */
+@media (min-width: 1200px) {
+    .card-section {
+        gap: 1.5rem;
+        padding: 2rem 0;
+    }
 }

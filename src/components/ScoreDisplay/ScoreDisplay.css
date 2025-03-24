@@ -1,56 +1,17 @@
+/* components/ScoreDisplay/ScoreDisplay.css */
 .score-display {
     display: flex;
     justify-content: space-between;
-    color: white;
-    padding-top: 1vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    color: var(--white);
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
-.score-display div {
-    margin-right: 1vw;
+.score-display > div {
+    margin-right: 1rem;
 }
 
-.score-display div:last-child {
-    margin-right: 0; /* Убираем отступ у последнего элемента */
-}
-
-.label {
-    font-family: 'Inria Sans', sans-serif;
-    font-size: 4vw;
-    font-weight: 400;
-    letter-spacing: 0.32vw;
-    text-align: left;
-    padding-bottom: 0.4vh;
-}
-
-.value {
-    font-family: 'Inria Sans', sans-serif;
-    font-size: 4vw;
-    font-weight: 400;
-    width: 100%;
-    align-items: center;
-    color: #2958D1;
-}
-
-.scoreboard {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.scoreboard-counter {
-    display: flex;
-    background: #FFFFFF;
-    border-radius: 2vw;
-    height: 5vw;
-    justify-content: left; /* Центрирование по вертикали */
-    align-items: center;
-    padding: 0 0.6vw;
-}
-
-.icon{
-    height: 5vw;
-    width: 5vw;
+.score-display > div:last-child {
+    margin-right: 0;
 }

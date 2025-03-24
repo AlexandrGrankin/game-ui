@@ -1,0 +1,47 @@
+/* styles/global.css */
+@import 'variables.css';
+
+html {
+    font-size: 16px; /* Базовый размер для rem на мобильных */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Для маленьких мобильных устройств */
+@media (max-width: 375px) {
+    html {
+        font-size: 14px; /* Уменьшаем базовый размер */
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 768px) {
+    html {
+        font-size: 17px; /* Небольшое увеличение для планшетов */
+    }
+}
+
+/* Для десктопов */
+@media (min-width: 1024px) {
+    html {
+        font-size: 18px; /* Умеренное увеличение для десктопов */
+    }
+}
+
+/* Для больших десктопов */
+@media (min-width: 1440px) {
+    html {
+        font-size: 20px; /* Максимальный размер - увеличен умеренно */
+    }
+}

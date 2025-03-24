@@ -1,0 +1,60 @@
+/* styles/variables.css */
+:root {
+    /* Базовые цвета */
+    --white: #FFFFFF;
+    --black: #000000;
+
+    /* Основные цвета */
+    --primary-blue-light: #4A90E2;
+    --primary-blue-dark: #357ABD;
+    --primary-orange-light: #F5A623;
+    --primary-orange-dark: #D18B17;
+    --primary-red-light: #EA8E8E;
+    --primary-red-dark: #D64636;
+
+    /* Градиенты */
+    --gradient-blue: linear-gradient(to bottom, var(--primary-blue-light), var(--primary-blue-dark));
+    --gradient-orange: linear-gradient(to bottom, var(--primary-orange-light), var(--primary-orange-dark));
+    --gradient-red: linear-gradient(to bottom, var(--primary-red-light), var(--primary-red-dark));
+    --gradient-background: linear-gradient(to bottom, #0A4589, #062A55);
+
+    /* Базовые размеры */
+    --size-xs: 0.25rem;   /* ~4px */
+    --size-sm: 0.5rem;    /* ~8px */
+    --size-md: 1rem;      /* ~16px */
+    --size-lg: 1.5rem;    /* ~24px */
+    --size-xl: 2rem;      /* ~32px */
+    --size-2xl: 3rem;     /* ~48px */
+    --size-3xl: 4rem;     /* ~64px */
+    --size-4xl: 6rem;     /* ~96px */
+
+    /* Компонентные размеры */
+    --button-small: 2.5rem;     /* ~40px */
+    --button-medium: 3.5rem;    /* ~56px */
+    --button-large: 4.5rem;     /* ~72px */
+    --avatar-size: 5rem;        /* ~80px */
+
+    /* Размеры иконок */
+    --icon-small: 1.5rem;      /* ~24px */
+    --icon-medium: 2rem;       /* ~32px */
+    --icon-large: 3rem;        /* ~48px */
+
+    /* Радиусы */
+    --border-radius: 0.5rem;
+    --border-radius-bar: 2rem;
+    --border-radius-circle: 50%;
+
+    /* Тени */
+    --shadow-outer: 0 0 0.75rem 0.1rem rgba(255, 255, 255, 0.20);
+    --shadow-inner: inset 0 0 0.4rem 0.1rem rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
+
+    /* Шрифты */
+    --font-family: 'Inria Sans', sans-serif;
+    --font-size-small: 1rem;
+    --font-size-medium: 1.4rem;
+    --font-size-large: 2.25rem;
+    --font-size-xl: 1.5rem;
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+}

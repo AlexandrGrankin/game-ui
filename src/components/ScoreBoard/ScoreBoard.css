@@ -1,0 +1,47 @@
+/* components/ScoreBoard/ScoreBoard.css */
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.label {
+    font-family: var(--font-family);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: 0.05em;
+    text-align: left;
+    padding-bottom: 0.2rem;
+    color: var(--white);
+}
+
+.value {
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-normal);
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-blue-dark);
+}
+
+.scoreboard-counter {
+    display: flex;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    height: 2.2rem;
+    justify-content: left;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.scoreboard-icon {
+    height: 1.2rem;
+    margin-right: 0.3rem;
+}
+
+.scoreboard-icon-end {
+    margin-right: 0;
+    margin-left: 0.3rem;
+}
