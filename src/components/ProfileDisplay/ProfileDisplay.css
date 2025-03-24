@@ -12,6 +12,7 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 1.5rem;
+    align-items: start;
 }
 
 .progress-container {
@@ -35,7 +36,7 @@
 .progress-bar {
     position: relative;
     font-family: var(--font-family);
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-normal);
     text-align: center;
     width: 65%;

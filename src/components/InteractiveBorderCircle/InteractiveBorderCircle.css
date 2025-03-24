@@ -21,8 +21,8 @@
     align-items: center;
     box-shadow: var(--shadow-inner);
     border-radius: var(--border-radius-circle);
-    width: 90%;
-    height: 90%;
+    width: 88%;
+    height: 88%;
 }
 
 /* Градиенты */
@@ -81,7 +81,7 @@
 
 /* Иконки масштабируем относительно родительского контейнера */
 .circle-icon {
-    width: 60%;
+    width: 70%;
     height: auto;
     object-fit: contain;
 }
@@ -97,21 +97,29 @@
     .interactive-border-circle-small .interactive-border-circle-outer {
         min-width: 4.5rem;
         min-height: 4.5rem;
+        max-width: 8.5rem;
+        max-height: 8.5rem;
     }
 
     .interactive-border-circle-medium .interactive-border-circle-outer {
         min-width: 6rem;
         min-height: 6rem;
+        max-width: 10.5rem;
+        max-height: 10.5rem;
     }
 
     .interactive-border-circle-large .interactive-border-circle-outer {
         min-width: 8rem;
         min-height: 8rem;
+        max-width: 13.5rem;
+        max-height: 13.5rem;
     }
 
     .interactive-border-circle-avatar .interactive-border-circle-outer {
         min-width: 8.5rem;
         min-height: 8.5rem;
+        max-width: 14.5rem;
+        max-height: 14.5rem;
     }
 }
 

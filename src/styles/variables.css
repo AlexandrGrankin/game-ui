@@ -40,20 +40,20 @@
     --icon-large: 3rem;        /* ~48px */
 
     /* Радиусы */
-    --border-radius: 0.5rem;
-    --border-radius-bar: 2rem;
+    --border-radius: 1.5rem;
+    --border-radius-bar: 4rem;
     --border-radius-circle: 50%;
 
     /* Тени */
-    --shadow-outer: 0 0 0.75rem 0.1rem rgba(255, 255, 255, 0.20);
-    --shadow-inner: inset 0 0 0.4rem 0.1rem rgba(0, 0, 0, 0.35);
+    --shadow-outer: 0 0 1.75rem 0.1rem rgba(255, 255, 255, 0.20);
+    --shadow-inner: inset 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.35);
     --shadow-card: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
 
     /* Шрифты */
     --font-family: 'Inria Sans', sans-serif;
     --font-size-small: 1rem;
-    --font-size-medium: 1.4rem;
-    --font-size-large: 2.25rem;
+    --font-size-medium: 1.6rem;
+    --font-size-large: 2rem;
     --font-size-xl: 1.5rem;
     --font-weight-normal: 400;
     --font-weight-bold: 600;

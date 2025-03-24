@@ -21,10 +21,10 @@
 .scoreboard-icon {
     height: 2.2rem;
     width: auto;
-    margin-right: 0.3rem;
+    margin: 0 0.3rem;
 }
 
 .scoreboard-icon-end {
     margin-right: 0;
-    margin-left: 0.3rem;
+    margin: 0 0.3rem;
 }

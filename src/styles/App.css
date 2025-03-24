@@ -55,22 +55,22 @@
 /* Для средних экранов добавляем ограничение ширины */
 @media (min-width: 768px) {
     .app-top, .app-bottom {
-        padding: var(--size-md);
+        padding: var(--size-xs);
     }
 
     .app-content {
-        /*max-width: 700px;*/
+        max-width: 650px;
     }
 }
 
 /* Для крупных экранов увеличиваем отступы и макс. ширину */
 @media (min-width: 1024px) {
     .app-top, .app-bottom {
-        padding: var(--size-xl);
+        padding: var(--size-xs);
     }
 
     .app-content {
-        /*max-width: 800px;*/
+        max-width: 900px;
     }
 }
 
