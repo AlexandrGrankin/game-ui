@@ -1,20 +1,20 @@
-// components/ScoreDisplay/ScoreDisplay.jsx
+// components/ScoreSection/ScoreSection.jsx
 import React from 'react';
-import './ScoreDisplay.css';
+import './ScoreSection.css';
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import {ICONS} from "../../constants/appConstants";
 
-const ScoreDisplay = ({clickcoins, battles}) => {
+const ScoreSection = ({clickCoins, statistics}) => {
     return (
         <div className="score-display">
             <ScoreBoard
                 label="Clickcoin"
-                value={clickcoins.toLocaleString('ru-RU')}
+                value={clickCoins.toLocaleString('ru-RU')}
                 iconStart={ICONS.CLICKCOIN}
             />
             <ScoreBoard
                 label="Статистика боев"
-                value={`${battles.won}/${battles.total}`}
+                value={`${statistics.won}/${statistics.lose}`}
                 iconStart={ICONS.SWORDS}
                 iconEnd={ICONS.SHIELD}
             />
@@ -22,4 +22,4 @@ const ScoreDisplay = ({clickcoins, battles}) => {
     );
 };
 
-export default ScoreDisplay;
+export default ScoreSection;

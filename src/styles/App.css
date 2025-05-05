@@ -14,7 +14,7 @@
 .app-top {
     background: var(--gradient-background);
     /*padding: var(--size-md);*/
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     width: 100%;
 }
 

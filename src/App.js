@@ -1,23 +1,28 @@
 // App.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './styles/App.css';
-import ScoreDisplay from "./components/ScoreDisplay/ScoreDisplay";
-import ProfileDisplay from "./components/ProfileDisplay/ProfileDisplay";
+import ScoreSection from "./components/ScoreSection/ScoreSection";
+import ProfileSection from "./components/ProfileSection/ProfileSection";
 import CardSection from "./components/CardSection/CardSection";
 import GameControlsSection from "./components/GameControlsSection/GameControlsSection";
 
 function App() {
     // Состояние для всего приложения
     const [appState, setAppState] = useState({
-        clickcoins: 4000,
-        battles: {
+        clickCoins: 4000,
+        statistics: {
             won: 2,
-            total: 10
+            lose: 10
         },
         progress: {
             current: 23,
             max: 100,
             level: 'Щегол'
+        },
+        battles: {
+            available: 3,
+            max: 10,
+            nextBattleTime: '00:12:00'
         }
     });
 
@@ -32,7 +37,7 @@ function App() {
     // Обработчик нажатия на основную кнопку
     const handleMainButtonClick = () => {
         updateAppState({
-            clickcoins: appState.clickcoins + 1
+            clickCoins: appState.clickCoins + 1
         });
         console.log("Клик! Монет:", appState.clickcoins + 1);
     };
@@ -42,16 +47,14 @@ function App() {
             <div className="app-top">
                 <div className="app-content">
                     <div className="app-header">
-                        <ScoreDisplay
-                            clickcoins={appState.clickcoins}
-                            battles={appState.battles}
+                        <ScoreSection
+                            clickCoins={appState.clickCoins}
+                            statistics={appState.statistics}
                         />
                     </div>
 
                     <div className="app-main-top">
-                        <ProfileDisplay
-                            progress={appState.progress}
-                        />
+                        <ProfileSection progress={appState.progress}/>
                     </div>
                 </div>
             </div>
@@ -59,13 +62,11 @@ function App() {
             <div className="app-bottom">
                 <div className="app-content">
                     <div className="app-main-bottom">
-                        <CardSection />
+                        <CardSection/>
                     </div>
 
                     <div className="app-footer">
-                        <GameControlsSection
-                            onMainClick={handleMainButtonClick}
-                        />
+                        <GameControlsSection battles={appState.battles} onMainClick={handleMainButtonClick}/>
                     </div>
                 </div>
             </div>

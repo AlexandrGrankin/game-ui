@@ -1,10 +1,10 @@
-// components/ProfileDisplay/ProfileDisplay.jsx
+// components/ProfileSection/ProfileSection.jsx
 import React from 'react';
-import './ProfileDisplay.css';
+import './ProfileSection.css';
 import InteractiveBorderCircle from "../InteractiveBorderCircle/InteractiveBorderCircle";
 import {GRADIENTS, SIZES, ICONS} from "../../constants/appConstants";
 
-const ProfileDisplay = ({progress}) => {
+const ProfileSection = ({progress}) => {
     // Обработчики событий для интерактивных элементов
     const handleWalletClick = () => {
         console.log("Wallet clicked");
@@ -52,4 +52,4 @@ const ProfileDisplay = ({progress}) => {
     );
 };
 
-export default ProfileDisplay;
+export default ProfileSection;

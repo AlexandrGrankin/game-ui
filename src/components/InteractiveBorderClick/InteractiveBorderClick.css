@@ -1,17 +1,122 @@
-.interactive__border__outer {
+.interactive__border__click__outer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 2vw 0.1vw rgb(255, 255, 255, 0.20);
+    background: var(--white);
+    border-radius: var(--border-radius-circle);
+    box-shadow: var(--shadow-outer);
 }
 
-.interactive__border__inner {
+.interactive__border__click__inner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 0.8vw 0.2vw rgba(0, 0, 0, 0.35);
-    background: #fff;
-    border-radius: 50%;
+    box-shadow: var(--shadow-inner);
+    border-radius: var(--border-radius-circle);
+    width: 88%;
+    height: 88%;
+}
+ .interactive__border__click__value__text{
+     font-family: var(--font-family);
+     font-size: var(--font-size-small);
+     font-weight: var(--font-weight-normal);
+     align-items: center;
+     text-align: center;
+     color: var(--white);
+ }
+
+.interactive__border__click__value {
+    font-size: var(--font-size-large);
+}
+
+.interactive__border__time__value {
+    font-size: var(--font-size-small);
+}
+
+/* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+.interactive__border__click__small .interactive__border__click__outer {
+    width: 20vw;
+    height: 20vw;
+    max-width: none;
+    max-height: none;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+}
+
+.interactive__border__click__medium .interactive__border__click__outer {
+    width: 25vw;
+    height: 25vw;
+    max-width: none;
+    max-height: none;
+    min-width: 5rem;
+    min-height: 5rem;
+}
+
+.interactive__border__click__large .interactive__border__click__outer {
+    width: 33vw;
+    height: 33vw;
+    max-width: none;
+    max-height: none;
+    min-width: 7rem;
+    min-height: 7rem;
+}
+
+/* Медиа-запросы для дополнительных настроек на больших экранах */
+@media (min-width: 768px) {
+    .interactive__border__click__small .interactive__border__click__outer {
+        min-width: 4.5rem;
+        min-height: 4.5rem;
+        max-width: 8.5rem;
+        max-height: 8.5rem;
+    }
+
+    .interactive__border__click__medium .interactive__border__click__outer {
+        min-width: 6rem;
+        min-height: 6rem;
+        max-width: 10.5rem;
+        max-height: 10.5rem;
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        min-width: 8rem;
+        min-height: 8rem;
+        max-width: 13.5rem;
+        max-height: 13.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .interactive__border__click__small .interactive__border__click__outer {
+        min-width: 5.5rem;
+        min-height: 5.5rem;
+    }
+
+    .interactive__border__click__medium .interactive__border__click__outer {
+        min-width: 7rem;
+        min-height: 7rem;
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        min-width: 9.5rem;
+        min-height: 9.5rem;
+    }
+}
+
+/* Добавляем ограничения только для очень больших экранов */
+@media (min-width: 1600px) {
+    .interactive__border__click__small .interactive__border__click__outer {
+        max-width: 7rem;
+        max-height: 7rem;
+    }
+
+    .interactive__border__click__medium .interactive__border__click__outer {
+        max-width: 9rem;
+        max-height: 9rem;
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        max-width: 12rem;
+        max-height: 12rem;
+    }
 }

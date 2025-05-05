@@ -3,8 +3,9 @@ import React from 'react';
 import "./GameControlsSection.css";
 import InteractiveBorderCircle from "../InteractiveBorderCircle/InteractiveBorderCircle";
 import {GRADIENTS, SIZES, ICONS} from "../../constants/appConstants";
+import InteractiveBorderClick from "../InteractiveBorderClick/InteractiveBorderClick";
 
-const GameControlsSection = ({onMainClick}) => {
+const GameControlsSection = ({onMainClick, battles}) => {
     return (
         <div className="game-controls-container">
             <div className="game-controls-section">
@@ -14,9 +15,10 @@ const GameControlsSection = ({onMainClick}) => {
                     iconName={ICONS.SWORDS}
                     onClick={() => console.log("Battle clicked")}
                 />
-                <InteractiveBorderCircle
+                <InteractiveBorderClick
                     size={SIZES.LARGE}
                     gradient={GRADIENTS.BLUE}
+                    battles={battles}
                     onClick={onMainClick}
                 />
                 <InteractiveBorderCircle

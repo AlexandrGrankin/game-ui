@@ -29,7 +29,7 @@
 .scoreboard-counter {
     display: flex;
     background: var(--white);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-scoreboard);
     height: 2.2rem;
     justify-content: left;
     align-items: center;
