@@ -1,10 +1,14 @@
-// components/ScoreSection/ScoreSection.jsx
 import React from 'react';
 import './ScoreSection.css';
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import {ICONS} from "../../constants/appConstants";
+import { useAppState } from '../../context/AppContext';
 
-const ScoreSection = ({clickCoins, statistics}) => {
+const ScoreSection = () => {
+    // Получаем данные из контекста
+    const { state } = useAppState();
+    const { clickCoins, statistics } = state;
+
     return (
         <div className="score-display">
             <ScoreBoard

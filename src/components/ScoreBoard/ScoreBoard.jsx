@@ -2,8 +2,9 @@
 import React from 'react';
 import './ScoreBoard.css';
 import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
 
-const ScoreBoard = ({label, value, iconStart, iconEnd}) => {
+const ScoreBoard = React.memo(({label, value, iconStart, iconEnd}) => {
     return (
         <div className="scoreboard">
             <div className="label">{label}</div>
@@ -14,6 +15,13 @@ const ScoreBoard = ({label, value, iconStart, iconEnd}) => {
             </div>
         </div>
     );
+});
+
+ScoreBoard.propTypes = {
+    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    iconStart: PropTypes.string,
+    iconEnd: PropTypes.string
 };
 
 export default ScoreBoard;

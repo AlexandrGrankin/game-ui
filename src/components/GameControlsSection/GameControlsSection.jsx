@@ -1,11 +1,23 @@
-// components/GameControlsSection/GameControlsSection.jsx
 import React from 'react';
 import "./GameControlsSection.css";
-import InteractiveBorderCircle from "../InteractiveBorderCircle/InteractiveBorderCircle";
+import InteractiveBorderCircle from "../InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
 import {GRADIENTS, SIZES, ICONS} from "../../constants/appConstants";
-import InteractiveBorderClick from "../InteractiveBorderClick/InteractiveBorderClick";
+import InteractiveBorderClick from "../InteractiveBorder/InteractiveBorderClick/InteractiveBorderClick";
+import { useAppState } from '../../context/AppContext';
 
-const GameControlsSection = ({onMainClick, battles}) => {
+const GameControlsSection = () => {
+    // Получаем данные и функции из контекста
+    const { state, incrementCoins } = useAppState();
+    const { battles } = state;
+
+    const handleBattleClick = () => {
+        console.log("Battle clicked");
+    };
+
+    const handleTaskClick = () => {
+        console.log("Task clicked");
+    };
+
     return (
         <div className="game-controls-container">
             <div className="game-controls-section">
@@ -13,19 +25,19 @@ const GameControlsSection = ({onMainClick, battles}) => {
                     size={SIZES.MEDIUM}
                     gradient={GRADIENTS.RED}
                     iconName={ICONS.SWORDS}
-                    onClick={() => console.log("Battle clicked")}
+                    onClick={handleBattleClick}
                 />
                 <InteractiveBorderClick
                     size={SIZES.LARGE}
                     gradient={GRADIENTS.BLUE}
                     battles={battles}
-                    onClick={onMainClick}
+                    onClick={incrementCoins}
                 />
                 <InteractiveBorderCircle
                     size={SIZES.MEDIUM}
                     gradient={GRADIENTS.ORANGE}
                     iconName={ICONS.TASK}
-                    onClick={() => console.log("Task clicked")}
+                    onClick={handleTaskClick}
                 />
             </div>
         </div>

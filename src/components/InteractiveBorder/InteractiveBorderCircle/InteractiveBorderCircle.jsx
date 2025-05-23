@@ -1,8 +1,7 @@
-// components/InteractiveBorderCircle/InteractiveBorderCircle.jsx
 import React from 'react';
 import "./InteractiveBorderCircle.css";
-import Icon from "../Icon/Icon";
-import {GRADIENTS, SIZES} from "../../constants/appConstants";
+import Icon from "../../Icon/Icon";
+import {GRADIENTS, SIZES} from "../../../constants/appConstants";
 
 const InteractiveBorderCircle = ({size = SIZES.MEDIUM, gradient = GRADIENTS.NONE, iconName, onClick}) => {
     return (<div className={`interactive-border-circle-${size}`} onClick={onClick}>

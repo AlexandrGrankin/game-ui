@@ -1,18 +1,8 @@
-/* components/ProfileSection/ProfileSection.css */
 .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-}
-
-.profile-menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1.5rem;
-    align-items: start;
 }
 
 .progress-container {
@@ -27,6 +17,15 @@
     flex-direction: row;
     width: 100%;
     color: var(--white);
+}
+
+.profile-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    align-items: start;
 }
 
 .progress-label {

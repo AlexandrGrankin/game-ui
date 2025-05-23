@@ -1,10 +1,14 @@
-// components/ProfileSection/ProfileSection.jsx
 import React from 'react';
 import './ProfileSection.css';
-import InteractiveBorderCircle from "../InteractiveBorderCircle/InteractiveBorderCircle";
+import InteractiveBorderCircle from "../InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
 import {GRADIENTS, SIZES, ICONS} from "../../constants/appConstants";
+import { useAppState } from '../../context/AppContext';
 
-const ProfileSection = ({progress}) => {
+const ProfileSection = () => {
+    // Получаем данные из контекста
+    const { state } = useAppState();
+    const { progress } = state;
+
     // Обработчики событий для интерактивных элементов
     const handleWalletClick = () => {
         console.log("Wallet clicked");

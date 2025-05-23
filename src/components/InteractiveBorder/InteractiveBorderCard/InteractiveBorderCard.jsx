@@ -1,8 +1,7 @@
-// components/InteractiveBorderCard/InteractiveBorderCard.jsx
 import React from 'react';
 import "./InteractiveBorderCard.css";
-import Icon from "../Icon/Icon";
-import {GRADIENTS} from "../../constants/appConstants";
+import Icon from "../../Icon/Icon";
+import {GRADIENTS} from "../../../constants/appConstants";
 
 const InteractiveBorderCard = ({
                                    gradient = GRADIENTS.NONE,

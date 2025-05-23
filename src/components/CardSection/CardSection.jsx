@@ -1,7 +1,7 @@
 // components/CardSection/CardSection.jsx
 import React from 'react';
 import "./CardSection.css";
-import InteractiveBorderCard from "../InteractiveBorderCard/InteractiveBorderCard";
+import InteractiveBorderCard from "../InteractiveBorder/InteractiveBorderCard/InteractiveBorderCard";
 import {GRADIENTS, ICONS} from "../../constants/appConstants";
 
 const CardSection = () => {
