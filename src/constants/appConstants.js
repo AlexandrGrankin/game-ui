@@ -5,6 +5,7 @@ export const GRADIENTS = {
     ORANGE: 'orange',
     WHITE: 'white',
     GREEN: 'green',
+    RED_LOSE: 'red-lose', // Добавляем недостающую константу
     NONE: 'none'
 };
 

@@ -12,7 +12,8 @@ import { useAppState } from '../../context/AppContext';
 const BattlePage = () => {
     const history = useHistory();
     const { createTimer, clearAllTimers } = useTimers();
-    const { actions } = useAppState();
+    const { actions, state } = useAppState();
+    const { battles } = state;
 
     // Состояние игры с 5 раундами
     const [gameState, setGameState] = useState({
@@ -73,17 +74,11 @@ const BattlePage = () => {
     // Функция выбора карты игроком
     const playerSelectCard = useCallback((cardId) => {
         if (gameState.selectedPlayerCard || gameState.phase !== 'selection') {
-            console.log('Player card selection blocked:', {
-                selectedCard: gameState.selectedPlayerCard,
-                phase: gameState.phase
-            });
             return;
         }
 
         const selectedCard = gameState.playerCards.find(card => card.id === cardId);
         if (!selectedCard) return;
-
-        console.log('Player selected card:', selectedCard);
 
         setGameState(prev => ({
             ...prev,
@@ -95,27 +90,18 @@ const BattlePage = () => {
 
     // Функция автоматического хода противника
     const enemyAutoMove = useCallback(() => {
-        console.log('Enemy auto move triggered');
-
         setGameState(prev => {
             if (prev.selectedEnemyCard || prev.phase !== 'selection') {
-                console.log('Enemy move blocked:', {
-                    selectedCard: prev.selectedEnemyCard,
-                    phase: prev.phase
-                });
                 return prev;
             }
 
             const availableCards = prev.enemyCards;
             if (availableCards.length === 0) {
-                console.log('No available cards for enemy');
                 return prev;
             }
 
             const randomIndex = Math.floor(Math.random() * availableCards.length);
             const selectedCard = availableCards[randomIndex];
-
-            console.log('Enemy selected card:', selectedCard);
 
             return {
                 ...prev,
@@ -129,7 +115,6 @@ const BattlePage = () => {
     // Проверка готовности к раскрытию карт
     useEffect(() => {
         if (gameState.selectedEnemyCard && gameState.selectedPlayerCard && gameState.phase === 'selection') {
-            console.log('Both cards selected, starting reveal phase');
             setGameState(prev => ({ ...prev, phase: 'reveal' }));
         }
     }, [gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.phase]);
@@ -141,8 +126,6 @@ const BattlePage = () => {
             gameState.selectedPlayerCard &&
             !gameState.isFlipping) {
 
-            console.log('Starting card reveal animation');
-
             // Очищаем таймер автохода если он есть
             if (gameState.enemyTimerId) {
                 clearTimeout(gameState.enemyTimerId);
@@ -153,7 +136,6 @@ const BattlePage = () => {
 
             // Открываем карту противника через 0.75 секунды
             createTimer(() => {
-                console.log('Revealing enemy card');
                 setGameState(prev => ({
                     ...prev,
                     cardRevealed: { ...prev.cardRevealed, enemy: true }
@@ -164,7 +146,6 @@ const BattlePage = () => {
             createTimer(() => {
                 setGameState(prev => {
                     const result = determineWinner(prev.selectedPlayerCard, prev.selectedEnemyCard);
-                    console.log('Round result:', result);
 
                     const newScore = { ...prev.gameScore };
                     if (result === 'win') newScore.player++;
@@ -191,15 +172,11 @@ const BattlePage = () => {
     // Обработка завершения раунда
     useEffect(() => {
         if (gameState.phase === 'roundResult') {
-            console.log('Round completed, showing result for 3 seconds');
-
             createTimer(() => {
                 if (gameState.currentRound >= 5) {
                     // Игра закончена
                     const finalResult = gameState.gameScore.player > gameState.gameScore.enemy ? 'win' :
                         gameState.gameScore.player < gameState.gameScore.enemy ? 'lose' : 'draw';
-
-                    console.log('Game completed, final result:', finalResult);
 
                     setGameState(prev => ({
                         ...prev,
@@ -208,15 +185,19 @@ const BattlePage = () => {
                         showGameResultModal: true
                     }));
 
-                    // Обновляем статистику в контексте
+                    // Обновляем статистику и ВСЕГДА списываем бой
                     if (finalResult === 'win') {
                         actions.handleBattleWin({ coinsWon: 1000, expGained: 50 });
                     } else if (finalResult === 'lose') {
                         actions.handleBattleLose({ expLost: 10 });
+                    } else {
+                        // При ничьей просто списываем бой без изменения статистики
+                        actions.updateBattles({
+                            available: Math.max(0, battles.available - 1)
+                        });
                     }
                 } else {
                     // Следующий раунд
-                    console.log('Starting next round');
                     startNewRound();
                 }
             }, 3000);
@@ -225,8 +206,6 @@ const BattlePage = () => {
 
     // Старт нового раунда
     const startNewRound = useCallback(() => {
-        console.log('Starting new round');
-
         setGameState(prev => ({
             ...prev,
             selectedEnemyCard: null,
@@ -239,11 +218,10 @@ const BattlePage = () => {
             enemyTimerId: null
         }));
 
-        // Запускаем таймер автохода противника через 5 секунд
+        // Запускаем таймер автохода противника через 2 секунды
         const timerId = createTimer(() => {
-            console.log('Enemy timer triggered after 5 seconds');
             enemyAutoMove();
-        }, 5000);
+        }, 2000);
 
         setGameState(prev => ({
             ...prev,
@@ -253,14 +231,9 @@ const BattlePage = () => {
 
     // Инициализация игры при монтировании
     useEffect(() => {
-        console.log('Game initialized');
         startNewRound();
-
-        return () => {
-            console.log('Cleaning up timers');
-            clearAllTimers();
-        };
-    }, []);
+        return () => clearAllTimers();
+    }, [startNewRound, clearAllTimers]);
 
     // Возврат в главное меню
     const handleBackToHome = useCallback(() => {
@@ -338,7 +311,7 @@ const BattlePage = () => {
                             />
                             <div>
                                 <div className="value">Enemy</div>
-                                <div className="value">{gameState.gameScore.enemy}/5</div>
+                                <div className="value">4/15</div>
                             </div>
                             <div className="lose-button">
                                 <InteractiveBorderCircle
@@ -354,10 +327,6 @@ const BattlePage = () => {
                                 iconName={ICONS.AVATAR}
                                 boxShadow={BOX_SHADOW.BLACK}
                             />
-                            <div>
-                                <div className="value">Player</div>
-                                <div className="value">{gameState.gameScore.player}/5</div>
-                            </div>
                         </div>
 
                         <div className="battle-fight-card-section">
@@ -432,28 +401,6 @@ const BattlePage = () => {
                             );
                         })}
                     </div>
-
-                    {/* Debug информация (можно убрать в продакшене) */}
-                    {process.env.NODE_ENV === 'development' && (
-                        <div style={{
-                            position: 'fixed',
-                            top: '10px',
-                            right: '10px',
-                            background: 'rgba(0,0,0,0.8)',
-                            color: 'white',
-                            padding: '10px',
-                            borderRadius: '5px',
-                            fontSize: '12px',
-                            maxWidth: '200px'
-                        }}>
-                            <div>Phase: {gameState.phase}</div>
-                            <div>Round: {gameState.currentRound}/5</div>
-                            <div>Score: {gameState.gameScore.player}-{gameState.gameScore.enemy}</div>
-                            <div>Player Card: {gameState.selectedPlayerCard?.icon || 'None'}</div>
-                            <div>Enemy Card: {gameState.selectedEnemyCard?.icon || 'None'}</div>
-                            <div>Results: {gameState.roundResults.join(', ')}</div>
-                        </div>
-                    )}
                 </div>
             </div>
 
