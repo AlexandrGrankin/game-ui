@@ -1,9 +1,8 @@
-/* components/InteractiveBorderCard/InteractiveBorderCard.css */
 .interactive-border-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%; /* Используем процент вместо фиксированного размера */
+    width: 100%; /* Используем процент вместо фиксированного размера */
     /*min-width: 5rem; !* Минимальный размер карточки *!*/
     max-width: none; /* Убираем максимальное ограничение */
 }
@@ -27,6 +26,68 @@
     border-radius: calc(var(--border-radius) * 0.5);
     width: 80%;
     height: 84%;
+    transition: all 0.3s ease; /* Плавный переход содержимого */
+}
+
+.card-back-inner {
+    background: var(--gradient-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Узор на рубашке */
+.card-back-pattern {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Создаем красивый узор CSS */
+.card-back-pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 12px 12px;
+    background: linear-gradient(45deg, var(--primary-blue-dark) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--primary-blue-dark) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--primary-blue-dark) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--primary-blue-dark) 75%),
+    0 0, 6px 0, 6px -6px, 0px 6px;
+    opacity: 0.6;
+}
+
+/* Добавляем символ в центр */
+.card-back-pattern::after {
+    content: '?';
+    font-family: var(--font-family);
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    position: relative;
+}
+
+.vs-divider {
+    font-family: var(--font-family);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-red-dark);
+    background: var(--white);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-circle);
+    box-shadow: var(--shadow-card);
+    min-width: 60px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Градиенты из глобальных переменных */
@@ -61,6 +122,18 @@
 @media (min-width: 768px) {
     .interactive-border-card {
         min-width: 7rem;
+    }
+
+    .center-cards {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .vs-divider {
+        order: 2;
+        min-width: 50px;
+        min-height: 50px;
+        font-size: var(--font-size-medium);
     }
 }
 

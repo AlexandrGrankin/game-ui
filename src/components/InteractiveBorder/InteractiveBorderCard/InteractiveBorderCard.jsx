@@ -9,13 +9,26 @@ const InteractiveBorderCard = ({
                                    isClickable = false,
                                    onClick
                                }) => {
-    const handleClick = isClickable && onClick ? onClick : undefined;
+
+    const handleClick = () => {
+        console.log('Card clicked!', { isClickable, onClick, gradient, iconName }); // Отладка
+        if (isClickable && onClick) {
+            onClick();
+        }
+    };
+    const isCardBack = gradient === GRADIENTS.NONE && !iconName;
 
     return (
         <div className={`interactive-border-card card-type-${iconName || 'default'}`} onClick={handleClick}>
             <div className="interactive-border-card-outer">
-                <div className={`interactive-border-card-inner gradient-${gradient}`}>
-                    {iconName && (<Icon name={iconName} className="card-icon"/>)}
+                <div className={`interactive-border-card-inner 
+                ${isCardBack ? 'card-back-inner' : `gradient-${gradient}`}`}>
+                    {!isCardBack && iconName && (
+                        <Icon name={iconName} className="card-icon"/>
+                    )}
+                    {isCardBack && (
+                        <div className="card-back-pattern"></div>
+                    )}
                 </div>
             </div>
         </div>
