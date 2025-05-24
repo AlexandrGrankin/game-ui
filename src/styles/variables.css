@@ -40,13 +40,14 @@
     --icon-large: 3rem;        /* ~48px */
 
     /* Радиусы */
-    --border-radius: 1.5rem;
+    --border-radius: max(1.0rem, 8%);
     --border-radius-scoreboard: 0.7rem;
     --border-radius-bar: 4rem;
     --border-radius-circle: 50%;
 
     /* Тени */
-    --shadow-outer: 0 0 1.75rem 0.1rem rgba(255, 255, 255, 0.20);
+    --shadow-white: 0 0 1.75rem 0.1rem rgba(255, 255, 255, 0.20);
+    --shadow-black: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
     --shadow-inner: inset 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.35);
     --shadow-card: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
 
@@ -55,7 +56,7 @@
     --font-size-small: 1rem;
     --font-size-medium: 1.6rem;
     --font-size-large: 2rem;
-    --font-size-xxl: 4rem;
+    --font-size-xxl: 2.5rem;
     --font-size-xl: 1.5rem;
     --font-weight-normal: 400;
     --font-weight-bold: 600;

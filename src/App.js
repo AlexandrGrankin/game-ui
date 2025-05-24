@@ -1,39 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles/App.css';
-import ScoreSection from "./components/ScoreSection/ScoreSection";
-import ProfileSection from "./components/ProfileSection/ProfileSection";
-import CardSection from "./components/CardSection/CardSection";
-import GameControlsSection from "./components/GameControlsSection/GameControlsSection";
 import {AppProvider} from './context/AppContext';
+import HomePage from './pages/HomePage/HomePage';
+import BattlePage from './pages/BattlePage/BattlePage';
 
 function App() {
     return (
         <AppProvider>
-            <div className="app-container">
-                <div className="app-top">
-                    <div className="app-content">
-                        <div className="app-header">
-                            <ScoreSection/>
-                        </div>
-
-                        <div className="app-main-top">
-                            <ProfileSection/>
-                        </div>
-                    </div>
+            <Router>
+                <div className="app-container">
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/battle" component={BattlePage} />
+                    </Switch>
                 </div>
-
-                <div className="app-bottom">
-                    <div className="app-content">
-                        <div className="app-main-bottom">
-                            <CardSection/>
-                        </div>
-
-                        <div className="app-footer">
-                            <GameControlsSection/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </Router>
         </AppProvider>
     );
 }

@@ -11,10 +11,12 @@ import paper from "../../assets/icons/paper.png";
 import stone from "../../assets/icons/stone.png";
 import cut from "../../assets/icons/cut.png";
 import task from "../../assets/icons/task.png";
+import flag from "../../assets/icons/flag.png";
 
 // Реестр всех иконок
 const iconRegistry = {
     clickcoin,
+    flag,
     swords,
     shield,
     wallet,

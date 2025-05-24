@@ -4,7 +4,6 @@
     align-items: center;
     background: var(--white);
     border-radius: var(--border-radius-circle);
-    box-shadow: var(--shadow-outer);
 }
 
 .interactive-border-circle-inner {
@@ -13,8 +12,8 @@
     align-items: center;
     box-shadow: var(--shadow-inner);
     border-radius: var(--border-radius-circle);
-    width: 88%;
-    height: 88%;
+    width: 84%;
+    height: 84%;
 }
 
 /* Градиенты */
@@ -34,7 +33,24 @@
     background: var(--white);
 }
 
+.box-shadow-black {
+    box-shadow: var(--shadow-black);
+}
+
+.box-shadow-white {
+    box-shadow: var(--shadow-white);
+}
+
 /* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+.interactive-border-circle-extra-small .interactive-border-circle-outer {
+    width: 16vw;
+    height: 16vw;
+    max-width: none;
+    max-height: none;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+}
+
 .interactive-border-circle-small .interactive-border-circle-outer {
     width: 20vw;
     height: 20vw;
@@ -86,6 +102,13 @@
 
 /* Медиа-запросы для дополнительных настроек на больших экранах */
 @media (min-width: 768px) {
+    .interactive-border-circle-extra-small .interactive-border-circle-outer {
+        min-width: 3.5rem;
+        min-height: 3.5rem;
+        max-width: 7.5rem;
+        max-height: 7.5rem;
+    }
+
     .interactive-border-circle-small .interactive-border-circle-outer {
         min-width: 4.5rem;
         min-height: 4.5rem;

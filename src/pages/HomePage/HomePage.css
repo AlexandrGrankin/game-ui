@@ -1,0 +1,39 @@
+.app-top {
+    background: var(--gradient-background);
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.app-bottom {
+    background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
+    flex: 1;
+    padding: var(--size-md);
+    width: 100%;
+}
+
+.app-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.app-header {
+    margin-bottom: var(--size-md);
+}
+
+.app-footer {
+    margin-top: auto;
+}
+
+/* Медиа-запросы */
+@media (min-width: 768px) {
+    .app-content {
+        max-width: 650px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-content {
+        max-width: 900px;
+    }
+}

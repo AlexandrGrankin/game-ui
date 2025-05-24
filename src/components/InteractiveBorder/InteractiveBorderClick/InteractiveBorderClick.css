@@ -34,6 +34,14 @@
     font-size: var(--font-size-small);
 }
 
+.box-shadow-black {
+    box-shadow: var(--shadow-black);
+}
+
+.box-shadow-white {
+    box-shadow: var(--shadow-white);
+}
+
 /* Значительно увеличенные размеры кнопок без ограничения максимального размера */
 .interactive__border__click__small .interactive__border__click__outer {
     width: 20vw;

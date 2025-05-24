@@ -1,4 +1,3 @@
-/* styles/App.css */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -9,74 +8,4 @@
     padding: 0;
     overflow: hidden;
     position: relative;
-}
-
-.app-top {
-    background: var(--gradient-background);
-    /*padding: var(--size-md);*/
-    padding-bottom: 1rem;
-    width: 100%;
-}
-
-.app-bottom {
-    background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
-    flex: 1;
-    padding: var(--size-md);
-    /*padding-top: 2rem;*/
-    width: 100%;
-}
-
-.app-content {
-    width: 100%;
-    max-width: 100%; /* Не ограничиваем ширину для меньших экранов */
-    margin: 0 auto; /* Центрируем контент */
-}
-
-.app-header {
-    margin-bottom: var(--size-md);
-}
-
-.app-main-top, .app-main-bottom {
-    /*margin-bottom: var(--size-lg);*/
-}
-
-.app-footer {
-    margin-top: auto;
-    /*padding-bottom: var(--size-md);*/
-}
-
-/* Медиа-запросы для адаптивности размеров */
-@media (max-width: 375px) {
-    .app-top, .app-bottom {
-        padding: var(--size-sm);
-    }
-}
-
-/* Для средних экранов добавляем ограничение ширины */
-@media (min-width: 768px) {
-    .app-top, .app-bottom {
-        padding: var(--size-xs);
-    }
-
-    .app-content {
-        max-width: 650px;
-    }
-}
-
-/* Для крупных экранов увеличиваем отступы и макс. ширину */
-@media (min-width: 1024px) {
-    .app-top, .app-bottom {
-        padding: var(--size-xs);
-    }
-
-    .app-content {
-        max-width: 900px;
-    }
-}
-
-/* Для очень больших экранов */
-@media (min-width: 1440px) {
-    .app-content {
-        /*max-width: 900px;*/
-    }
 }

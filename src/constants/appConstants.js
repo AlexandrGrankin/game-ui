@@ -6,7 +6,13 @@ export const GRADIENTS = {
     NONE: 'none'
 };
 
+export const BOX_SHADOW = {
+    BLACK: 'black',
+    WHITE: 'white'
+};
+
 export const SIZES = {
+    EXTRA_SMALL: 'extra-small',
     SMALL: 'small',
     MEDIUM: 'medium',
     LARGE: 'large',
@@ -23,5 +29,6 @@ export const ICONS = {
     STONE: 'stone',
     CUT: 'cut',
     PAPER: 'paper',
-    CLICKCOIN: 'clickcoin'
+    CLICKCOIN: 'clickcoin',
+    FLAG: 'flag'
 };

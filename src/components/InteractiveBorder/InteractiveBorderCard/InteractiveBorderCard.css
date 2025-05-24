@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 30%; /* Используем процент вместо фиксированного размера */
-    min-width: 5rem; /* Минимальный размер карточки */
+    /*min-width: 5rem; !* Минимальный размер карточки *!*/
     max-width: none; /* Убираем максимальное ограничение */
 }
 
@@ -25,8 +25,8 @@
     align-items: center;
     box-shadow: var(--shadow-inner);
     border-radius: calc(var(--border-radius) * 0.5);
-    width: 84%;
-    height: 88%;
+    width: 80%;
+    height: 84%;
 }
 
 /* Градиенты из глобальных переменных */

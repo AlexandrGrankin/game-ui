@@ -1,0 +1,108 @@
+.battle-top {
+    background: var(--gradient-background);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.battle-bottom {
+    position: relative;
+    background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
+    flex: 1;
+    padding: var(--size-sm);
+    width: 100%;
+}
+.battle-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+
+.battle-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:url('../../assets/icons/swords.png');
+    background-size: 60% auto;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Прозрачность только для картинки */
+    z-index: 0; /* Размещаем за контентом */
+}
+
+
+.battle-header {
+    margin-bottom: var(--size-md);
+}
+
+.battle-bid {
+    display: flex;
+    width: 100%;
+    margin-top: var(--size-lg);
+    margin-bottom: var(--size-lg);
+    letter-spacing: 0.3rem;
+    font-family: var(--font-family);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    align-items: center;
+    justify-content: center;
+
+    color: var(--white);
+}
+
+.battle-bid-icon {
+    width: var(--size-3xl);
+    margin-left: var(--size-md);
+    margin-right: var(--size-md);
+}
+
+.battle-main {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+.battle-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lose-button {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.battle-fight-card-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    padding: 0 0 0 1rem;
+    gap: 0.2rem;
+}
+
+.battle-control {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    max-height: 10%;
+}
+
+/* Медиа-запросы */
+@media (min-width: 768px) {
+    .battle-content {
+        max-width: 650px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .battle-content {
+        max-width: 900px;
+    }
+}
