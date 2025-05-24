@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import './BattlePage.css';
 import ScoreSection from "../../components/ScoreSection/ScoreSection";
@@ -10,6 +10,13 @@ import InteractiveBorderCard from "../../components/InteractiveBorder/Interactiv
 
 const BattlePage = () => {
     const history = useHistory();
+    const timersRef = useRef([]);
+
+    // Функция для очистки всех таймеров
+    const clearAllTimers = () => {
+        timersRef.current.forEach(timer => clearTimeout(timer));
+        timersRef.current = [];
+    };
 
     // Состояние игры
     const [gameState, setGameState] = useState({
@@ -36,7 +43,14 @@ const BattlePage = () => {
         centerCards: {
             enemy: null,
             player: null
-        }
+        },
+        // Состояние переворачивания карт
+        cardRevealed: {
+            enemy: false,
+            player: false
+        },
+        // Состояние анимации
+        isFlipping: false
     });
 
     // Функция выбора карты соперником
@@ -51,66 +65,105 @@ const BattlePage = () => {
             selectedEnemyCard: selectedCard,
             enemyCards: prev.enemyCards.filter(card => card.id !== selectedCard.id),
             firstToSelect: prev.firstToSelect || 'enemy',
-            phase: prev.selectedPlayerCard ? 'reveal' : 'waiting'
+            phase: prev.selectedPlayerCard ? 'reveal' : 'waiting',
+            // Сразу помещаем карту соперника в центр (но перевернутой)
+            centerCards: {
+                ...prev.centerCards,
+                enemy: selectedCard
+            },
+            cardRevealed: {
+                ...prev.cardRevealed,
+                enemy: false // Карта остается перевернутой
+            }
         }));
-
-        console.log('Соперник выбрал карту:', selectedCard);
     };
 
     // Функция выбора карты игроком
     const playerSelectCard = (cardId) => {
-        console.log('playerSelectCard called with cardId:', cardId);
-        console.log('Current gameState:', gameState);
-
         if (gameState.selectedPlayerCard) {
-            console.log('Player already selected a card');
             return;
         }
 
         const selectedCard = gameState.playerCards.find(card => card.id === cardId);
-        console.log('Selected card:', selectedCard);
 
-        setGameState(prev => {
-            const newState = {
-                ...prev,
-                selectedPlayerCard: selectedCard,
-                firstToSelect: prev.firstToSelect || 'player',
-                phase: prev.selectedEnemyCard ? 'reveal' : 'waiting'
-            };
-            console.log('New game state:', newState);
-            return newState;
-        });
+        setGameState(prev => ({
+            ...prev,
+            selectedPlayerCard: selectedCard,
+            firstToSelect: prev.firstToSelect || 'player',
+            phase: prev.selectedEnemyCard ? 'reveal' : 'waiting',
+            // Помещаем карту игрока в центр
+            centerCards: {
+                ...prev.centerCards,
+                player: selectedCard
+            },
+            cardRevealed: {
+                ...prev.cardRevealed,
+                player: true // Карта игрока всегда открыта
+            }
+        }));
 
         // Если игрок выбрал первый, соперник выбирает через секунду
         if (!gameState.selectedEnemyCard) {
-            console.log('Enemy will select in 1 second...');
             setTimeout(() => {
                 enemySelectCard();
             }, 1000);
         }
     };
 
-    // Функция размещения карт в центре
-    const placeCardsOnTable = () => {
-        if (gameState.selectedEnemyCard && gameState.selectedPlayerCard && gameState.phase === 'reveal') {
-            console.log("work")
+    // Основная логика анимации переворачивания
+    useEffect(() => {
+        // Запускаем анимацию ТОЛЬКО если:
+        // 1. Обе карты выбраны
+        // 2. Карта соперника еще не открыта
+        // 3. Анимация еще не запущена
+        if (gameState.selectedEnemyCard &&
+            gameState.selectedPlayerCard &&
+            !gameState.cardRevealed.enemy &&
+            !gameState.isFlipping) {
+
+            // Очищаем предыдущие таймеры
+            clearAllTimers();
+
+            // Запускаем анимацию
             setGameState(prev => ({
                 ...prev,
-                phase: 'result'
-            }))
-        }
+                isFlipping: true
+            }));
 
-        setGameState(prev => ({
-            ...prev,
-            centerCards: {
-                enemy: prev.selectedEnemyCard,
-                player: prev.selectedPlayerCard
-            }
-        }));
-    };
+            // Через 0.75 секунды открываем карту (точно в момент 90°)
+            const timer1 = setTimeout(() => {
+                setGameState(prev => ({
+                    ...prev,
+                    cardRevealed: { ...prev.cardRevealed, enemy: true }
+                }));
+            }, 750);
+
+            // Через 1.75 секунды завершаем анимацию (даем время на полный второй поворот)
+            const timer2 = setTimeout(() => {
+                setGameState(prev => ({
+                    ...prev,
+                    isFlipping: false,
+                    phase: 'result'
+                }));
+            }, 1750);
+
+            // Сохраняем таймеры
+            timersRef.current = [timer1, timer2];
+        }
+    }, [gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.cardRevealed.enemy, gameState.isFlipping]);
+
+    // Отдельный useEffect для очистки таймеров при размонтировании
+    useEffect(() => {
+        return () => {
+            clearAllTimers();
+        };
+    }, []);
 
     // Сброс игры
     const resetGame = () => {
+        // Очищаем все таймеры при сбросе
+        clearAllTimers();
+
         setGameState({
             enemyCards: [
                 {id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
@@ -126,32 +179,36 @@ const BattlePage = () => {
             selectedPlayerCard: null,
             phase: 'selection',
             firstToSelect: null,
-            centerCards: {enemy: null, player: null}
+            centerCards: {enemy: null, player: null},
+            cardRevealed: {enemy: false, player: false},
+            isFlipping: false
         });
     };
 
-    // Автоматическое размещение карт когда обе выбраны
-    useEffect(() => {
-        if (gameState.selectedEnemyCard && gameState.selectedPlayerCard && gameState.phase === 'reveal') {
-            console.log("оба выбрали")
-            setTimeout(() => {
-                placeCardsOnTable();
-            }, 1000);
-        }
-    }, [gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.phase]);
-
-    useEffect(() => {
-        if (gameState.selectedEnemyCard && gameState.phase === 'waiting') {
-            console.log("выбрал соперник")
-            setTimeout(() => {
-                placeCardsOnTable();
-            }, 1000);
-        }
-    }, [gameState.selectedEnemyCard, gameState.phase]);
-
-
     const handleBackClick = () => {
-        history.push('/'); // Возвращаемся на главную страницу
+        history.push('/');
+    };
+
+    // Функция для получения простых стилей анимации
+    const getEnemyAnimationStyles = (isFlipping, cardRevealed) => {
+        if (isFlipping) {
+            if (!cardRevealed) {
+                // Первая половина: поворот до 90° (карта становится невидимой)
+                return {
+                    transform: 'rotateY(90deg)',
+                    transition: 'transform 0.75s ease-in-out'
+                };
+            } else {
+                // Вторая половина: поворот от 90° до 0° (карта появляется лицом)
+                return {
+                    transform: 'rotateY(0deg)',
+                    transition: 'transform 0.75s ease-in-out'
+                };
+            }
+        }
+        return {
+            transform: 'rotateY(0deg)'
+        };
     };
 
     return (
@@ -205,25 +262,34 @@ const BattlePage = () => {
                                     </div>
                                 ))}
                             </div>
+
                             {/* Центр стола - выбранные карты */}
                             {(gameState.centerCards.enemy || gameState.centerCards.player) && (
                                 <div className="battle-center">
                                     <div style={{width: '50%'}}>
                                         {gameState.centerCards.enemy && (
                                             <InteractiveBorderCard
-                                                gradient={gameState.centerCards.enemy.gradient}
-                                                iconName={gameState.centerCards.enemy.icon}
-                                                className="card-appear"
+                                                gradient={gameState.cardRevealed.enemy ?
+                                                    gameState.centerCards.enemy.gradient :
+                                                    GRADIENTS.NONE}
+                                                iconName={gameState.cardRevealed.enemy ?
+                                                    gameState.centerCards.enemy.icon :
+                                                    null}
+                                                className="card-appear-enemy"
+                                                animationStyles={getEnemyAnimationStyles(
+                                                    gameState.isFlipping,
+                                                    gameState.cardRevealed.enemy
+                                                )}
                                             />
                                         )}
                                     </div>
+                                    <div className="vs-divider">VS</div>
                                     <div style={{width: '50%'}}>
-
                                         {gameState.centerCards.player && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.centerCards.player.gradient}
                                                 iconName={gameState.centerCards.player.icon}
-                                                className="card-appear"
+                                                className="card-appear-player"
                                             />
                                         )}
                                     </div>
@@ -275,8 +341,7 @@ const BattlePage = () => {
                 </div>
             </div>
         </>
-    )
-        ;
+    );
 };
 
 export default BattlePage;
