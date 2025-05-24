@@ -117,6 +117,95 @@
     height: auto;
 }
 
+/* Добавляем в src/components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle.css */
+
+.gradient-red-lose {
+    background: linear-gradient(to bottom, #ff4444, #cc3333);
+}
+
+/* Стили для модального окна результатов */
+.game-result-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    font-family: var(--font-family);
+}
+
+.game-result-content {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--shadow-card);
+    animation: modalSlideIn 0.5s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.game-result-title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-blue-dark);
+    margin-bottom: 1rem;
+}
+
+.game-result-score {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1.5rem;
+    color: var(--primary-red-dark);
+}
+
+.game-result-button {
+    background: var(--gradient-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease;
+}
+
+.game-result-button:hover {
+    transform: scale(1.05);
+}
+
+/* Анимация увеличения карты победителя */
+.winner-card-animation {
+    animation: winnerPulse 1s ease-in-out;
+}
+
+@keyframes winnerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 20px rgba(56, 193, 10, 0.5);
+    }
+}
+
 /* Медиа-запросы для дополнительных настроек на больших экранах */
 @media (min-width: 768px) {
     .interactive-border-circle-extra-extra-small .interactive-border-circle-outer {

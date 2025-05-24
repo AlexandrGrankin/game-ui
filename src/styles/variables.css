@@ -4,6 +4,7 @@
     --white: #FFFFFF;
     --black: #000000;
     --green: #38c10a;
+    --red-lose: #ff4444;
 
     /* Основные цвета */
     --primary-blue-light: #4A90E2;
@@ -17,6 +18,7 @@
     --gradient-blue: linear-gradient(to bottom, var(--primary-blue-light), var(--primary-blue-dark));
     --gradient-orange: linear-gradient(to bottom, var(--primary-orange-light), var(--primary-orange-dark));
     --gradient-red: linear-gradient(to bottom, var(--primary-red-light), var(--primary-red-dark));
+    --gradient-red-lose: linear-gradient(to bottom, #ff4444, #cc3333);
     --gradient-background: linear-gradient(to bottom, #0A4589, #062A55);
 
     /* Базовые размеры */

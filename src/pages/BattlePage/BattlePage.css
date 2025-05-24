@@ -1,3 +1,4 @@
+/* pages/BattlePage/BattlePage.css */
 .battle-top {
     background: var(--gradient-background);
     width: 100%;
@@ -96,18 +97,18 @@
     width: 100%;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    transition: all 0.5s ease-in-out; /* Плавная анимация для контейнера */
+    transition: all 0.5s ease-in-out;
 }
 
 .battle-enemy-card > div {
-    transition: all 0.5s ease-in-out; /* Плавная анимация для каждой карты */
+    transition: all 0.5s ease-in-out;
 }
 
 .battle-control {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem auto; /* auto для центрирования самого контейнера */
+    margin: 0.5rem auto;
     z-index: 2;
     width: 100%;
     gap: 1rem;
@@ -142,46 +143,101 @@
     position: relative;
 }
 
-/* Анимации */
-.card-appear {
-    animation: cardAppear 0.6s ease-in-out;
+/* Стили для выбранных карт игрока */
+.card-selected {
+    transform: scale(0.9);
+    opacity: 0.7;
+    transition: all 0.3s ease;
 }
 
-.card-flip {
-    animation: cardFlip 0.8s ease-in-out;
+.battle-status-game {
+    display: flex;
+    margin-top: auto;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
-/* Статус игры */
-.battle-status {
-    text-align: center;
-    margin-top: 1rem;
+/* Стили для модального окна результатов */
+.game-result-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
     font-family: var(--font-family);
+}
+
+.game-result-content {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--shadow-card);
+    animation: modalSlideIn 0.5s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.game-result-title {
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
     color: var(--primary-blue-dark);
+    margin-bottom: 1rem;
 }
 
-.battle-button {
+.game-result-score {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1.5rem;
+    color: var(--primary-red-dark);
+}
+
+.game-result-button {
+    background: var(--gradient-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: var(--border-radius);
     font-family: var(--font-family);
     font-size: var(--font-size-medium);
     font-weight: var(--font-weight-bold);
-    background: var(--gradient-red);
-    color: var(--white);
-    border: none;
-    padding: 0.8rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-card);
     cursor: pointer;
+    box-shadow: var(--shadow-card);
     transition: transform 0.2s ease;
 }
 
-.battle-button:hover {
+.game-result-button:hover {
     transform: scale(1.05);
 }
 
-.battle-button:active {
-    transform: scale(0.95);
+/* Анимация увеличения карты победителя */
+.winner-card-animation {
+    animation: winnerPulse 1s ease-in-out;
+}
+
+@keyframes winnerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 20px rgba(56, 193, 10, 0.5);
+    }
 }
 
 /* Анимация появления карты */
@@ -213,16 +269,14 @@
     }
 }
 
-/* Стили для выбранных карт игрока */
-.card-selected {
-    transform: scale(0.9);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.battle-status-game {
-    display: flex;
-    margin-top: auto;
+.value {
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-normal);
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-blue-dark);
 }
 
 /* Медиа-запросы */
@@ -241,6 +295,10 @@
         min-height: 80px;
         font-size: var(--font-size-xxl);
     }
+
+    .battle-status-game {
+        gap: 1rem;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -251,5 +309,9 @@
     .battle-center {
         gap: 2rem;
         min-height: 160px;
+    }
+
+    .battle-status-game {
+        gap: 1.5rem;
     }
 }
