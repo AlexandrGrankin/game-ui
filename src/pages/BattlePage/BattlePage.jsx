@@ -60,6 +60,7 @@ const BattlePage = () => {
         const randomIndex = Math.floor(Math.random() * gameState.enemyCards.length);
         const selectedCard = gameState.enemyCards[randomIndex];
 
+        // Мгновенно удаляем карту и сразу помещаем в центр
         setGameState(prev => ({
             ...prev,
             selectedEnemyCard: selectedCard,
@@ -121,34 +122,37 @@ const BattlePage = () => {
             !gameState.cardRevealed.enemy &&
             !gameState.isFlipping) {
 
-            // Очищаем предыдущие таймеры
-            clearAllTimers();
+            // Небольшая задержка перед началом анимации, чтобы карта успела появиться
+            setTimeout(() => {
+                // Очищаем предыдущие таймеры
+                clearAllTimers();
 
-            // Запускаем анимацию
-            setGameState(prev => ({
-                ...prev,
-                isFlipping: true
-            }));
-
-            // Через 0.75 секунды открываем карту (точно в момент 90°)
-            const timer1 = setTimeout(() => {
+                // Запускаем анимацию
                 setGameState(prev => ({
                     ...prev,
-                    cardRevealed: { ...prev.cardRevealed, enemy: true }
+                    isFlipping: true
                 }));
-            }, 750);
 
-            // Через 1.75 секунды завершаем анимацию (даем время на полный второй поворот)
-            const timer2 = setTimeout(() => {
-                setGameState(prev => ({
-                    ...prev,
-                    isFlipping: false,
-                    phase: 'result'
-                }));
-            }, 1750);
+                // Через 0.75 секунды открываем карту (точно в момент 90°)
+                const timer1 = setTimeout(() => {
+                    setGameState(prev => ({
+                        ...prev,
+                        cardRevealed: { ...prev.cardRevealed, enemy: true }
+                    }));
+                }, 750);
 
-            // Сохраняем таймеры
-            timersRef.current = [timer1, timer2];
+                // Через 1.75 секунды завершаем анимацию (даем время на полный второй поворот)
+                const timer2 = setTimeout(() => {
+                    setGameState(prev => ({
+                        ...prev,
+                        isFlipping: false,
+                        phase: 'result'
+                    }));
+                }, 1750);
+
+                // Сохраняем таймеры
+                timersRef.current = [timer1, timer2];
+            }, 100); // Небольшая задержка для появления карты
         }
     }, [gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.cardRevealed.enemy, gameState.isFlipping]);
 
