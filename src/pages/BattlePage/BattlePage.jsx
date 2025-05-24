@@ -1,30 +1,31 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useState, useEffect, useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 import './BattlePage.css';
 import ScoreSection from "../../components/ScoreSection/ScoreSection";
-import { SIZES, ICONS, GRADIENTS, BOX_SHADOW } from "../../constants/appConstants";
+import {SIZES, ICONS, GRADIENTS, BOX_SHADOW} from "../../constants/appConstants";
 import Icon from "../../components/Icon/Icon";
-import InteractiveBorderCircle from "../../components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
+import InteractiveBorderCircle
+    from "../../components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
 import InteractiveBorderCard from "../../components/InteractiveBorder/InteractiveBorderCard/InteractiveBorderCard";
 import useTimers from "../../hooks/useTimers";
 
 const BattlePage = () => {
     const history = useHistory();
-    const { createTimer, clearAllTimers } = useTimers();
+    const {createTimer, clearAllTimers} = useTimers();
 
     // Состояние игры
     const [gameState, setGameState] = useState({
         // Карты соперника (изначально все перевернуты)
         enemyCards: [
-            { id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-            { id: 2, gradient: GRADIENTS.RED, icon: ICONS.CUT },
-            { id: 3, gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
+            {id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+            {id: 2, gradient: GRADIENTS.RED, icon: ICONS.CUT},
+            {id: 3, gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
         ],
         // Карты игрока
         playerCards: [
-            { id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-            { id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
-            { id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
+            {id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+            {id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT},
+            {id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
         ],
         // Выбранные карты
         selectedEnemyCard: null,
@@ -146,7 +147,7 @@ const BattlePage = () => {
                 createTimer(() => {
                     setGameState(prev => ({
                         ...prev,
-                        cardRevealed: { ...prev.cardRevealed, enemy: true }
+                        cardRevealed: {...prev.cardRevealed, enemy: true}
                     }));
                 }, 750);
 
@@ -173,21 +174,21 @@ const BattlePage = () => {
 
         setGameState({
             enemyCards: [
-                { id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-                { id: 2, gradient: GRADIENTS.RED, icon: ICONS.CUT },
-                { id: 3, gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
+                {id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+                {id: 2, gradient: GRADIENTS.RED, icon: ICONS.CUT},
+                {id: 3, gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
             ],
             playerCards: [
-                { id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-                { id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
-                { id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
+                {id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+                {id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT},
+                {id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
             ],
             selectedEnemyCard: null,
             selectedPlayerCard: null,
             phase: 'selection',
             firstToSelect: null,
-            centerCards: { enemy: null, player: null },
-            cardRevealed: { enemy: false, player: false },
+            centerCards: {enemy: null, player: null},
+            cardRevealed: {enemy: false, player: false},
             isFlipping: false,
             gameResult: null
         });
@@ -238,11 +239,11 @@ const BattlePage = () => {
         <>
             <div className="battle-top">
                 <div className="battle-header">
-                    <ScoreSection />
+                    <ScoreSection/>
                 </div>
                 <div className="battle-bid">
-                    Заряд<Icon name={ICONS.CLICKCOIN} className="battle-bid-icon" />
-                    <span style={{ letterSpacing: '0.1rem' }}>1000</span>
+                    Заряд<Icon name={ICONS.CLICKCOIN} className="battle-bid-icon"/>
+                    <span style={{letterSpacing: '0.1rem'}}>1000</span>
                 </div>
             </div>
 
@@ -277,7 +278,7 @@ const BattlePage = () => {
                         <div className="battle-fight-card-section">
                             <div className="battle-enemy-card">
                                 {gameState.enemyCards.map(card => (
-                                    <div style={{ width: '32%' }} key={card.id}>
+                                    <div style={{width: '32%'}} key={card.id}>
                                         <InteractiveBorderCard
                                             // Не передаем градиент и иконку = рубашка
                                             isClickable={false}
@@ -289,7 +290,7 @@ const BattlePage = () => {
                             {/* Центр стола - выбранные карты */}
                             {(gameState.centerCards.enemy || gameState.centerCards.player) && (
                                 <div className="battle-center">
-                                    <div style={{ width: '50%' }}>
+                                    <div style={{width: '50%'}}>
                                         {gameState.centerCards.enemy && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.cardRevealed.enemy ?
@@ -307,7 +308,7 @@ const BattlePage = () => {
                                         )}
                                     </div>
                                     <div className="vs-divider">VS</div>
-                                    <div style={{ width: '50%' }}>
+                                    <div style={{width: '50%'}}>
                                         {gameState.centerCards.player && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.centerCards.player.gradient}
@@ -318,6 +319,29 @@ const BattlePage = () => {
                                     </div>
                                 </div>
                             )}
+
+                            <div className="battle-status-game">
+                                <InteractiveBorderCircle
+                                    size={SIZES.EXTRA_EXTRA_SMALL}
+                                    gradient={GRADIENTS.GREEN}
+                                />
+                                <InteractiveBorderCircle
+                                    size={SIZES.EXTRA_EXTRA_SMALL}
+                                    gradient={GRADIENTS.WHITE}
+                                />
+                                <InteractiveBorderCircle
+                                    size={SIZES.EXTRA_EXTRA_SMALL}
+                                    gradient={GRADIENTS.WHITE}
+                                />
+                                <InteractiveBorderCircle
+                                    size={SIZES.EXTRA_EXTRA_SMALL}
+                                    gradient={GRADIENTS.WHITE}
+                                />
+                                <InteractiveBorderCircle
+                                    size={SIZES.EXTRA_EXTRA_SMALL}
+                                    gradient={GRADIENTS.WHITE}
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -354,7 +378,7 @@ const BattlePage = () => {
                         {gameState.phase === 'result' && (
                             <>
                                 <p>{getResultText()}</p>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
                                     <button className="battle-button" onClick={resetGame}>
                                         Новый раунд
                                     </button>

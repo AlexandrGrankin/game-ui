@@ -3,6 +3,8 @@ export const GRADIENTS = {
     BLUE: 'blue',
     RED: 'red',
     ORANGE: 'orange',
+    WHITE: 'white',
+    GREEN: 'green',
     NONE: 'none'
 };
 
@@ -12,6 +14,7 @@ export const BOX_SHADOW = {
 };
 
 export const SIZES = {
+    EXTRA_EXTRA_SMALL: 'extra-extra-small',
     EXTRA_SMALL: 'extra-small',
     SMALL: 'small',
     MEDIUM: 'medium',

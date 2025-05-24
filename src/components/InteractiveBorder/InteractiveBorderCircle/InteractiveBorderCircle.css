@@ -29,6 +29,14 @@
     background: var(--gradient-red);
 }
 
+.gradient-white {
+    background: var(--white);
+}
+
+.gradient-green {
+    background: var(--green);
+}
+
 .gradient-none {
     background: var(--white);
 }
@@ -42,6 +50,15 @@
 }
 
 /* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+.interactive-border-circle-extra-extra-small .interactive-border-circle-outer {
+    width: 3vw;
+    height: 3vw;
+    max-width: none;
+    max-height: none;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+}
+
 .interactive-border-circle-extra-small .interactive-border-circle-outer {
     width: 16vw;
     height: 16vw;
@@ -102,6 +119,13 @@
 
 /* Медиа-запросы для дополнительных настроек на больших экранах */
 @media (min-width: 768px) {
+    .interactive-border-circle-extra-extra-small .interactive-border-circle-outer {
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+        max-width: 5.5rem;
+        max-height: 5.5rem;
+    }
+
     .interactive-border-circle-extra-small .interactive-border-circle-outer {
         min-width: 3.5rem;
         min-height: 3.5rem;
