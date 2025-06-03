@@ -1,33 +1,34 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useState, useEffect, useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 import './BattlePage.css';
 import ScoreSection from "../../components/ScoreSection/ScoreSection";
-import { SIZES, ICONS, GRADIENTS, BOX_SHADOW } from "../../constants/appConstants";
+import {SIZES, ICONS, GRADIENTS, BOX_SHADOW} from "../../constants/appConstants";
 import Icon from "../../components/Icon/Icon";
-import InteractiveBorderCircle from "../../components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
+import InteractiveBorderCircle
+    from "../../components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
 import InteractiveBorderCard from "../../components/InteractiveBorder/InteractiveBorderCard/InteractiveBorderCard";
 import useTimers from "../../hooks/useTimers";
-import { useAppState } from '../../context/AppContext';
+import {useAppState} from '../../context/AppContext';
+
+// Изначальные наборы карт (константы)
+const INITIAL_CARDS = {
+    enemy: [
+        {id: 'e1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+        {id: 'e2', gradient: GRADIENTS.RED, icon: ICONS.CUT},
+        {id: 'e3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
+    ],
+    player: [
+        {id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE},
+        {id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT},
+        {id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER}
+    ]
+};
 
 const BattlePage = () => {
     const history = useHistory();
-    const { createTimer, clearAllTimers } = useTimers();
-    const { actions, state } = useAppState();
-    const { battles } = state;
-
-    // Изначальные наборы карт (константы)
-    const INITIAL_CARDS = {
-        enemy: [
-            { id: 'e1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-            { id: 'e2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
-            { id: 'e3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
-        ],
-        player: [
-            { id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-            { id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
-            { id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
-        ]
-    };
+    const {createTimer, clearAllTimers} = useTimers();
+    const {actions, state} = useAppState();
+    const {battles} = state;
 
     // Состояние игры с 5 раундами
     const [gameState, setGameState] = useState({
@@ -39,15 +40,15 @@ const BattlePage = () => {
         selectedEnemyCard: null,
         selectedPlayerCard: null,
         // Карты в центре стола
-        centerCards: { enemy: null, player: null },
+        centerCards: {enemy: null, player: null},
         // Состояние переворачивания карт
-        cardRevealed: { enemy: false, player: false },
+        cardRevealed: {enemy: false, player: false},
         // Состояние анимации
         isFlipping: false,
         // Результат текущей партии
         roundResult: null, // 'win' | 'lose' | 'draw'
         // Счет игры (из 5 раундов)
-        gameScore: { player: 0, enemy: 0 },
+        gameScore: {player: 0, enemy: 0},
         // Результаты каждого раунда для индикаторов
         roundResults: [], // массив из 'win', 'lose', 'draw'
         // Текущий раунд (0-4)
@@ -89,8 +90,8 @@ const BattlePage = () => {
         setGameState(prev => ({
             ...prev,
             selectedPlayerCard: selectedCard,
-            centerCards: { ...prev.centerCards, player: selectedCard },
-            cardRevealed: { ...prev.cardRevealed, player: true }
+            centerCards: {...prev.centerCards, player: selectedCard},
+            cardRevealed: {...prev.cardRevealed, player: true}
             // Не удаляем карту игрока из массива - оставляем эффект затенения
         }));
     }, [gameState.selectedPlayerCard, gameState.playerCards, gameState.phase]);
@@ -113,15 +114,15 @@ const BattlePage = () => {
             return {
                 ...prev,
                 selectedEnemyCard: selectedCard,
-                centerCards: { ...prev.centerCards, enemy: selectedCard },
-                cardRevealed: { ...prev.cardRevealed, enemy: false },
+                centerCards: {...prev.centerCards, enemy: selectedCard},
+                cardRevealed: {...prev.cardRevealed, enemy: false},
                 // Удаляем выбранную карту из руки противника
                 enemyCards: prev.enemyCards.filter(card => card.id !== selectedCard.id)
             };
         });
     }, []);
 
-    // Старт нового раунда
+    // Старт нового раунда (ВОЗВРАЩАЕМ ФУНКЦИЮ)
     const startNewRound = useCallback(() => {
         setGameState(prev => ({
             ...prev,
@@ -146,12 +147,16 @@ const BattlePage = () => {
             ...prev,
             enemyTimerId: timerId
         }));
-    }, [INITIAL_CARDS.enemy, createTimer, enemyAutoMove]);
+    }, [createTimer, enemyAutoMove]);
 
-    // Проверка готовности к раскрытию карт
+    // Инициализация игры при монтировании
+    useEffect(() => {
+        startNewRound();
+        return () => clearAllTimers();
+    }, [startNewRound, clearAllTimers]);
     useEffect(() => {
         if (gameState.selectedEnemyCard && gameState.selectedPlayerCard && gameState.phase === 'selection') {
-            setGameState(prev => ({ ...prev, phase: 'reveal' }));
+            setGameState(prev => ({...prev, phase: 'reveal'}));
         }
     }, [gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.phase]);
 
@@ -165,16 +170,16 @@ const BattlePage = () => {
             // Очищаем таймер автохода если он есть
             if (gameState.enemyTimerId) {
                 clearTimeout(gameState.enemyTimerId);
-                setGameState(prev => ({ ...prev, enemyTimerId: null }));
+                setGameState(prev => ({...prev, enemyTimerId: null}));
             }
 
-            setGameState(prev => ({ ...prev, isFlipping: true }));
+            setGameState(prev => ({...prev, isFlipping: true}));
 
             // Открываем карту противника через 0.75 секунды
             createTimer(() => {
                 setGameState(prev => ({
                     ...prev,
-                    cardRevealed: { ...prev.cardRevealed, enemy: true }
+                    cardRevealed: {...prev.cardRevealed, enemy: true}
                 }));
             }, 750);
 
@@ -183,7 +188,7 @@ const BattlePage = () => {
                 setGameState(prev => {
                     const result = determineWinner(prev.selectedPlayerCard, prev.selectedEnemyCard);
 
-                    const newScore = { ...prev.gameScore };
+                    const newScore = {...prev.gameScore};
                     if (result === 'win') newScore.player++;
                     if (result === 'lose') newScore.enemy++;
 
@@ -202,44 +207,51 @@ const BattlePage = () => {
                 });
             }, 1750);
         }
-    }, [gameState.phase, gameState.selectedEnemyCard, gameState.selectedPlayerCard,
-        gameState.isFlipping, gameState.enemyTimerId, createTimer, determineWinner]);
+    }, [gameState.phase, gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.isFlipping, gameState.enemyTimerId, createTimer, determineWinner]);
 
     // Обработка завершения раунда
     useEffect(() => {
-            if (gameState.phase === 'roundResult') {
-                createTimer(() => {
-                    if (gameState.currentRound >= 5) {
+        if (gameState.phase === 'roundResult') {
+            createTimer(() => {
+                // Используем функциональный setState для получения актуальных данных
+                setGameState(prevState => {
+                    if (prevState.currentRound >= 5) {
                         // Игра закончена
-                        const finalResult = gameState.gameScore.player > gameState.gameScore.enemy ? 'win' :
-                            gameState.gameScore.player < gameState.gameScore.enemy ? 'lose' : 'draw';
+                        const finalResult = prevState.gameScore.player > prevState.gameScore.enemy ? 'win' :
+                            prevState.gameScore.player < prevState.gameScore.enemy ? 'lose' : 'draw';
 
-                        setGameState(prev => ({
-                            ...prev,
+                        // ВЫНОСИМ actions в отдельный таймер чтобы избежать обновления во время рендера
+                        setTimeout(() => {
+                            if (finalResult === 'win') {
+                                actions.handleBattleWin({coinsWon: 1000, expGained: 50});
+                            } else if (finalResult === 'lose') {
+                                actions.handleBattleLose({expLost: 10});
+                            } else {
+                                // При ничьей просто списываем бой без изменения статистики
+                                actions.updateBattles({
+                                    available: Math.max(0, battles.available - 1)
+                                });
+                            }
+                        }, 0);
+
+                        return {
+                            ...prevState,
                             phase: 'gameComplete',
                             finalResult,
                             showGameResultModal: true
-                        }));
-
-                        // Обновляем статистику и ВСЕГДА списываем бой
-                        if (finalResult === 'win') {
-                            actions.handleBattleWin({coinsWon: 1000, expGained: 50});
-                        } else if (finalResult === 'lose') {
-                            actions.handleBattleLose({expLost: 10});
-                        } else {
-                            // При ничьей просто списываем бой без изменения статистики
-                            actions.updateBattles({
-                                available: Math.max(0, battles.available - 1)
-                            });
-                        }
+                        };
                     } else {
-                        // Следующий раунд
-                        startNewRound();
+                        // Следующий раунд - запускаем startNewRound
+                        setTimeout(() => {
+                            startNewRound();
+                        }, 100);
+
+                        return prevState; // Не изменяем состояние здесь, startNewRound сделает это
                     }
-                }, 3000);
-            }
-        },
-        [gameState.phase, gameState.currentRound, gameState.gameScore, createTimer, actions, battles.available, startNewRound]);
+                });
+            }, 3000);
+        }
+    }, [gameState.phase, createTimer, actions, battles.available, startNewRound]);
 
     // Инициализация игры при монтировании
     useEffect(() => {
@@ -256,7 +268,7 @@ const BattlePage = () => {
     // Сдаться
     const handleSurrender = useCallback(() => {
         clearAllTimers();
-        actions.handleBattleLose({ expLost: 20 });
+        actions.handleBattleLose({expLost: 20});
         history.push('/');
     }, [clearAllTimers, actions, history]);
 
@@ -275,7 +287,7 @@ const BattlePage = () => {
                 };
             }
         }
-        return { transform: 'rotateY(0deg)' };
+        return {transform: 'rotateY(0deg)'};
     }, []);
 
     // Определение градиента для индикатора раунда
@@ -284,10 +296,14 @@ const BattlePage = () => {
 
         const result = gameState.roundResults[index];
         switch (result) {
-            case 'win': return GRADIENTS.GREEN;
-            case 'lose': return GRADIENTS.RED_LOSE;
-            case 'draw': return GRADIENTS.ORANGE;
-            default: return GRADIENTS.WHITE;
+            case 'win':
+                return GRADIENTS.GREEN;
+            case 'lose':
+                return GRADIENTS.RED_LOSE;
+            case 'draw':
+                return GRADIENTS.ORANGE;
+            default:
+                return GRADIENTS.WHITE;
         }
     }, [gameState.roundResults]);
 
@@ -304,11 +320,11 @@ const BattlePage = () => {
         <>
             <div className="battle-top">
                 <div className="battle-header">
-                    <ScoreSection />
+                    <ScoreSection/>
                 </div>
                 <div className="battle-bid">
-                    Заряд<Icon name={ICONS.CLICKCOIN} className="battle-bid-icon" />
-                    <span style={{ letterSpacing: '0.1rem' }}>1000</span>
+                    Заряд<Icon name={ICONS.CLICKCOIN} className="battle-bid-icon"/>
+                    <span style={{letterSpacing: '0.1rem'}}>1000</span>
                 </div>
             </div>
 
@@ -345,8 +361,8 @@ const BattlePage = () => {
                             {/* Карты противника - показываем только оставшиеся в руке */}
                             <div className="battle-enemy-card">
                                 {gameState.enemyCards.map(card => (
-                                    <div style={{ width: '32%' }} key={card.id}>
-                                        <InteractiveBorderCard isClickable={false} />
+                                    <div style={{width: '32%'}} key={card.id}>
+                                        <InteractiveBorderCard isClickable={false}/>
                                     </div>
                                 ))}
                             </div>
@@ -354,7 +370,7 @@ const BattlePage = () => {
                             {/* Центр стола - выбранные карты */}
                             {(gameState.centerCards.enemy || gameState.centerCards.player) && (
                                 <div className="battle-center">
-                                    <div style={{ width: '50%' }}>
+                                    <div style={{width: '50%'}}>
                                         {gameState.centerCards.enemy && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.cardRevealed.enemy ?
@@ -372,7 +388,7 @@ const BattlePage = () => {
                                         )}
                                     </div>
                                     <div className="vs-divider">VS</div>
-                                    <div style={{ width: '50%' }}>
+                                    <div style={{width: '50%'}}>
                                         {gameState.centerCards.player && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.centerCards.player.gradient}
