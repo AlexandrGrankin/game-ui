@@ -121,7 +121,7 @@ const BattlePage = () => {
         });
     }, []);
 
-    // Старт нового раунда
+    // Старт нового раунда (ВОЗВРАЩАЕМ ФУНКЦИЮ)
     const startNewRound = useCallback(() => {
         setGameState(prev => ({
             ...prev,
@@ -129,8 +129,8 @@ const BattlePage = () => {
             enemyCards: [...INITIAL_CARDS.enemy],
             selectedEnemyCard: null,
             selectedPlayerCard: null,
-            centerCards: {enemy: null, player: null},
-            cardRevealed: {enemy: false, player: false},
+            centerCards: { enemy: null, player: null },
+            cardRevealed: { enemy: false, player: false },
             isFlipping: false,
             roundResult: null,
             phase: 'selection',
@@ -146,9 +146,13 @@ const BattlePage = () => {
             ...prev,
             enemyTimerId: timerId
         }));
-    }, [INITIAL_CARDS.enemy, createTimer, enemyAutoMove]);
+    }, [createTimer, enemyAutoMove]);
 
-    // Проверка готовности к раскрытию карт
+    // Инициализация игры при монтировании
+    useEffect(() => {
+        startNewRound();
+        return () => clearAllTimers();
+    }, [startNewRound, clearAllTimers]);
     useEffect(() => {
         if (gameState.selectedEnemyCard && gameState.selectedPlayerCard && gameState.phase === 'selection') {
             setGameState(prev => ({ ...prev, phase: 'reveal' }));
@@ -202,44 +206,51 @@ const BattlePage = () => {
                 });
             }, 1750);
         }
-    }, [gameState.phase, gameState.selectedEnemyCard, gameState.selectedPlayerCard,
-        gameState.isFlipping, gameState.enemyTimerId, createTimer, determineWinner]);
+    }, [gameState.phase, gameState.selectedEnemyCard, gameState.selectedPlayerCard, gameState.isFlipping, gameState.enemyTimerId, createTimer, determineWinner]);
 
     // Обработка завершения раунда
     useEffect(() => {
-            if (gameState.phase === 'roundResult') {
-                createTimer(() => {
-                    if (gameState.currentRound >= 5) {
+        if (gameState.phase === 'roundResult') {
+            createTimer(() => {
+                // Используем функциональный setState для получения актуальных данных
+                setGameState(prevState => {
+                    if (prevState.currentRound >= 5) {
                         // Игра закончена
-                        const finalResult = gameState.gameScore.player > gameState.gameScore.enemy ? 'win' :
-                            gameState.gameScore.player < gameState.gameScore.enemy ? 'lose' : 'draw';
+                        const finalResult = prevState.gameScore.player > prevState.gameScore.enemy ? 'win' :
+                            prevState.gameScore.player < prevState.gameScore.enemy ? 'lose' : 'draw';
 
-                        setGameState(prev => ({
-                            ...prev,
+                        // ВЫНОСИМ actions в отдельный таймер чтобы избежать обновления во время рендера
+                        setTimeout(() => {
+                            if (finalResult === 'win') {
+                                actions.handleBattleWin({ coinsWon: 1000, expGained: 50 });
+                            } else if (finalResult === 'lose') {
+                                actions.handleBattleLose({ expLost: 10 });
+                            } else {
+                                // При ничьей просто списываем бой без изменения статистики
+                                actions.updateBattles({
+                                    available: Math.max(0, battles.available - 1)
+                                });
+                            }
+                        }, 0);
+
+                        return {
+                            ...prevState,
                             phase: 'gameComplete',
                             finalResult,
                             showGameResultModal: true
-                        }));
-
-                        // Обновляем статистику и ВСЕГДА списываем бой
-                        if (finalResult === 'win') {
-                            actions.handleBattleWin({coinsWon: 1000, expGained: 50});
-                        } else if (finalResult === 'lose') {
-                            actions.handleBattleLose({expLost: 10});
-                        } else {
-                            // При ничьей просто списываем бой без изменения статистики
-                            actions.updateBattles({
-                                available: Math.max(0, battles.available - 1)
-                            });
-                        }
+                        };
                     } else {
-                        // Следующий раунд
-                        startNewRound();
+                        // Следующий раунд - запускаем startNewRound
+                        setTimeout(() => {
+                            startNewRound();
+                        }, 100);
+
+                        return prevState; // Не изменяем состояние здесь, startNewRound сделает это
                     }
-                }, 3000);
-            }
-        },
-        [gameState.phase, gameState.currentRound, gameState.gameScore, createTimer, actions, battles.available, startNewRound]);
+                });
+            }, 3000);
+        }
+    }, [gameState.phase, createTimer, actions, battles.available, startNewRound]);
 
     // Инициализация игры при монтировании
     useEffect(() => {
