@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 import "./GameControlsSection.css";
 import InteractiveBorderCircle from "../InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle";
-import { GRADIENTS, SIZES, ICONS, BOX_SHADOW } from "../../constants/appConstants";
+import {GRADIENTS, SIZES, ICONS, BOX_SHADOW} from "../../constants/appConstants";
 import InteractiveBorderClick from "../InteractiveBorder/InteractiveBorderClick/InteractiveBorderClick";
-import { useAppState } from '../../context/AppContext';
+import {useAppState} from '../../context/AppContext';
 
 const GameControlsSection = React.memo(() => {
     const history = useHistory();
 
     // Получаем данные и функции из контекста
-    const { state, computed } = useAppState();
-    const { battles } = state;
+    const {state} = useAppState();
+    const {battles} = state;
 
     const handleBattleClick = useCallback(() => {
         // Проверяем, есть ли доступные бои

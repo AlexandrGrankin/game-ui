@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import "./InteractiveBorderClick.css";
-import { BOX_SHADOW, GRADIENTS, SIZES } from "../../../constants/appConstants";
-import { useAppState } from '../../../context/AppContext';
+import {BOX_SHADOW, GRADIENTS, SIZES} from "../../../constants/appConstants";
+import {useAppState} from '../../../context/AppContext';
 
 const InteractiveBorderClick = React.memo(({
                                                size = SIZES.MEDIUM,
@@ -13,8 +13,8 @@ const InteractiveBorderClick = React.memo(({
                                                'data-testid': testId
                                            }) => {
     // Получаем battles из контекста
-    const { state, computed } = useAppState();
-    const { battles } = state;
+    const {state} = useAppState();
+    const {battles} = state;
 
     const handleClick = useCallback((event) => {
         if (!disabled && onClick && battles.available > 0) {

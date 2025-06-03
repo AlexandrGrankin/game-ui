@@ -1,13 +1,13 @@
 import React from 'react';
 import './ScoreSection.css';
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
-import { ICONS } from "../../constants/appConstants";
-import { useAppState } from '../../context/AppContext';
+import {ICONS} from "../../constants/appConstants";
+import {useAppState} from '../../context/AppContext';
 
 const ScoreSection = React.memo(() => {
     // Получаем данные из контекста
-    const { state, computed } = useAppState();
-    const { clickCoins, statistics } = state;
+    const {state} = useAppState();
+    const {clickCoins, statistics} = state;
 
     // Форматирование числа с разделителями
     const formatNumber = (num) => {
@@ -16,7 +16,7 @@ const ScoreSection = React.memo(() => {
 
     // Форматирование статистики боев
     const formatBattleStats = () => {
-        const { won, lose } = statistics;
+        const {won, lose} = statistics;
         return `${won}/${lose}`;
     };
 

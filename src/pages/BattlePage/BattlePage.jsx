@@ -15,20 +15,26 @@ const BattlePage = () => {
     const { actions, state } = useAppState();
     const { battles } = state;
 
-    // Состояние игры с 5 раундами
-    const [gameState, setGameState] = useState({
-        // Карты соперника (изначально все перевернуты)
-        enemyCards: [
-            { id: 1, gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
-            { id: 2, gradient: GRADIENTS.RED, icon: ICONS.CUT },
-            { id: 3, gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
+    // Изначальные наборы карт (константы)
+    const INITIAL_CARDS = {
+        enemy: [
+            { id: 'e1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
+            { id: 'e2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
+            { id: 'e3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
         ],
-        // Карты игрока
-        playerCards: [
+        player: [
             { id: 'p1', gradient: GRADIENTS.BLUE, icon: ICONS.STONE },
             { id: 'p2', gradient: GRADIENTS.RED, icon: ICONS.CUT },
             { id: 'p3', gradient: GRADIENTS.ORANGE, icon: ICONS.PAPER }
-        ],
+        ]
+    };
+
+    // Состояние игры с 5 раундами
+    const [gameState, setGameState] = useState({
+        // Карты соперника (изначально все доступны)
+        enemyCards: [...INITIAL_CARDS.enemy],
+        // Карты игрока
+        playerCards: [...INITIAL_CARDS.player],
         // Выбранные карты текущего раунда
         selectedEnemyCard: null,
         selectedPlayerCard: null,
@@ -85,6 +91,7 @@ const BattlePage = () => {
             selectedPlayerCard: selectedCard,
             centerCards: { ...prev.centerCards, player: selectedCard },
             cardRevealed: { ...prev.cardRevealed, player: true }
+            // Не удаляем карту игрока из массива - оставляем эффект затенения
         }));
     }, [gameState.selectedPlayerCard, gameState.playerCards, gameState.phase]);
 
@@ -107,10 +114,39 @@ const BattlePage = () => {
                 ...prev,
                 selectedEnemyCard: selectedCard,
                 centerCards: { ...prev.centerCards, enemy: selectedCard },
-                cardRevealed: { ...prev.cardRevealed, enemy: false }
+                cardRevealed: { ...prev.cardRevealed, enemy: false },
+                // Удаляем выбранную карту из руки противника
+                enemyCards: prev.enemyCards.filter(card => card.id !== selectedCard.id)
             };
         });
     }, []);
+
+    // Старт нового раунда
+    const startNewRound = useCallback(() => {
+        setGameState(prev => ({
+            ...prev,
+            // Восстанавливаем карты противника, карты игрока остаются как есть
+            enemyCards: [...INITIAL_CARDS.enemy],
+            selectedEnemyCard: null,
+            selectedPlayerCard: null,
+            centerCards: {enemy: null, player: null},
+            cardRevealed: {enemy: false, player: false},
+            isFlipping: false,
+            roundResult: null,
+            phase: 'selection',
+            enemyTimerId: null
+        }));
+
+        // Запускаем таймер автохода противника через 2 секунды
+        const timerId = createTimer(() => {
+            enemyAutoMove();
+        }, 2000);
+
+        setGameState(prev => ({
+            ...prev,
+            enemyTimerId: timerId
+        }));
+    }, [INITIAL_CARDS.enemy, createTimer, enemyAutoMove]);
 
     // Проверка готовности к раскрытию карт
     useEffect(() => {
@@ -171,63 +207,39 @@ const BattlePage = () => {
 
     // Обработка завершения раунда
     useEffect(() => {
-        if (gameState.phase === 'roundResult') {
-            createTimer(() => {
-                if (gameState.currentRound >= 5) {
-                    // Игра закончена
-                    const finalResult = gameState.gameScore.player > gameState.gameScore.enemy ? 'win' :
-                        gameState.gameScore.player < gameState.gameScore.enemy ? 'lose' : 'draw';
+            if (gameState.phase === 'roundResult') {
+                createTimer(() => {
+                    if (gameState.currentRound >= 5) {
+                        // Игра закончена
+                        const finalResult = gameState.gameScore.player > gameState.gameScore.enemy ? 'win' :
+                            gameState.gameScore.player < gameState.gameScore.enemy ? 'lose' : 'draw';
 
-                    setGameState(prev => ({
-                        ...prev,
-                        phase: 'gameComplete',
-                        finalResult,
-                        showGameResultModal: true
-                    }));
+                        setGameState(prev => ({
+                            ...prev,
+                            phase: 'gameComplete',
+                            finalResult,
+                            showGameResultModal: true
+                        }));
 
-                    // Обновляем статистику и ВСЕГДА списываем бой
-                    if (finalResult === 'win') {
-                        actions.handleBattleWin({ coinsWon: 1000, expGained: 50 });
-                    } else if (finalResult === 'lose') {
-                        actions.handleBattleLose({ expLost: 10 });
+                        // Обновляем статистику и ВСЕГДА списываем бой
+                        if (finalResult === 'win') {
+                            actions.handleBattleWin({coinsWon: 1000, expGained: 50});
+                        } else if (finalResult === 'lose') {
+                            actions.handleBattleLose({expLost: 10});
+                        } else {
+                            // При ничьей просто списываем бой без изменения статистики
+                            actions.updateBattles({
+                                available: Math.max(0, battles.available - 1)
+                            });
+                        }
                     } else {
-                        // При ничьей просто списываем бой без изменения статистики
-                        actions.updateBattles({
-                            available: Math.max(0, battles.available - 1)
-                        });
+                        // Следующий раунд
+                        startNewRound();
                     }
-                } else {
-                    // Следующий раунд
-                    startNewRound();
-                }
-            }, 3000);
-        }
-    }, [gameState.phase, gameState.currentRound, gameState.gameScore, createTimer, actions]);
-
-    // Старт нового раунда
-    const startNewRound = useCallback(() => {
-        setGameState(prev => ({
-            ...prev,
-            selectedEnemyCard: null,
-            selectedPlayerCard: null,
-            centerCards: { enemy: null, player: null },
-            cardRevealed: { enemy: false, player: false },
-            isFlipping: false,
-            roundResult: null,
-            phase: 'selection',
-            enemyTimerId: null
-        }));
-
-        // Запускаем таймер автохода противника через 2 секунды
-        const timerId = createTimer(() => {
-            enemyAutoMove();
-        }, 2000);
-
-        setGameState(prev => ({
-            ...prev,
-            enemyTimerId: timerId
-        }));
-    }, [createTimer, enemyAutoMove]);
+                }, 3000);
+            }
+        },
+        [gameState.phase, gameState.currentRound, gameState.gameScore, createTimer, actions, battles.available, startNewRound]);
 
     // Инициализация игры при монтировании
     useEffect(() => {
@@ -330,6 +342,7 @@ const BattlePage = () => {
                         </div>
 
                         <div className="battle-fight-card-section">
+                            {/* Карты противника - показываем только оставшиеся в руке */}
                             <div className="battle-enemy-card">
                                 {gameState.enemyCards.map(card => (
                                     <div style={{ width: '32%' }} key={card.id}>
@@ -384,6 +397,7 @@ const BattlePage = () => {
                         </div>
                     </div>
 
+                    {/* Карты игрока - показываем все карты с эффектом затенения для выбранной */}
                     <div className="battle-control">
                         {gameState.playerCards.map(card => {
                             const isClickable = !gameState.selectedPlayerCard && gameState.phase === 'selection';
