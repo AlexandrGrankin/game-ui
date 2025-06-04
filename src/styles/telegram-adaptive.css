@@ -91,7 +91,7 @@
 /* Масштабирование шрифтов */
 .battle-bid {
     font-size: calc(var(--font-size-xxl) * var(--scale-factor));
-    margin: calc(var(--size-lg) * var(--scale-factor)) 0;
+    margin: calc(var(--size-sm) * var(--scale-factor)) 0;
 }
 
 .battle-bid-icon {

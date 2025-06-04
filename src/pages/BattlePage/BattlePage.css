@@ -51,8 +51,8 @@
 .battle-bid {
     display: flex;
     width: 100%;
-    margin-top: calc(var(--size-lg) * var(--scale-factor, 1));
-    margin-bottom: calc(var(--size-lg) * var(--scale-factor, 1));
+    margin-top: calc(var(--size-sm) * var(--scale-factor, 1));
+    margin-bottom: calc(var(--size-sm) * var(--scale-factor, 1));
     letter-spacing: calc(0.3rem * var(--scale-factor, 1));
     font-family: var(--font-family);
     font-size: calc(var(--font-size-xxl) * var(--scale-factor, 1));
@@ -337,13 +337,13 @@
 }
 
 /* Компактные режимы для маленьких экранов */
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 635px) {
     .battle-content {
         padding: calc(0.3rem * var(--scale-factor, 1));
     }
 
     .battle-bid {
-        margin: calc(var(--size-md) * var(--scale-factor, 1)) 0;
+        margin: calc(var(--size-sm) * var(--scale-factor, 1)) 0;
         letter-spacing: calc(0.1rem * var(--scale-factor, 1));
     }
 

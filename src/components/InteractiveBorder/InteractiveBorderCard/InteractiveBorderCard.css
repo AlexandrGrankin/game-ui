@@ -14,15 +14,25 @@
     justify-content: center;
     align-items: center;
     background: var(--white);
+    /* ИСПРАВЛЕНО: Упрощаем border-radius для iOS */
     border-radius: calc(var(--border-radius) * var(--scale-factor, 1));
     box-shadow: var(--shadow-card);
     width: 100%;
     aspect-ratio: 3/4.4; /* Базовые пропорции */
+
+    /* ИСПРАВЛЕНО: Добавляем overflow hidden для предотвращения выхода за границы */
+    overflow: hidden;
+
+    /* ИСПРАВЛЕНО: Явно задаем box-sizing */
+    box-sizing: border-box;
+
     /* Настройки для 3D трансформации */
     transform-style: preserve-3d;
     transition: transform 0.6s ease-in-out;
     transform: rotateY(0deg);
-    /* Убираем агрессивные ограничения - только разумные лимиты */
+
+    /* ИСПРАВЛЕНО: Добавляем position relative */
+    position: relative;
 }
 
 /* Различные этапы анимации переворачивания */
@@ -67,15 +77,19 @@
     align-items: center;
     box-shadow: var(--shadow-inner);
     border-radius: calc(calc(var(--border-radius) * 0.5) * var(--scale-factor, 1));
-    width: 80%; /* Фиксированный размер */
-    height: 84%; /* Фиксированный размер */
+
+    /* ИСПРАВЛЕНО: Явно задаем box-sizing */
+    box-sizing: border-box;
+
     transition: all 0.3s ease;
     backface-visibility: hidden;
-    /* Добавляем ограничения для предотвращения выхода за границы */
-    max-width: 80%;
-    max-height: 84%;
-    min-width: 60%; /* Минимальный размер */
-    min-height: 70%; /* Минимальный размер */
+
+    /* ИСПРАВЛЕНО: Добавляем overflow hidden и для внутреннего контейнера */
+    overflow: hidden;
+
+    /* ИСПРАВЛЕНО: Убираем возможные margin/padding */
+    margin: 0;
+    padding: 0;
 }
 
 .card-back-inner {
@@ -92,6 +106,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* ИСПРАВЛЕНО: Добавляем overflow hidden */
+    overflow: hidden;
 }
 
 /* Создаем красивый узор CSS */
@@ -119,7 +135,7 @@
 .card-back-pattern::after {
     content: '?';
     font-family: var(--font-family);
-    font-size: calc(1.8rem * var(--scale-factor, 1)); /* Уменьшили с 2rem */
+    font-size: calc(1.8rem * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     color: var(--white);
     text-shadow: calc(2px * var(--scale-factor, 1)) calc(2px * var(--scale-factor, 1)) calc(4px * var(--scale-factor, 1)) rgba(0, 0, 0, 0.5);
@@ -144,13 +160,16 @@
     background: var(--white);
 }
 
-/* ИСПРАВЛЕННАЯ иконка - точно помещается в карты */
+/* ИСПРАВЛЕНО: Упрощаем размеры иконки для лучшей совместимости с iOS */
 .card-icon {
-    width: 75%; /* Уменьшили с 80% для гарантии */
+    width: 68%;
     height: auto;
-    max-width: 75%; /* Жесткое ограничение */
-    max-height: 75%; /* Жесткое ограничение */
+    max-width: 68%;
+    max-height: 68%;
     object-fit: contain;
+    /* ИСПРАВЛЕНО: Добавляем explicit sizing */
+    box-sizing: border-box;
+    display: block;
 }
 
 /* Эффекты для кликабельных карт */
@@ -212,9 +231,9 @@
 }
 
 .battle-control .card-icon {
-    width: 75%;
-    max-width: 75%;
-    max-height: 75%;
+    width: 68%;
+    max-width: 68%;
+    max-height: 68%;
 }
 
 .battle-control .card-back-pattern::after {
@@ -228,9 +247,9 @@
 }
 
 .battle-enemy-card .card-icon {
-    width: 75%;
-    max-width: 75%;
-    max-height: 75%;
+    width: 68%;
+    max-width: 68%;
+    max-height: 68%;
 }
 
 .battle-enemy-card .card-back-pattern::after {
@@ -244,9 +263,9 @@
 }
 
 .battle-center .card-icon {
-    width: 75%;
-    max-width: 75%;
-    max-height: 75%;
+    width: 68%;
+    max-width: 68%;
+    max-height: 68%;
 }
 
 .battle-center .card-back-pattern::after {
@@ -254,10 +273,10 @@
 }
 
 /* СПЕЦИАЛЬНЫЙ медиа-запрос для iPhone 8 и подобных (около 667px) */
-@media screen and (max-height: 700px) and (min-height: 600px) {
+@media screen and (max-height: 700px) and (min-height: 635px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
-        max-height: calc(9rem * var(--scale-factor, 1));
+        max-height: calc(11rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.6;
     }
     .battle-control .card-back-pattern::after {
@@ -266,17 +285,17 @@
 
     /* ========== КАРТЫ ПРОТИВНИКА ========== */
     .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.6;
     }
     .battle-enemy-card .card-back-pattern::after {
-        font-size: calc(1.7rem * var(--scale-factor, 1));
+        font-size: calc(1.5rem * var(--scale-factor, 1));
     }
 
     /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(12rem * var(--scale-factor, 1));
-        aspect-ratio: 3/4.6;
+        max-height: calc(10rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4;
     }
     .battle-center .card-back-pattern::after {
         font-size: calc(2.1rem * var(--scale-factor, 1));
@@ -284,7 +303,7 @@
 }
 
 /* Для экранов с малой высотой - ПЛАВНОЕ пропорциональное уменьшение */
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 635px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
         max-height: calc(12rem * var(--scale-factor, 1));
@@ -438,9 +457,9 @@
     }
 
     .card-icon {
-        width: calc(75% * var(--scale-factor, 1));
-        max-width: 75%;
-        max-height: 75%;
+        width: calc(70% * var(--scale-factor, 1));
+        max-width: 70%;
+        max-height: 70%;
     }
 }
 
@@ -455,12 +474,90 @@
     }
 
     .card-icon {
-        width: calc(70% * var(--scale-factor, 1));
-        max-width: 70%;
-        max-height: 70%;
+        width: calc(68% * var(--scale-factor, 1));
+        max-width: 68%;
+        max-height: 68%;
     }
 
     .card-back-pattern::after {
         font-size: calc(0.8rem * var(--scale-factor, 1));
+    }
+}
+
+/* ИСПРАВЛЕНО: Добавляем специальные правила для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .interactive-border-card-outer {
+        /* Принудительное hardware acceleration для iOS */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        /* Улучшаем рендеринг на iOS */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* Отключаем сглаживание на iOS если нужно */
+        -webkit-font-smoothing: antialiased;
+        /* ИСПРАВЛЕНО: Принудительно устанавливаем overflow */
+        overflow: hidden !important;
+    }
+
+    .interactive-border-card-inner {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* ИСПРАВЛЕНО: Используем более точные отступы для iOS */
+        top: 10% !important;
+        left: 10% !important;
+        right: 10% !important;
+        bottom: 10% !important;
+        overflow: hidden !important;
+    }
+
+    /* ИСПРАВЛЕНО: Принудительно устанавливаем размеры иконок для iOS */
+    .card-icon {
+        width: 65% !important;
+        height: auto !important;
+        max-width: 65% !important;
+        max-height: 65% !important;
+    }
+
+    /* ИСПРАВЛЕНО: Специальные правила для background pattern на iOS */
+    .card-back-pattern::before {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+/* ИСПРАВЛЕНО: Дополнительные правила для WebKit браузеров */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .interactive-border-card-outer {
+        /* Исправляем рендеринг на Retina дисплеях */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .interactive-border-card-inner {
+        /* Убираем возможные артефакты рендеринга */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* ИСПРАВЛЕНО: Fallback для браузеров без поддержки @supports */
+.interactive-border-card-inner {
+    /* Fallback размеры если абсолютное позиционирование не сработает */
+    width: 78%;
+    height: 82%;
+}
+
+/* Применяем абсолютное позиционирование только если браузер поддерживает @supports */
+@supports (position: absolute) {
+    .interactive-border-card-inner {
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 11%;
+        left: 11%;
+        right: 11%;
+        bottom: 11%;
     }
 }
