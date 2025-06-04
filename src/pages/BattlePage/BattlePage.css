@@ -134,7 +134,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: calc(1rem * var(--scale-factor, 1));
+    /*gap: calc(1rem * var(--scale-factor, 1));*/
     flex: 1;
     min-height: calc(120px * var(--scale-factor, 1));
 }
@@ -337,7 +337,7 @@
 }
 
 /* Компактные режимы для маленьких экранов */
-@media screen and (max-height: 635px) {
+@media screen and (max-height: 835px) {
     .battle-content {
         padding: calc(0.3rem * var(--scale-factor, 1));
     }

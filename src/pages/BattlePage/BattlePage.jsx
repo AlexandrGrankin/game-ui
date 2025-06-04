@@ -220,7 +220,7 @@ const BattlePage = () => {
                         const finalResult = prevState.gameScore.player > prevState.gameScore.enemy ? 'win' :
                             prevState.gameScore.player < prevState.gameScore.enemy ? 'lose' : 'draw';
 
-                        // ВЫНОСИМ actions в отдельный таймер, чтобы избежать обновления во время рендера
+                        // ВЫНОСИМ actions в отдельный таймер чтобы избежать обновления во время рендера
                         setTimeout(() => {
                             if (finalResult === 'win') {
                                 actions.handleBattleWin({coinsWon: 1000, expGained: 50});
@@ -370,7 +370,7 @@ const BattlePage = () => {
                             {/* Центр стола - выбранные карты */}
                             {(gameState.centerCards.enemy || gameState.centerCards.player) && (
                                 <div className="battle-center">
-                                    <div style={{width: '50%'}}>
+                                    <div style={{width: '51%'}}>
                                         {gameState.centerCards.enemy && (
                                             <InteractiveBorderCard
                                                 gradient={gameState.cardRevealed.enemy ?

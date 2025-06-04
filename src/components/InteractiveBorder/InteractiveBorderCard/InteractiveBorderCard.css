@@ -226,7 +226,7 @@
 
 /* ========== КАРТЫ ИГРОКОВ (внизу) ========== */
 .battle-control .interactive-border-card-outer {
-    max-height: calc(10.5rem * var(--scale-factor, 1));
+    max-height: calc(11.5rem * var(--scale-factor, 1));
     aspect-ratio: 3/4.8;
 }
 
@@ -242,7 +242,7 @@
 
 /* ========== КАРТЫ ПРОТИВНИКА (сверху) ========== */
 .battle-enemy-card .interactive-border-card-outer {
-    max-height: calc(9rem * var(--scale-factor, 1));
+    max-height: calc(11rem * var(--scale-factor, 1));
     aspect-ratio: 3/4.4;
 }
 
@@ -258,8 +258,8 @@
 
 /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ (на столе) ========== */
 .battle-center .interactive-border-card-outer {
-    max-height: calc(12rem * var(--scale-factor, 1));
-    aspect-ratio: 3/4.4;
+    max-height: calc(14rem * var(--scale-factor, 1));
+    aspect-ratio: 3/5;
 }
 
 .battle-center .card-icon {
@@ -294,8 +294,8 @@
 
     /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(10rem * var(--scale-factor, 1));
-        aspect-ratio: 3/4;
+        max-height: calc(15rem * var(--scale-factor, 1));
+        aspect-ratio: 3/5;
     }
     .battle-center .card-back-pattern::after {
         font-size: calc(2.1rem * var(--scale-factor, 1));
@@ -306,7 +306,7 @@
 @media screen and (max-height: 635px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
-        max-height: calc(12rem * var(--scale-factor, 1));
+        max-height: calc(11rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.5;
     }
     .battle-control .card-back-pattern::after {
@@ -315,7 +315,7 @@
 
     /* ========== КАРТЫ ПРОТИВНИКА ========== */
     .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(9rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.6;
     }
     .battle-enemy-card .card-back-pattern::after {
@@ -324,8 +324,8 @@
 
     /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(12rem * var(--scale-factor, 1));
-        aspect-ratio: 3/4.4;
+        max-height: calc(11rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.5;
     }
     .battle-center .card-back-pattern::after {
         font-size: calc(2rem * var(--scale-factor, 1));
