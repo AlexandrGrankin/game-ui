@@ -1,11 +1,179 @@
+/* styles/App.css */
 .app-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    width: 100%; /* Занимает всю ширину */
-    max-width: 100%; /* Убираем максимальную ширину */
+    /* Используем кастомные переменные высоты */
+    height: var(--app-height, 100vh);
+    min-height: var(--app-height, 100vh);
+    max-height: var(--app-height, 100vh);
+    width: 100vw;
     margin: 0;
     padding: 0;
     overflow: hidden;
     position: relative;
+
+    /* Для поддержки safe areas на iOS */
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
+}
+
+/* Специальная настройка для Telegram WebApp */
+.telegram-webapp .app-container {
+    height: var(--tg-viewport-height, 100vh);
+    min-height: var(--tg-viewport-height, 100vh);
+    max-height: var(--tg-viewport-height, 100vh);
+
+    /* Учитываем Telegram safe areas */
+    padding-top: var(--tg-safe-area-top, 0px);
+    padding-bottom: var(--tg-safe-area-bottom, 0px);
+}
+
+/* Верхняя часть приложения */
+.app-top,
+.battle-top {
+    flex-shrink: 0; /* Не сжимается */
+    width: 100%;
+    overflow: hidden;
+    background: var(--gradient-background);
+}
+
+/* Нижняя часть приложения */
+.app-bottom,
+.battle-bottom {
+    flex: 1; /* Занимает оставшееся место */
+    min-height: 0; /* Важно для корректной работы flex */
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контент приложения */
+.app-content,
+.battle-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Адаптивные ограничения ширины */
+@media (min-width: 768px) {
+    .app-content,
+    .battle-content {
+        max-width: calc(650px * var(--scale-factor, 1));
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-content,
+    .battle-content {
+        max-width: calc(900px * var(--scale-factor, 1));
+    }
+}
+
+/* Особые стили для мобильных устройств */
+@media (max-width: 767px) {
+    .app-container {
+        /* Фиксируем контейнер для предотвращения bounce */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    /* Предотвращаем overscroll behavior */
+    .app-top,
+    .app-bottom,
+    .battle-top,
+    .battle-bottom {
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Стили для экранов с малой высотой */
+@media screen and (max-height: 600px) {
+    .app-container {
+        /* Уменьшаем внутренние отступы для компактности */
+        padding-top: calc(var(--safe-area-inset-top) * 0.5);
+        padding-bottom: calc(var(--safe-area-inset-bottom) * 0.5);
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .app-container {
+        /* Еще больше уменьшаем отступы */
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+/* Стили для высоких разрешений */
+@media (min-width: 1440px) {
+    .app-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-card);
+    }
+}
+
+/* Стили для печати (если потребуется) */
+@media print {
+    .app-container {
+        height: auto;
+        min-height: auto;
+        max-height: none;
+        overflow: visible;
+        position: static;
+        padding: 0;
+    }
+}
+
+/* Стили для accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .app-container * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    .app-container {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+/* Дополнительные стили для безопасной области */
+.safe-area-container {
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
+}
+
+/* Полноэкранный режим (если приложение запускается как PWA) */
+@media (display-mode: fullscreen) {
+    .app-container {
+        height: 100vh;
+        padding-top: var(--safe-area-inset-top);
+    }
+}
+
+@media (display-mode: standalone) {
+    .app-container {
+        height: 100vh;
+        padding-top: var(--safe-area-inset-top);
+    }
 }

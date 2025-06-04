@@ -3,6 +3,9 @@
 
 html {
     font-size: 16px; /* Базовый размер для rem на мобильных */
+    /* Устанавливаем высоту с учетом возможных интерфейсов браузера */
+    height: 100%;
+    height: -webkit-fill-available;
 }
 
 body {
@@ -10,38 +13,164 @@ body {
     padding: 0;
     font-family: var(--font-family);
     overflow-x: hidden;
+    overflow-y: hidden; /* Предотвращаем вертикальную прокрутку */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    height: -webkit-fill-available;
+    position: fixed; /* Фиксируем body для предотвращения bounce */
+    width: 100%;
+    /* Отключаем выделение текста на мобильных */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Отключаем подсветку тапов на мобильных */
+    -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+    height: 100%;
+    height: -webkit-fill-available;
+    width: 100%;
+    overflow: hidden;
 }
 
 * {
     box-sizing: border-box;
 }
 
-/* Для маленьких мобильных устройств */
+/* Стили для Telegram WebApp */
+.telegram-webapp {
+    /* Специфичные стили для Telegram */
+    height: var(--tg-viewport-height, 100vh);
+}
+
+.telegram-webapp body {
+    height: var(--tg-viewport-height, 100vh);
+}
+
+/* Предотвращаем bounce эффект на iOS */
+.app-container,
+.app-top,
+.app-bottom,
+.battle-top,
+.battle-bottom {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Адаптивные размеры шрифтов с учетом масштабирования */
 @media (max-width: 375px) {
     html {
-        font-size: 14px; /* Уменьшаем базовый размер */
+        font-size: calc(14px * var(--scale-factor, 1));
+    }
+}
+
+@media (min-width: 376px) and (max-width: 767px) {
+    html {
+        font-size: calc(16px * var(--scale-factor, 1));
     }
 }
 
 /* Для планшетов */
 @media (min-width: 768px) {
     html {
-        font-size: 17px; /* Небольшое увеличение для планшетов */
+        font-size: calc(17px * var(--scale-factor, 1));
+    }
+
+    body {
+        overflow-y: auto; /* Разрешаем прокрутку на больших экранах */
+        position: static;
     }
 }
 
 /* Для десктопов */
 @media (min-width: 1024px) {
     html {
-        font-size: 18px; /* Умеренное увеличение для десктопов */
+        font-size: calc(18px * var(--scale-factor, 1));
     }
 }
 
 /* Для больших десктопов */
 @media (min-width: 1440px) {
     html {
-        font-size: 20px; /* Максимальный размер - увеличен умеренно */
+        font-size: calc(20px * var(--scale-factor, 1));
     }
 }
+
+/* Специальные правила для низких экранов */
+@media screen and (max-height: 600px) {
+    html {
+        font-size: calc(15px * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    html {
+        font-size: calc(14px * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    html {
+        font-size: calc(13px * var(--scale-factor, 1));
+    }
+}
+
+/* Стили для предотвращения прокрутки на мобильных */
+@media (max-width: 767px) {
+    html, body {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .app-container {
+        height: 100vh;
+        height: var(--app-height, 100vh);
+        overflow: hidden;
+    }
+}
+
+/* Стили для сенсорных устройств */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем области касания */
+    button,
+    [role="button"],
+    .interactive-border-circle-outer,
+    .interactive-border-card {
+        min-height: 44px; /* Минимальная область касания по Apple HIG */
+        min-width: 44px;
+    }
+
+    /* Отключаем hover эффекты на сенсорных */
+    *:hover {
+        background-color: initial;
+        color: initial;
+    }
+
+    /* Предотвращаем случайное масштабирование */
+    input, textarea, select {
+        font-size: 16px; /* Предотвращает zoom на iOS */
+    }
+}
+
+/* Анимации и переходы оптимизируем для мобильных */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Темная тема для систем с поддержкой */
+/*@media (prefers-color-scheme: dark) {*/
+/*    :root {*/
+/*        --white: #1a1a1a;*/
+/*        --black: #ffffff;*/
+/*    }*/
+/*}*/

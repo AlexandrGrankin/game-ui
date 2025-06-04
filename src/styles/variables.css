@@ -21,46 +21,184 @@
     --gradient-red-lose: linear-gradient(to bottom, #ff4444, #cc3333);
     --gradient-background: linear-gradient(to bottom, #0A4589, #062A55);
 
-    /* Базовые размеры */
-    --size-xs: 0.25rem;   /* ~4px */
-    --size-sm: 0.5rem;    /* ~8px */
-    --size-md: 1rem;      /* ~16px */
-    --size-lg: 1.5rem;    /* ~24px */
-    --size-xl: 2rem;      /* ~32px */
-    --size-2xl: 3rem;     /* ~48px */
-    --size-3xl: 4rem;     /* ~64px */
-    --size-4xl: 6rem;     /* ~96px */
+    /* Адаптивные переменные для высоты */
+    --app-height: 100vh;
+    --content-height: 100vh;
+    --vh: 1vh; /* Кастомная единица vh */
+    --scale-factor: 1; /* Общий коэффициент масштабирования */
 
-    /* Компонентные размеры */
-    --button-small: 2.5rem;     /* ~40px */
-    --button-medium: 3.5rem;    /* ~56px */
-    --button-large: 4.5rem;     /* ~72px */
-    --avatar-size: 5rem;        /* ~80px */
+    /* Safe areas для мобильных устройств */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
 
-    /* Размеры иконок */
-    --icon-small: 1.5rem;      /* ~24px */
-    --icon-medium: 2rem;       /* ~32px */
-    --icon-large: 3rem;        /* ~48px */
+    /* Telegram WebApp специфичные переменные */
+    --tg-viewport-height: 100vh;
+    --tg-safe-area-top: 0px;
+    --tg-safe-area-bottom: 0px;
+    --tg-bg-color: #ffffff;
+    --tg-text-color: #000000;
+    --tg-hint-color: #999999;
+    --tg-button-color: #4A90E2;
+    --tg-button-text-color: #ffffff;
 
-    /* Радиусы */
-    --border-radius: max(1.0rem, 8%);
-    --border-radius-scoreboard: 0.7rem;
-    --border-radius-bar: 4rem;
+    /* Базовые размеры с масштабированием */
+    --size-xs: calc(0.25rem * var(--scale-factor));   /* ~4px */
+    --size-sm: calc(0.5rem * var(--scale-factor));    /* ~8px */
+    --size-md: calc(1rem * var(--scale-factor));      /* ~16px */
+    --size-lg: calc(1.5rem * var(--scale-factor));    /* ~24px */
+    --size-xl: calc(2rem * var(--scale-factor));      /* ~32px */
+    --size-2xl: calc(3rem * var(--scale-factor));     /* ~48px */
+    --size-3xl: calc(4rem * var(--scale-factor));     /* ~64px */
+    --size-4xl: calc(6rem * var(--scale-factor));     /* ~96px */
+
+    /* Адаптивные размеры для кнопок */
+    --circle-extra-extra-small: calc(3vw * var(--scale-factor));
+    --circle-extra-small: calc(16vw * var(--scale-factor));
+    --circle-small: calc(20vw * var(--scale-factor));
+    --circle-medium: calc(25vw * var(--scale-factor));
+    --circle-large: calc(33vw * var(--scale-factor));
+    --circle-avatar: calc(35vw * var(--scale-factor));
+
+    /* Минимальные размеры с масштабированием */
+    --circle-min-extra-extra-small: calc(1.5rem * var(--scale-factor));
+    --circle-min-extra-small: calc(3.5rem * var(--scale-factor));
+    --circle-min-small: calc(3.5rem * var(--scale-factor));
+    --circle-min-medium: calc(5rem * var(--scale-factor));
+    --circle-min-large: calc(7rem * var(--scale-factor));
+    --circle-min-avatar: calc(7.5rem * var(--scale-factor));
+
+    /* Максимальные размеры с масштабированием */
+    --circle-max-extra-extra-small: calc(5.5rem * var(--scale-factor));
+    --circle-max-extra-small: calc(7.5rem * var(--scale-factor));
+    --circle-max-small: calc(8.5rem * var(--scale-factor));
+    --circle-max-medium: calc(10.5rem * var(--scale-factor));
+    --circle-max-large: calc(13.5rem * var(--scale-factor));
+    --circle-max-avatar: calc(14.5rem * var(--scale-factor));
+
+    /* Компонентные размеры с масштабированием */
+    --button-small: calc(2.5rem * var(--scale-factor));     /* ~40px */
+    --button-medium: calc(3.5rem * var(--scale-factor));    /* ~56px */
+    --button-large: calc(4.5rem * var(--scale-factor));     /* ~72px */
+    --avatar-size: calc(5rem * var(--scale-factor));        /* ~80px */
+
+    /* Размеры иконок с масштабированием */
+    --icon-small: calc(1.5rem * var(--scale-factor));      /* ~24px */
+    --icon-medium: calc(2rem * var(--scale-factor));       /* ~32px */
+    --icon-large: calc(3rem * var(--scale-factor));        /* ~48px */
+
+    /* Радиусы с масштабированием */
+    --border-radius: calc(max(1.0rem, 8%) * var(--scale-factor));
+    --border-radius-scoreboard: calc(0.7rem * var(--scale-factor));
+    --border-radius-bar: calc(4rem * var(--scale-factor));
     --border-radius-circle: 50%;
 
-    /* Тени */
-    --shadow-white: 0 0 1.75rem 0.1rem rgba(255, 255, 255, 0.20);
-    --shadow-black: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
-    --shadow-inner: inset 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.35);
-    --shadow-card: 0 0.5rem 1rem 0.25rem rgba(0, 0, 0, 0.2);
+    /* Тени с масштабированием */
+    --shadow-white: 0 0 calc(1.75rem * var(--scale-factor)) calc(0.1rem * var(--scale-factor)) rgba(255, 255, 255, 0.20);
+    --shadow-black: 0 calc(0.5rem * var(--scale-factor)) calc(1rem * var(--scale-factor)) calc(0.25rem * var(--scale-factor)) rgba(0, 0, 0, 0.2);
+    --shadow-inner: inset 0 0 calc(0.2rem * var(--scale-factor)) calc(0.1rem * var(--scale-factor)) rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 calc(0.5rem * var(--scale-factor)) calc(1rem * var(--scale-factor)) calc(0.25rem * var(--scale-factor)) rgba(0, 0, 0, 0.2);
+    --shadow-outer: 0 calc(0.3rem * var(--scale-factor)) calc(0.8rem * var(--scale-factor)) calc(0.2rem * var(--scale-factor)) rgba(0, 0, 0, 0.15);
 
-    /* Шрифты */
-    --font-family: 'Inria Sans', sans-serif;
-    --font-size-small: 1rem;
-    --font-size-medium: 1.6rem;
-    --font-size-large: 2rem;
-    --font-size-xxl: 2.5rem;
-    --font-size-xl: 1.5rem;
+    /* Шрифты с масштабированием */
+    --font-family: 'Inria Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-small: calc(1rem * var(--scale-factor));
+    --font-size-medium: calc(1.6rem * var(--scale-factor));
+    --font-size-large: calc(2rem * var(--scale-factor));
+    --font-size-xl: calc(1.5rem * var(--scale-factor));
+    --font-size-xxl: calc(2.5rem * var(--scale-factor));
     --font-weight-normal: 400;
     --font-weight-bold: 600;
+
+    /* Отступы и margin с масштабированием */
+    --padding-xs: calc(0.25rem * var(--scale-factor));
+    --padding-sm: calc(0.5rem * var(--scale-factor));
+    --padding-md: calc(1rem * var(--scale-factor));
+    --padding-lg: calc(1.5rem * var(--scale-factor));
+    --padding-xl: calc(2rem * var(--scale-factor));
+
+    /* Z-index значения */
+    --z-index-modal: 1000;
+    --z-index-overlay: 999;
+    --z-index-dropdown: 100;
+    --z-index-header: 10;
+    --z-index-content: 1;
+}
+
+/* Адаптивные переменные для разных высот экрана */
+@media screen and (max-height: 700px) {
+    :root {
+        --scale-factor: 0.85;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    :root {
+        --scale-factor: 0.75;
+        /* Дополнительно уменьшаем некоторые элементы */
+        --circle-medium: calc(28vw * var(--scale-factor));
+        --circle-large: calc(30vw * var(--scale-factor));
+        --circle-avatar: calc(32vw * var(--scale-factor));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    :root {
+        --scale-factor: 0.65;
+        /* Еще больше уменьшаем для очень маленьких экранов */
+        --circle-medium: calc(20vw * var(--scale-factor));
+        --circle-large: calc(28vw * var(--scale-factor));
+        --circle-avatar: calc(30vw * var(--scale-factor));
+
+        /* Уменьшаем отступы */
+        --padding-md: calc(0.7rem * var(--scale-factor));
+        --padding-lg: calc(1rem * var(--scale-factor));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    :root {
+        --scale-factor: 0.55;
+        /* Критически маленькие экраны */
+        --circle-medium: calc(18vw * var(--scale-factor));
+        --circle-large: calc(25vw * var(--scale-factor));
+        --circle-avatar: calc(27vw * var(--scale-factor));
+
+        /* Минимальные отступы */
+        --padding-md: calc(0.5rem * var(--scale-factor));
+        --padding-lg: calc(0.8rem * var(--scale-factor));
+    }
+}
+
+/* Переменные для планшетов в ландшафте */
+@media (min-width: 768px) and (max-height: 600px) {
+    :root {
+        --scale-factor: 0.8;
+        /* Оптимизируем для ландшафтной ориентации планшетов */
+        --circle-medium: calc(15vw * var(--scale-factor));
+        --circle-large: calc(20vw * var(--scale-factor));
+        --circle-avatar: calc(22vw * var(--scale-factor));
+    }
+}
+
+/* Темная тема переменные */
+/*@media (prefers-color-scheme: dark) {*/
+/*    :root {*/
+/*        !* Инвертируем основные цвета для темной темы *!*/
+/*        --white: #1a1a1a;*/
+/*        --black: #ffffff;*/
+/*        --tg-bg-color: #1a1a1a;*/
+/*        --tg-text-color: #ffffff;*/
+/*        --tg-hint-color: #666666;*/
+/*    }*/
+/*}*/
+
+/* Высокое DPI дисплеи */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    :root {
+        /* Настройки для Retina дисплеев */
+        --border-radius: calc(max(1.2rem, 10%) * var(--scale-factor));
+        --shadow-card: 0 calc(0.25rem * var(--scale-factor)) calc(0.5rem * var(--scale-factor)) calc(0.125rem * var(--scale-factor)) rgba(0, 0, 0, 0.15);
+    }
 }

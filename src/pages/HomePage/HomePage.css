@@ -7,7 +7,6 @@
 .app-bottom {
     background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
     flex: 1;
-    padding: var(--size-md);
     width: 100%;
 }
 

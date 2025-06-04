@@ -1,3 +1,5 @@
+/* components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle.css */
+
 .interactive-border-circle-outer {
     display: flex;
     justify-content: center;
@@ -41,6 +43,10 @@
     background: var(--white);
 }
 
+.gradient-red-lose {
+    background: var(--gradient-red-lose);
+}
+
 .box-shadow-black {
     box-shadow: var(--shadow-black);
 }
@@ -49,59 +55,47 @@
     box-shadow: var(--shadow-white);
 }
 
-/* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+/* Обновленные размеры с использованием CSS переменных */
 .interactive-border-circle-extra-extra-small .interactive-border-circle-outer {
-    width: 3vw;
-    height: 3vw;
-    max-width: none;
-    max-height: none;
-    min-width: 1.5rem;
-    min-height: 1.5rem;
+    width: var(--circle-extra-extra-small, 3vw);
+    height: var(--circle-extra-extra-small, 3vw);
+    min-width: calc(1.5rem * var(--scale-factor, 1));
+    min-height: calc(1.5rem * var(--scale-factor, 1));
 }
 
 .interactive-border-circle-extra-small .interactive-border-circle-outer {
-    width: 16vw;
-    height: 16vw;
-    max-width: none;
-    max-height: none;
-    min-width: 3.5rem;
-    min-height: 3.5rem;
+    width: var(--circle-extra-small, 16vw);
+    height: var(--circle-extra-small, 16vw);
+    min-width: calc(3.5rem * var(--scale-factor, 1));
+    min-height: calc(3.5rem * var(--scale-factor, 1));
 }
 
 .interactive-border-circle-small .interactive-border-circle-outer {
-    width: 20vw;
-    height: 20vw;
-    max-width: none;
-    max-height: none;
-    min-width: 3.5rem;
-    min-height: 3.5rem;
+    width: var(--circle-small, 20vw);
+    height: var(--circle-small, 20vw);
+    min-width: calc(3.5rem * var(--scale-factor, 1));
+    min-height: calc(3.5rem * var(--scale-factor, 1));
 }
 
 .interactive-border-circle-medium .interactive-border-circle-outer {
-    width: 25vw;
-    height: 25vw;
-    max-width: none;
-    max-height: none;
-    min-width: 5rem;
-    min-height: 5rem;
+    width: var(--circle-medium, 25vw);
+    height: var(--circle-medium, 25vw);
+    min-width: calc(5rem * var(--scale-factor, 1));
+    min-height: calc(5rem * var(--scale-factor, 1));
 }
 
 .interactive-border-circle-large .interactive-border-circle-outer {
-    width: 33vw;
-    height: 33vw;
-    max-width: none;
-    max-height: none;
-    min-width: 7rem;
-    min-height: 7rem;
+    width: var(--circle-large, 33vw);
+    height: var(--circle-large, 33vw);
+    min-width: calc(7rem * var(--scale-factor, 1));
+    min-height: calc(7rem * var(--scale-factor, 1));
 }
 
 .interactive-border-circle-avatar .interactive-border-circle-outer {
-    width: 35vw;
-    height: 35vw;
-    max-width: none;
-    max-height: none;
-    min-width: 7.5rem;
-    min-height: 7.5rem;
+    width: var(--circle-avatar, 35vw);
+    height: var(--circle-avatar, 35vw);
+    min-width: calc(7.5rem * var(--scale-factor, 1));
+    min-height: calc(7.5rem * var(--scale-factor, 1));
 }
 
 /* Иконки масштабируем относительно родительского контейнера */
@@ -115,12 +109,6 @@
 .interactive-border-circle-avatar .circle-icon {
     width: 74%;
     height: auto;
-}
-
-/* Добавляем в src/components/InteractiveBorder/InteractiveBorderCircle/InteractiveBorderCircle.css */
-
-.gradient-red-lose {
-    background: linear-gradient(to bottom, #ff4444, #cc3333);
 }
 
 /* Стили для модального окна результатов */
@@ -141,9 +129,9 @@
 .game-result-content {
     background: var(--white);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: calc(2rem * var(--scale-factor, 1));
     text-align: center;
-    max-width: 400px;
+    max-width: calc(400px * var(--scale-factor, 1));
     width: 90%;
     box-shadow: var(--shadow-card);
     animation: modalSlideIn 0.5s ease-out;
@@ -161,15 +149,15 @@
 }
 
 .game-result-title {
-    font-size: var(--font-size-large);
+    font-size: calc(var(--font-size-large) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     color: var(--primary-blue-dark);
-    margin-bottom: 1rem;
+    margin-bottom: calc(1rem * var(--scale-factor, 1));
 }
 
 .game-result-score {
-    font-size: var(--font-size-xl);
-    margin-bottom: 1.5rem;
+    font-size: calc(var(--font-size-xl) * var(--scale-factor, 1));
+    margin-bottom: calc(1.5rem * var(--scale-factor, 1));
     color: var(--primary-red-dark);
 }
 
@@ -177,10 +165,10 @@
     background: var(--gradient-blue);
     color: var(--white);
     border: none;
-    padding: 0.8rem 2rem;
+    padding: calc(0.8rem * var(--scale-factor, 1)) calc(2rem * var(--scale-factor, 1));
     border-radius: var(--border-radius);
     font-family: var(--font-family);
-    font-size: var(--font-size-medium);
+    font-size: calc(var(--font-size-medium) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     cursor: pointer;
     box-shadow: var(--shadow-card);
@@ -206,92 +194,100 @@
     }
 }
 
-/* Медиа-запросы для дополнительных настроек на больших экранах */
-@media (min-width: 768px) {
+/* Адаптивные медиа-запросы для разных высот экрана */
+@media screen and (max-height: 700px) {
     .interactive-border-circle-extra-extra-small .interactive-border-circle-outer {
-        min-width: 1.5rem;
-        min-height: 1.5rem;
-        max-width: 5.5rem;
-        max-height: 5.5rem;
+        max-width: calc(4.5rem * var(--scale-factor, 1));
+        max-height: calc(4.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-extra-small .interactive-border-circle-outer {
-        min-width: 3.5rem;
-        min-height: 3.5rem;
-        max-width: 7.5rem;
-        max-height: 7.5rem;
+        max-width: calc(6.5rem * var(--scale-factor, 1));
+        max-height: calc(6.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-small .interactive-border-circle-outer {
-        min-width: 4.5rem;
-        min-height: 4.5rem;
-        max-width: 8.5rem;
-        max-height: 8.5rem;
+        max-width: calc(7.5rem * var(--scale-factor, 1));
+        max-height: calc(7.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-medium .interactive-border-circle-outer {
-        min-width: 6rem;
-        min-height: 6rem;
-        max-width: 10.5rem;
-        max-height: 10.5rem;
+        max-width: calc(9.5rem * var(--scale-factor, 1));
+        max-height: calc(9.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-large .interactive-border-circle-outer {
-        min-width: 8rem;
-        min-height: 8rem;
-        max-width: 13.5rem;
-        max-height: 13.5rem;
+        max-width: calc(12.5rem * var(--scale-factor, 1));
+        max-height: calc(12.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-avatar .interactive-border-circle-outer {
-        min-width: 8.5rem;
-        min-height: 8.5rem;
-        max-width: 14.5rem;
-        max-height: 14.5rem;
+        max-width: calc(13.5rem * var(--scale-factor, 1));
+        max-height: calc(13.5rem * var(--scale-factor, 1));
     }
 }
 
-@media (min-width: 1200px) {
-    .interactive-border-circle-small .interactive-border-circle-outer {
-        min-width: 5.5rem;
-        min-height: 5.5rem;
-    }
-
+@media screen and (max-height: 600px) {
     .interactive-border-circle-medium .interactive-border-circle-outer {
-        min-width: 7rem;
-        min-height: 7rem;
+        max-width: calc(8rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-large .interactive-border-circle-outer {
-        min-width: 9.5rem;
-        min-height: 9.5rem;
+        max-width: calc(10rem * var(--scale-factor, 1));
+        max-height: calc(10rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-avatar .interactive-border-circle-outer {
-        min-width: 10rem;
-        min-height: 10rem;
+        max-width: calc(11rem * var(--scale-factor, 1));
+        max-height: calc(11rem * var(--scale-factor, 1));
     }
 }
 
-/* Добавляем ограничения только для очень больших экранов */
-@media (min-width: 1600px) {
-    .interactive-border-circle-small .interactive-border-circle-outer {
-        max-width: 7rem;
-        max-height: 7rem;
-    }
-
+@media screen and (max-height: 500px) {
     .interactive-border-circle-medium .interactive-border-circle-outer {
-        max-width: 9rem;
-        max-height: 9rem;
+        max-width: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(7rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-large .interactive-border-circle-outer {
-        max-width: 12rem;
-        max-height: 12rem;
+        max-width: calc(8.5rem * var(--scale-factor, 1));
+        max-height: calc(8.5rem * var(--scale-factor, 1));
     }
 
     .interactive-border-circle-avatar .interactive-border-circle-outer {
-        max-width: 14rem;
-        max-height: 14rem;
+        max-width: calc(9.5rem * var(--scale-factor, 1));
+        max-height: calc(9.5rem * var(--scale-factor, 1));
+    }
+}
+
+/* Для планшетов в ландшафте */
+@media (min-width: 768px) and (max-height: 600px) {
+    .interactive-border-circle-small .interactive-border-circle-outer {
+        min-width: calc(4rem * var(--scale-factor, 1));
+        min-height: calc(4rem * var(--scale-factor, 1));
+        max-width: calc(6rem * var(--scale-factor, 1));
+        max-height: calc(6rem * var(--scale-factor, 1));
+    }
+
+    .interactive-border-circle-medium .interactive-border-circle-outer {
+        min-width: calc(5rem * var(--scale-factor, 1));
+        min-height: calc(5rem * var(--scale-factor, 1));
+        max-width: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(7rem * var(--scale-factor, 1));
+    }
+
+    .interactive-border-circle-large .interactive-border-circle-outer {
+        min-width: calc(6rem * var(--scale-factor, 1));
+        min-height: calc(6rem * var(--scale-factor, 1));
+        max-width: calc(8rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
+    }
+
+    .interactive-border-circle-avatar .interactive-border-circle-outer {
+        min-width: calc(6.5rem * var(--scale-factor, 1));
+        min-height: calc(6.5rem * var(--scale-factor, 1));
+        max-width: calc(8.5rem * var(--scale-factor, 1));
+        max-height: calc(8.5rem * var(--scale-factor, 1));
     }
 }

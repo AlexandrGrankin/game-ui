@@ -1,0 +1,185 @@
+/* styles/telegram-adaptive.css */
+
+/* Определяем переменные для Telegram WebApp */
+:root {
+    /* Базовая высота viewport */
+    --app-height: 100vh;
+    --app-max-height: 100vh;
+
+    /* Отступы для Telegram WebApp */
+    --tg-safe-area-top: 0px;
+    --tg-safe-area-bottom: 0px;
+
+    /* Доступная высота для контента */
+    --content-height: calc(var(--app-height) - var(--tg-safe-area-top) - var(--tg-safe-area-bottom));
+
+    /* Коэффициент масштабирования для компонентов */
+    --scale-factor: 1;
+}
+
+/* Определяем Telegram WebApp через user agent или window.Telegram */
+@media screen and (max-height: 700px) {
+    :root {
+        --scale-factor: 0.85;
+        --app-height: 100vh;
+        --tg-safe-area-top: env(safe-area-inset-top, 0px);
+        --tg-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+@media screen and (max-height: 600px) {
+    :root {
+        --scale-factor: 0.75;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    :root {
+        --scale-factor: 0.65;
+    }
+}
+
+/* Для очень низких экранов (возможно старые устройства) */
+@media screen and (max-height: 400px) {
+    :root {
+        --scale-factor: 0.55;
+    }
+}
+
+/* Обновленные размеры компонентов с учетом масштабирования */
+:root {
+    /* Масштабируемые размеры кнопок */
+    --circle-extra-extra-small: calc(3vw * var(--scale-factor));
+    --circle-extra-small: calc(16vw * var(--scale-factor));
+    --circle-small: calc(20vw * var(--scale-factor));
+    --circle-medium: calc(25vw * var(--scale-factor));
+    --circle-large: calc(33vw * var(--scale-factor));
+    --circle-avatar: calc(35vw * var(--scale-factor));
+
+    /* Минимальные и максимальные размеры */
+    --circle-min-small: calc(1.5rem * var(--scale-factor));
+    --circle-min-medium: calc(5rem * var(--scale-factor));
+    --circle-min-large: calc(7rem * var(--scale-factor));
+    --circle-min-avatar: calc(7.5rem * var(--scale-factor));
+
+    --circle-max-small: calc(7rem * var(--scale-factor));
+    --circle-max-medium: calc(9rem * var(--scale-factor));
+    --circle-max-large: calc(12rem * var(--scale-factor));
+    --circle-max-avatar: calc(14rem * var(--scale-factor));
+}
+
+/* Telegram WebApp специфичные стили */
+.telegram-webapp {
+    --app-height: var(--tg-viewport-height, 100vh);
+}
+
+/* Базовый контейнер приложения */
+.app-container {
+    height: var(--content-height);
+    max-height: var(--content-height);
+    min-height: var(--content-height);
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Обновленные стили для топа и низа */
+.app-top, .battle-top {
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.app-bottom, .battle-bottom {
+    flex: 1;
+    min-height: 0; /* Важно для flex-элементов */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-content, .battle-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Адаптивные отступы */
+.profile-container {
+    padding: calc(1rem * var(--scale-factor));
+}
+
+.score-display {
+    padding: calc(0.5rem * var(--scale-factor));
+}
+
+/* Масштабирование шрифтов */
+.battle-bid {
+    font-size: calc(var(--font-size-xxl) * var(--scale-factor));
+    margin: calc(var(--size-lg) * var(--scale-factor)) 0;
+}
+
+.battle-bid-icon {
+    width: calc(var(--size-3xl) * var(--scale-factor));
+    height: calc(var(--size-3xl) * var(--scale-factor));
+}
+
+/* Компактный режим для карточек */
+@media screen and (max-height: 600px) {
+    .card-section {
+        padding: 0.5rem 0;
+        gap: 0.3rem;
+    }
+
+    .battle-enemy-card {
+        margin-bottom: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    .battle-center {
+        gap: 0.5rem;
+        min-height: 80px;
+    }
+
+    .vs-divider {
+        min-width: 40px;
+        min-height: 40px;
+        font-size: calc(var(--font-size-large) * var(--scale-factor));
+        padding: 0.4rem 0.6rem;
+    }
+
+    .game-controls-container {
+        padding: 0.3rem 0.5rem 0.8rem 0.5rem;
+    }
+
+    .battle-status-game {
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Экстра компактный режим */
+@media screen and (max-height: 500px) {
+    .profile-container {
+        padding: 0.5rem;
+    }
+
+    .progress-container {
+        font-size: calc(var(--font-size-medium) * var(--scale-factor));
+    }
+
+    .battle-bid {
+        margin: calc(var(--size-md) * var(--scale-factor)) 0;
+        letter-spacing: 0.1rem;
+    }
+
+    .battle-center {
+        min-height: 60px;
+    }
+
+    .profile-menu {
+        margin-bottom: 1rem;
+    }
+}
