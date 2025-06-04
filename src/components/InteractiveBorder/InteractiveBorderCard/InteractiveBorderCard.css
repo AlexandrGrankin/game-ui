@@ -273,7 +273,7 @@
 }
 
 /* СПЕЦИАЛЬНЫЙ медиа-запрос для iPhone 8 и подобных (около 667px) */
-@media screen and (max-height: 700px) and (min-height: 635px) {
+@media screen and (max-height: 700px) and (min-height: 600px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
         max-height: calc(11rem * var(--scale-factor, 1));
