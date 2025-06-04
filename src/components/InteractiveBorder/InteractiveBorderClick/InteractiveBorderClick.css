@@ -1,3 +1,4 @@
+/* components/InteractiveBorder/InteractiveBorderClick/InteractiveBorderClick.css */
 .interactive__border__click__outer {
     display: flex;
     justify-content: center;
@@ -17,21 +18,23 @@
     width: 88%;
     height: 88%;
 }
- .interactive__border__click__value__text{
-     font-family: var(--font-family);
-     font-size: var(--font-size-small);
-     font-weight: var(--font-weight-normal);
-     align-items: center;
-     text-align: center;
-     color: var(--white);
- }
+
+.interactive__border__click__value__text {
+    font-family: var(--font-family);
+    font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
+    font-weight: var(--font-weight-normal);
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+}
 
 .interactive__border__click__value {
-    font-size: var(--font-size-large);
+    font-size: calc(var(--font-size-large) * var(--scale-factor, 1));
+    font-weight: var(--font-weight-bold);
 }
 
 .interactive__border__time__value {
-    font-size: var(--font-size-small);
+    font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
 }
 
 .box-shadow-black {
@@ -42,89 +45,171 @@
     box-shadow: var(--shadow-white);
 }
 
-/* Значительно увеличенные размеры кнопок без ограничения максимального размера */
+/* Обновленные размеры с масштабированием */
 .interactive__border__click__small .interactive__border__click__outer {
-    width: 20vw;
-    height: 20vw;
-    max-width: none;
-    max-height: none;
-    min-width: 3.5rem;
-    min-height: 3.5rem;
+    width: calc(20vw * var(--scale-factor, 1));
+    height: calc(20vw * var(--scale-factor, 1));
+    min-width: calc(3.5rem * var(--scale-factor, 1));
+    min-height: calc(3.5rem * var(--scale-factor, 1));
 }
 
 .interactive__border__click__medium .interactive__border__click__outer {
-    width: 25vw;
-    height: 25vw;
-    max-width: none;
-    max-height: none;
-    min-width: 5rem;
-    min-height: 5rem;
+    width: calc(25vw * var(--scale-factor, 1));
+    height: calc(25vw * var(--scale-factor, 1));
+    min-width: calc(5rem * var(--scale-factor, 1));
+    min-height: calc(5rem * var(--scale-factor, 1));
 }
 
 .interactive__border__click__large .interactive__border__click__outer {
-    width: 33vw;
-    height: 33vw;
-    max-width: none;
-    max-height: none;
-    min-width: 7rem;
-    min-height: 7rem;
+    width: calc(33vw * var(--scale-factor, 1));
+    height: calc(33vw * var(--scale-factor, 1));
+    min-width: calc(7rem * var(--scale-factor, 1));
+    min-height: calc(7rem * var(--scale-factor, 1));
 }
 
-/* Медиа-запросы для дополнительных настроек на больших экранах */
+/* Адаптивные медиа-запросы с масштабированием */
 @media (min-width: 768px) {
     .interactive__border__click__small .interactive__border__click__outer {
-        min-width: 4.5rem;
-        min-height: 4.5rem;
-        max-width: 8.5rem;
-        max-height: 8.5rem;
+        min-width: calc(4.5rem * var(--scale-factor, 1));
+        min-height: calc(4.5rem * var(--scale-factor, 1));
+        max-width: calc(8.5rem * var(--scale-factor, 1));
+        max-height: calc(8.5rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__medium .interactive__border__click__outer {
-        min-width: 6rem;
-        min-height: 6rem;
-        max-width: 10.5rem;
-        max-height: 10.5rem;
+        min-width: calc(6rem * var(--scale-factor, 1));
+        min-height: calc(6rem * var(--scale-factor, 1));
+        max-width: calc(10.5rem * var(--scale-factor, 1));
+        max-height: calc(10.5rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__large .interactive__border__click__outer {
-        min-width: 8rem;
-        min-height: 8rem;
-        max-width: 13.5rem;
-        max-height: 13.5rem;
+        min-width: calc(8rem * var(--scale-factor, 1));
+        min-height: calc(8rem * var(--scale-factor, 1));
+        max-width: calc(13.5rem * var(--scale-factor, 1));
+        max-height: calc(13.5rem * var(--scale-factor, 1));
     }
 }
 
 @media (min-width: 1200px) {
     .interactive__border__click__small .interactive__border__click__outer {
-        min-width: 5.5rem;
-        min-height: 5.5rem;
+        min-width: calc(5.5rem * var(--scale-factor, 1));
+        min-height: calc(5.5rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__medium .interactive__border__click__outer {
-        min-width: 7rem;
-        min-height: 7rem;
+        min-width: calc(7rem * var(--scale-factor, 1));
+        min-height: calc(7rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__large .interactive__border__click__outer {
-        min-width: 9.5rem;
-        min-height: 9.5rem;
+        min-width: calc(9.5rem * var(--scale-factor, 1));
+        min-height: calc(9.5rem * var(--scale-factor, 1));
     }
 }
 
-/* Добавляем ограничения только для очень больших экранов */
+/* Ограничения для очень больших экранов */
 @media (min-width: 1600px) {
     .interactive__border__click__small .interactive__border__click__outer {
-        max-width: 7rem;
-        max-height: 7rem;
+        max-width: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(7rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__medium .interactive__border__click__outer {
-        max-width: 9rem;
-        max-height: 9rem;
+        max-width: calc(9rem * var(--scale-factor, 1));
+        max-height: calc(9rem * var(--scale-factor, 1));
     }
 
     .interactive__border__click__large .interactive__border__click__outer {
-        max-width: 12rem;
-        max-height: 12rem;
+        max-width: calc(12rem * var(--scale-factor, 1));
+        max-height: calc(12rem * var(--scale-factor, 1));
+    }
+}
+
+/* Адаптация для экранов с малой высотой */
+@media screen and (max-height: 700px) {
+    .interactive__border__click__small .interactive__border__click__outer {
+        max-width: calc(7.5rem * var(--scale-factor, 1));
+        max-height: calc(7.5rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__medium .interactive__border__click__outer {
+        max-width: calc(9.5rem * var(--scale-factor, 1));
+        max-height: calc(9.5rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        max-width: calc(12.5rem * var(--scale-factor, 1));
+        max-height: calc(12.5rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .interactive__border__click__medium .interactive__border__click__outer {
+        max-width: calc(8rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        max-width: calc(10rem * var(--scale-factor, 1));
+        max-height: calc(10rem * var(--scale-factor, 1));
+    }
+
+    /* Уменьшаем шрифты для компактности */
+    .interactive__border__click__value {
+        font-size: calc(var(--font-size-medium) * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__time__value {
+        font-size: calc(0.8rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .interactive__border__click__medium .interactive__border__click__outer {
+        max-width: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(7rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        max-width: calc(8.5rem * var(--scale-factor, 1));
+        max-height: calc(8.5rem * var(--scale-factor, 1));
+    }
+
+    /* Еще больше уменьшаем шрифты */
+    .interactive__border__click__value {
+        font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__time__value {
+        font-size: calc(0.7rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__value__text {
+        font-size: calc(0.8rem * var(--scale-factor, 1));
+    }
+}
+
+/* Для планшетов в ландшафте */
+@media (min-width: 768px) and (max-height: 600px) {
+    .interactive__border__click__small .interactive__border__click__outer {
+        min-width: calc(4rem * var(--scale-factor, 1));
+        min-height: calc(4rem * var(--scale-factor, 1));
+        max-width: calc(6rem * var(--scale-factor, 1));
+        max-height: calc(6rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__medium .interactive__border__click__outer {
+        min-width: calc(5rem * var(--scale-factor, 1));
+        min-height: calc(5rem * var(--scale-factor, 1));
+        max-width: calc(7rem * var(--scale-factor, 1));
+        max-height: calc(7rem * var(--scale-factor, 1));
+    }
+
+    .interactive__border__click__large .interactive__border__click__outer {
+        min-width: calc(6rem * var(--scale-factor, 1));
+        min-height: calc(6rem * var(--scale-factor, 1));
+        max-width: calc(8rem * var(--scale-factor, 1));
+        max-height: calc(8rem * var(--scale-factor, 1));
     }
 }

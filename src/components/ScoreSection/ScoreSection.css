@@ -3,15 +3,52 @@
     display: flex;
     justify-content: space-between;
     color: var(--white);
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-top: calc(0.5rem * var(--scale-factor, 1));
+    padding-left: calc(0.5rem * var(--scale-factor, 1));
+    padding-right: calc(0.5rem * var(--scale-factor, 1));
 }
 
 .score-display > div {
-    margin-right: 1rem;
+    margin-right: calc(1rem * var(--scale-factor, 1));
 }
 
 .score-display > div:last-child {
     margin-right: 0;
+}
+
+/* Компактные режимы для маленьких экранов */
+@media screen and (max-height: 600px) {
+    .score-display {
+        padding-top: calc(0.3rem * var(--scale-factor, 1));
+        padding-left: calc(0.3rem * var(--scale-factor, 1));
+        padding-right: calc(0.3rem * var(--scale-factor, 1));
+    }
+
+    .score-display > div {
+        margin-right: calc(0.8rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .score-display {
+        padding-top: calc(0.2rem * var(--scale-factor, 1));
+        padding-left: calc(0.2rem * var(--scale-factor, 1));
+        padding-right: calc(0.2rem * var(--scale-factor, 1));
+    }
+
+    .score-display > div {
+        margin-right: calc(0.5rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    .score-display {
+        padding-top: calc(0.1rem * var(--scale-factor, 1));
+        padding-left: calc(0.1rem * var(--scale-factor, 1));
+        padding-right: calc(0.1rem * var(--scale-factor, 1));
+    }
+
+    .score-display > div {
+        margin-right: calc(0.3rem * var(--scale-factor, 1));
+    }
 }

@@ -9,8 +9,9 @@
     position: relative;
     background: linear-gradient(to bottom, #F0F0F0, #E5E5E5);
     flex: 1;
-    padding: var(--size-sm);
+    /* Убираем padding отсюда чтобы градиент заполнял весь контейнер */
     width: 100%;
+    overflow: hidden;
 }
 
 .battle-content {
@@ -19,6 +20,11 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Добавляем padding здесь */
+    padding: calc(var(--size-sm) * var(--scale-factor, 1));
 }
 
 .battle-content::before {
@@ -29,7 +35,7 @@
     right: 0;
     bottom: 0;
     background-image: url('../../assets/icons/swords.png');
-    background-size: 60% auto;
+    background-size: calc(60% * var(--scale-factor, 1)) auto;
     background-position: center 40%;
     background-repeat: no-repeat;
     opacity: 0.3;
@@ -38,17 +44,18 @@
 }
 
 .battle-header {
-    margin-bottom: var(--size-md);
+    margin-bottom: calc(var(--size-md) * var(--scale-factor, 1));
+    flex-shrink: 0;
 }
 
 .battle-bid {
     display: flex;
     width: 100%;
-    margin-top: var(--size-lg);
-    margin-bottom: var(--size-lg);
-    letter-spacing: 0.3rem;
+    margin-top: calc(var(--size-lg) * var(--scale-factor, 1));
+    margin-bottom: calc(var(--size-lg) * var(--scale-factor, 1));
+    letter-spacing: calc(0.3rem * var(--scale-factor, 1));
     font-family: var(--font-family);
-    font-size: var(--font-size-xxl);
+    font-size: calc(var(--font-size-xxl) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     align-items: center;
     justify-content: center;
@@ -56,9 +63,9 @@
 }
 
 .battle-bid-icon {
-    width: var(--size-3xl);
-    margin-left: var(--size-md);
-    margin-right: var(--size-md);
+    width: calc(var(--size-3xl) * var(--scale-factor, 1));
+    margin-left: calc(var(--size-md) * var(--scale-factor, 1));
+    margin-right: calc(var(--size-md) * var(--scale-factor, 1));
 }
 
 .battle-main {
@@ -67,6 +74,8 @@
     align-items: stretch;
     position: relative;
     z-index: 2;
+    flex: 1;
+    min-height: 0;
 }
 
 .battle-avatar-section {
@@ -74,10 +83,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    flex-shrink: 0;
 }
 
 .lose-button {
-    margin: 0.5rem 0 0.5rem 0;
+    margin: calc(0.5rem * var(--scale-factor, 1)) 0;
 }
 
 .battle-fight-card-section {
@@ -85,9 +95,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 0 0 1rem;
+    padding: 0 0 0 calc(1rem * var(--scale-factor, 1));
     flex-grow: 1;
-    gap: 1rem;
+    gap: calc(1rem * var(--scale-factor, 1));
+    min-height: 0;
 }
 
 .battle-enemy-card {
@@ -95,9 +106,10 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: calc(0.5rem * var(--scale-factor, 1));
+    margin-bottom: calc(1rem * var(--scale-factor, 1));
     transition: all 0.5s ease-in-out;
+    flex-shrink: 0;
 }
 
 .battle-enemy-card > div {
@@ -108,10 +120,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem auto;
+    margin: calc(0.5rem * var(--scale-factor, 1)) auto;
     z-index: 2;
     width: 100%;
-    gap: 1rem;
+    gap: calc(1rem * var(--scale-factor, 1));
+    flex-shrink: 0;
 }
 
 /* Центр стола для выбранных карт */
@@ -121,26 +134,29 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 1rem;
+    gap: calc(1rem * var(--scale-factor, 1));
+    flex: 1;
+    min-height: calc(120px * var(--scale-factor, 1));
 }
 
 /* VS разделитель */
 .vs-divider {
     font-family: var(--font-family);
-    font-size: var(--font-size-xl);
+    font-size: calc(var(--font-size-xl) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     color: var(--primary-red-dark);
     background: var(--white);
-    padding: 0.8rem 1rem;
+    padding: calc(0.8rem * var(--scale-factor, 1)) calc(1rem * var(--scale-factor, 1));
     border-radius: var(--border-radius-circle);
     box-shadow: var(--shadow-card);
-    min-width: 30px;
-    min-height: 30px;
+    min-width: calc(30px * var(--scale-factor, 1));
+    min-height: calc(30px * var(--scale-factor, 1));
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
     position: relative;
+    flex-shrink: 0;
 }
 
 /* Стили для выбранных карт игрока */
@@ -153,8 +169,10 @@
 .battle-status-game {
     display: flex;
     margin-top: auto;
-    gap: 0.5rem;
+    gap: calc(0.5rem * var(--scale-factor, 1));
     justify-content: center;
+    flex-shrink: 0;
+    padding: calc(0.5rem * var(--scale-factor, 1)) 0;
 }
 
 /* Стили для модального окна результатов */
@@ -168,16 +186,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: var(--z-index-modal, 1000);
     font-family: var(--font-family);
 }
 
 .game-result-content {
     background: var(--white);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: calc(2rem * var(--scale-factor, 1));
     text-align: center;
-    max-width: 400px;
+    max-width: calc(400px * var(--scale-factor, 1));
     width: 90%;
     box-shadow: var(--shadow-card);
     animation: modalSlideIn 0.5s ease-out;
@@ -195,15 +213,15 @@
 }
 
 .game-result-title {
-    font-size: var(--font-size-large);
+    font-size: calc(var(--font-size-large) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     color: var(--primary-blue-dark);
-    margin-bottom: 1rem;
+    margin-bottom: calc(1rem * var(--scale-factor, 1));
 }
 
 .game-result-score {
-    font-size: var(--font-size-xl);
-    margin-bottom: 1.5rem;
+    font-size: calc(var(--font-size-xl) * var(--scale-factor, 1));
+    margin-bottom: calc(1.5rem * var(--scale-factor, 1));
     color: var(--primary-red-dark);
 }
 
@@ -211,10 +229,10 @@
     background: var(--gradient-blue);
     color: var(--white);
     border: none;
-    padding: 0.8rem 2rem;
+    padding: calc(0.8rem * var(--scale-factor, 1)) calc(2rem * var(--scale-factor, 1));
     border-radius: var(--border-radius);
     font-family: var(--font-family);
-    font-size: var(--font-size-medium);
+    font-size: calc(var(--font-size-medium) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
     cursor: pointer;
     box-shadow: var(--shadow-card);
@@ -271,7 +289,7 @@
 
 .value {
     font-family: var(--font-family);
-    font-size: var(--font-size-medium);
+    font-size: calc(var(--font-size-medium) * var(--scale-factor, 1));
     font-weight: var(--font-weight-normal);
     width: 100%;
     align-items: center;
@@ -279,39 +297,93 @@
     color: var(--primary-blue-dark);
 }
 
-/* Медиа-запросы */
+/* Медиа-запросы с масштабированием */
 @media (min-width: 768px) {
     .battle-content {
-        max-width: 650px;
+        max-width: calc(650px * var(--scale-factor, 1));
+        padding: calc(var(--size-md) * var(--scale-factor, 1));
     }
 
     .battle-center {
-        gap: 1.5rem;
-        min-height: 140px;
+        gap: calc(1.5rem * var(--scale-factor, 1));
+        min-height: calc(140px * var(--scale-factor, 1));
     }
 
     .vs-divider {
-        min-width: 80px;
-        min-height: 80px;
-        font-size: var(--font-size-xxl);
+        min-width: calc(80px * var(--scale-factor, 1));
+        min-height: calc(80px * var(--scale-factor, 1));
+        font-size: calc(var(--font-size-xxl) * var(--scale-factor, 1));
     }
 
     .battle-status-game {
-        gap: 1rem;
+        gap: calc(1rem * var(--scale-factor, 1));
     }
 }
 
 @media (min-width: 1024px) {
     .battle-content {
-        max-width: 900px;
+        max-width: calc(900px * var(--scale-factor, 1));
+        padding: calc(var(--size-lg) * var(--scale-factor, 1));
     }
 
     .battle-center {
-        gap: 2rem;
-        min-height: 160px;
+        gap: calc(2rem * var(--scale-factor, 1));
+        min-height: calc(160px * var(--scale-factor, 1));
     }
 
     .battle-status-game {
-        gap: 1.5rem;
+        gap: calc(1.5rem * var(--scale-factor, 1));
+    }
+}
+
+/* Компактные режимы для маленьких экранов */
+@media screen and (max-height: 600px) {
+    .battle-content {
+        padding: calc(0.3rem * var(--scale-factor, 1));
+    }
+
+    .battle-bid {
+        margin: calc(var(--size-md) * var(--scale-factor, 1)) 0;
+        letter-spacing: calc(0.1rem * var(--scale-factor, 1));
+    }
+
+    .battle-center {
+        gap: calc(0.5rem * var(--scale-factor, 1));
+        min-height: calc(80px * var(--scale-factor, 1));
+    }
+
+    .vs-divider {
+        min-width: calc(40px * var(--scale-factor, 1));
+        min-height: calc(40px * var(--scale-factor, 1));
+        font-size: calc(var(--font-size-large) * var(--scale-factor, 1));
+        padding: calc(0.4rem * var(--scale-factor, 1)) calc(0.6rem * var(--scale-factor, 1));
+    }
+
+    .battle-status-game {
+        gap: calc(0.3rem * var(--scale-factor, 1));
+        padding: calc(0.3rem * var(--scale-factor, 1)) 0;
+    }
+
+    .battle-fight-card-section {
+        padding: 0 0 0 calc(0.5rem * var(--scale-factor, 1));
+        gap: calc(0.5rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .battle-content {
+        padding: calc(0.2rem * var(--scale-factor, 1));
+    }
+
+    .battle-bid {
+        margin: calc(0.5rem * var(--scale-factor, 1)) 0;
+    }
+
+    .battle-center {
+        min-height: calc(60px * var(--scale-factor, 1));
+    }
+
+    .battle-header {
+        margin-bottom: calc(0.3rem * var(--scale-factor, 1));
     }
 }

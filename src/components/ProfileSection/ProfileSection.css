@@ -1,15 +1,16 @@
+/* components/ProfileSection/ProfileSection.css */
 .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: calc(1rem * var(--scale-factor, 1));
 }
 
 .progress-container {
     font-family: var(--font-family);
-    font-size: var(--font-size-large);
+    font-size: calc(var(--font-size-large) * var(--scale-factor, 1));
     font-weight: var(--font-weight-bold);
-    letter-spacing: 0.05em;
+    letter-spacing: calc(0.05em * var(--scale-factor, 1));
     text-align: left;
     display: flex;
     justify-content: center;
@@ -24,25 +25,25 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: calc(1.5rem * var(--scale-factor, 1));
     align-items: start;
 }
 
 .progress-label {
-    margin-right: 0.5rem;
+    margin-right: calc(0.5rem * var(--scale-factor, 1));
 }
 
 .progress-bar {
     position: relative;
     font-family: var(--font-family);
-    font-size: var(--font-size-small);
+    font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
     font-weight: var(--font-weight-normal);
     text-align: center;
     width: 65%;
-    height: 1.5rem;
+    height: calc(1.5rem * var(--scale-factor, 1));
     background: #FFF8F8;
     border-radius: var(--border-radius-bar);
-    margin: 0.2rem 0;
+    margin: calc(0.2rem * var(--scale-factor, 1)) 0;
 }
 
 .progress-value {
@@ -56,10 +57,80 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
 }
 
 .progress-fill {
     height: 100%;
     background: var(--primary-orange-light);
     border-radius: var(--border-radius-bar);
+}
+
+/* Компактные режимы для маленьких экранов */
+@media screen and (max-height: 600px) {
+    .profile-container {
+        padding: calc(0.8rem * var(--scale-factor, 1));
+    }
+
+    .profile-menu {
+        margin-bottom: calc(1rem * var(--scale-factor, 1));
+    }
+
+    .progress-container {
+        font-size: calc(var(--font-size-medium) * var(--scale-factor, 1));
+    }
+
+    .progress-bar {
+        height: calc(1.2rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .profile-container {
+        padding: calc(0.5rem * var(--scale-factor, 1));
+    }
+
+    .profile-menu {
+        margin-bottom: calc(0.8rem * var(--scale-factor, 1));
+    }
+
+    .progress-container {
+        font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
+    }
+
+    .progress-bar {
+        height: calc(1rem * var(--scale-factor, 1));
+        width: 70%; /* Увеличиваем ширину прогресс-бара для компактности */
+    }
+
+    .progress-value {
+        font-size: calc(0.8rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    .profile-container {
+        padding: calc(0.3rem * var(--scale-factor, 1));
+    }
+
+    .profile-menu {
+        margin-bottom: calc(0.5rem * var(--scale-factor, 1));
+    }
+
+    .progress-container {
+        font-size: calc(var(--font-size-small) * var(--scale-factor, 1));
+    }
+
+    .progress-bar {
+        height: calc(0.8rem * var(--scale-factor, 1));
+        width: 75%;
+    }
+
+    .progress-value {
+        font-size: calc(0.7rem * var(--scale-factor, 1));
+    }
+
+    .progress-label {
+        margin-right: calc(0.3rem * var(--scale-factor, 1));
+    }
 }

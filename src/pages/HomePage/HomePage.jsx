@@ -1,3 +1,4 @@
+// pages/HomePage/HomePage.jsx
 import React from 'react';
 import './HomePage.css';
 import ScoreSection from "../../components/ScoreSection/ScoreSection";

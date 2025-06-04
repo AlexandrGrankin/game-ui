@@ -17,34 +17,7 @@
     --scale-factor: 1;
 }
 
-/* Определяем Telegram WebApp через user agent или window.Telegram */
-@media screen and (max-height: 700px) {
-    :root {
-        --scale-factor: 0.85;
-        --app-height: 100vh;
-        --tg-safe-area-top: env(safe-area-inset-top, 0px);
-        --tg-safe-area-bottom: env(safe-area-inset-bottom, 0px);
-    }
-}
-
-@media screen and (max-height: 600px) {
-    :root {
-        --scale-factor: 0.75;
-    }
-}
-
-@media screen and (max-height: 500px) {
-    :root {
-        --scale-factor: 0.65;
-    }
-}
-
-/* Для очень низких экранов (возможно старые устройства) */
-@media screen and (max-height: 400px) {
-    :root {
-        --scale-factor: 0.55;
-    }
-}
+/* УБИРАЕМ агрессивные медиа-запросы - оставляем только для очень маленьких экранов */
 
 /* Обновленные размеры компонентов с учетом масштабирования */
 :root {
@@ -126,44 +99,43 @@
     height: calc(var(--size-3xl) * var(--scale-factor));
 }
 
-/* Компактный режим для карточек */
-@media screen and (max-height: 600px) {
+/* ОСТАВЛЯЕМ специальные правила только для ДЕЙСТВИТЕЛЬНО маленьких экранов */
+
+/* Только для экранов меньше 320px */
+@media screen and (max-width: 320px), screen and (max-height: 320px) {
     .card-section {
-        padding: 0.5rem 0;
-        gap: 0.3rem;
+        padding: calc(0.3rem * var(--scale-factor)) 0;
+        gap: calc(0.2rem * var(--scale-factor));
     }
 
     .battle-enemy-card {
-        margin-bottom: 0.5rem;
-        gap: 0.3rem;
+        margin-bottom: calc(0.5rem * var(--scale-factor));
+        gap: calc(0.2rem * var(--scale-factor));
     }
 
     .battle-center {
-        gap: 0.5rem;
-        min-height: 80px;
+        gap: calc(0.3rem * var(--scale-factor));
+        min-height: calc(60px * var(--scale-factor));
     }
 
     .vs-divider {
-        min-width: 40px;
-        min-height: 40px;
-        font-size: calc(var(--font-size-large) * var(--scale-factor));
-        padding: 0.4rem 0.6rem;
+        min-width: calc(30px * var(--scale-factor));
+        min-height: calc(30px * var(--scale-factor));
+        font-size: calc(var(--font-size-medium) * var(--scale-factor));
+        padding: calc(0.3rem * var(--scale-factor)) calc(0.4rem * var(--scale-factor));
     }
 
     .game-controls-container {
-        padding: 0.3rem 0.5rem 0.8rem 0.5rem;
+        padding: calc(0.2rem * var(--scale-factor)) calc(0.3rem * var(--scale-factor)) calc(0.5rem * var(--scale-factor)) calc(0.3rem * var(--scale-factor));
     }
 
     .battle-status-game {
-        gap: 0.3rem;
-        margin-top: 0.5rem;
+        gap: calc(0.2rem * var(--scale-factor));
+        margin-top: calc(0.3rem * var(--scale-factor));
     }
-}
 
-/* Экстра компактный режим */
-@media screen and (max-height: 500px) {
     .profile-container {
-        padding: 0.5rem;
+        padding: calc(0.5rem * var(--scale-factor));
     }
 
     .progress-container {
@@ -171,15 +143,135 @@
     }
 
     .battle-bid {
-        margin: calc(var(--size-md) * var(--scale-factor)) 0;
-        letter-spacing: 0.1rem;
+        margin: calc(var(--size-sm) * var(--scale-factor)) 0;
+        letter-spacing: calc(0.1rem * var(--scale-factor));
+    }
+}
+
+/* Только для экстремально маленьких экранов (300x300 и меньше) */
+@media screen and (max-width: 300px) and (max-height: 300px) {
+    .app-container {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .profile-container {
+        padding: calc(0.3rem * var(--scale-factor));
+    }
+
+    .progress-container {
+        font-size: calc(var(--font-size-small) * var(--scale-factor));
+    }
+
+    .progress-bar {
+        height: calc(1rem * var(--scale-factor));
+        width: 75%;
+    }
+
+    .progress-value {
+        font-size: calc(0.8rem * var(--scale-factor));
+    }
+
+    .battle-bid {
+        margin: calc(0.3rem * var(--scale-factor)) 0;
+        letter-spacing: 0;
+        font-size: calc(var(--font-size-large) * var(--scale-factor));
+    }
+
+    .battle-bid-icon {
+        width: calc(var(--size-xl) * var(--scale-factor));
+        margin: 0 calc(0.2rem * var(--scale-factor));
     }
 
     .battle-center {
-        min-height: 60px;
+        min-height: calc(40px * var(--scale-factor));
+        gap: calc(0.2rem * var(--scale-factor));
+    }
+
+    .vs-divider {
+        min-width: calc(20px * var(--scale-factor));
+        min-height: calc(20px * var(--scale-factor));
+        font-size: calc(var(--font-size-small) * var(--scale-factor));
+        padding: calc(0.1rem * var(--scale-factor)) calc(0.2rem * var(--scale-factor));
     }
 
     .profile-menu {
-        margin-bottom: 1rem;
+        margin-bottom: calc(0.3rem * var(--scale-factor));
     }
+
+    .card-section {
+        padding: calc(0.1rem * var(--scale-factor)) 0;
+        gap: calc(0.05rem * var(--scale-factor));
+    }
+
+    .game-controls-container {
+        padding: calc(0.1rem * var(--scale-factor)) calc(0.1rem * var(--scale-factor)) calc(0.2rem * var(--scale-factor)) calc(0.1rem * var(--scale-factor));
+    }
+
+    .game-controls-section {
+        gap: calc(0.1rem * var(--scale-factor));
+    }
+
+    .battle-status-game {
+        gap: calc(0.1rem * var(--scale-factor));
+        padding: calc(0.1rem * var(--scale-factor)) 0;
+    }
+
+    .battle-fight-card-section {
+        padding: 0 0 0 calc(0.1rem * var(--scale-factor));
+        gap: calc(0.1rem * var(--scale-factor));
+    }
+
+    .battle-enemy-card {
+        margin-bottom: calc(0.2rem * var(--scale-factor));
+        gap: calc(0.05rem * var(--scale-factor));
+    }
+
+    .battle-control {
+        gap: calc(0.1rem * var(--scale-factor));
+        margin: calc(0.1rem * var(--scale-factor)) auto;
+    }
+
+    .score-display {
+        padding: calc(0.05rem * var(--scale-factor));
+    }
+
+    .score-display > div {
+        margin-right: calc(0.1rem * var(--scale-factor));
+    }
+}
+
+/* Дополнительные правила для body классов - только светлая тема */
+.screen-extreme-small {
+    font-size: calc(12px * var(--scale-factor)) !important;
+}
+
+.screen-very-small {
+    font-size: calc(13px * var(--scale-factor)) !important;
+}
+
+.screen-small {
+    font-size: calc(14px * var(--scale-factor)) !important;
+}
+
+.screen-square .interactive-border-card-outer {
+    aspect-ratio: 1/1 !important;
+}
+
+.screen-square .battle-center {
+    flex-direction: column !important;
+    gap: calc(0.05rem * var(--scale-factor)) !important;
+}
+
+.screen-square .vs-divider {
+    order: 2;
+    margin: calc(0.05rem * var(--scale-factor)) 0;
+}
+
+.screen-extreme-small .app-main-bottom {
+    padding: calc(0.05rem * var(--scale-factor)) !important;
+}
+
+.screen-extreme-small .app-footer {
+    padding: 0 calc(0.05rem * var(--scale-factor)) calc(0.1rem * var(--scale-factor)) !important;
 }

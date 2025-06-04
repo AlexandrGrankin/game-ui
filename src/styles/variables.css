@@ -1,6 +1,6 @@
 /* styles/variables.css */
 :root {
-    /* Базовые цвета */
+    /* Базовые цвета - только светлая тема */
     --white: #FFFFFF;
     --black: #000000;
     --green: #38c10a;
@@ -24,8 +24,8 @@
     /* Адаптивные переменные для высоты */
     --app-height: 100vh;
     --content-height: 100vh;
-    --vh: 1vh; /* Кастомная единица vh */
-    --scale-factor: 1; /* Общий коэффициент масштабирования */
+    --vh: 1vh;
+    --scale-factor: 1; /* По умолчанию нормальный размер */
 
     /* Safe areas для мобильных устройств */
     --safe-area-inset-top: env(safe-area-inset-top, 0px);
@@ -33,7 +33,7 @@
     --safe-area-inset-left: env(safe-area-inset-left, 0px);
     --safe-area-inset-right: env(safe-area-inset-right, 0px);
 
-    /* Telegram WebApp специфичные переменные */
+    /* Telegram WebApp специфичные переменные - светлая тема */
     --tg-viewport-height: 100vh;
     --tg-safe-area-top: 0px;
     --tg-safe-area-bottom: 0px;
@@ -44,14 +44,14 @@
     --tg-button-text-color: #ffffff;
 
     /* Базовые размеры с масштабированием */
-    --size-xs: calc(0.25rem * var(--scale-factor));   /* ~4px */
-    --size-sm: calc(0.5rem * var(--scale-factor));    /* ~8px */
-    --size-md: calc(1rem * var(--scale-factor));      /* ~16px */
-    --size-lg: calc(1.5rem * var(--scale-factor));    /* ~24px */
-    --size-xl: calc(2rem * var(--scale-factor));      /* ~32px */
-    --size-2xl: calc(3rem * var(--scale-factor));     /* ~48px */
-    --size-3xl: calc(4rem * var(--scale-factor));     /* ~64px */
-    --size-4xl: calc(6rem * var(--scale-factor));     /* ~96px */
+    --size-xs: calc(0.25rem * var(--scale-factor));
+    --size-sm: calc(0.5rem * var(--scale-factor));
+    --size-md: calc(1rem * var(--scale-factor));
+    --size-lg: calc(1.5rem * var(--scale-factor));
+    --size-xl: calc(2rem * var(--scale-factor));
+    --size-2xl: calc(3rem * var(--scale-factor));
+    --size-3xl: calc(4rem * var(--scale-factor));
+    --size-4xl: calc(6rem * var(--scale-factor));
 
     /* Адаптивные размеры для кнопок */
     --circle-extra-extra-small: calc(3vw * var(--scale-factor));
@@ -78,15 +78,15 @@
     --circle-max-avatar: calc(14.5rem * var(--scale-factor));
 
     /* Компонентные размеры с масштабированием */
-    --button-small: calc(2.5rem * var(--scale-factor));     /* ~40px */
-    --button-medium: calc(3.5rem * var(--scale-factor));    /* ~56px */
-    --button-large: calc(4.5rem * var(--scale-factor));     /* ~72px */
-    --avatar-size: calc(5rem * var(--scale-factor));        /* ~80px */
+    --button-small: calc(2.5rem * var(--scale-factor));
+    --button-medium: calc(3.5rem * var(--scale-factor));
+    --button-large: calc(4.5rem * var(--scale-factor));
+    --avatar-size: calc(5rem * var(--scale-factor));
 
     /* Размеры иконок с масштабированием */
-    --icon-small: calc(1.5rem * var(--scale-factor));      /* ~24px */
-    --icon-medium: calc(2rem * var(--scale-factor));       /* ~32px */
-    --icon-large: calc(3rem * var(--scale-factor));        /* ~48px */
+    --icon-small: calc(1.5rem * var(--scale-factor));
+    --icon-medium: calc(2rem * var(--scale-factor));
+    --icon-large: calc(3rem * var(--scale-factor));
 
     /* Радиусы с масштабированием */
     --border-radius: calc(max(1.0rem, 8%) * var(--scale-factor));
@@ -126,18 +126,13 @@
     --z-index-content: 1;
 }
 
-/* Адаптивные переменные для разных высот экрана */
-@media screen and (max-height: 700px) {
-    :root {
-        --scale-factor: 0.85;
-    }
-}
+/* МЕДИА-ЗАПРОСЫ - scale-factor устанавливается в JavaScript */
+/* Здесь только дополнительные настройки для компактности */
 
 @media screen and (max-height: 600px) {
     :root {
-        --scale-factor: 0.75;
-        /* Дополнительно уменьшаем некоторые элементы */
-        --circle-medium: calc(28vw * var(--scale-factor));
+        /* Корректировки для компактности */
+        --circle-medium: calc(22vw * var(--scale-factor));
         --circle-large: calc(30vw * var(--scale-factor));
         --circle-avatar: calc(32vw * var(--scale-factor));
     }
@@ -145,13 +140,9 @@
 
 @media screen and (max-height: 500px) {
     :root {
-        --scale-factor: 0.65;
-        /* Еще больше уменьшаем для очень маленьких экранов */
         --circle-medium: calc(20vw * var(--scale-factor));
         --circle-large: calc(28vw * var(--scale-factor));
         --circle-avatar: calc(30vw * var(--scale-factor));
-
-        /* Уменьшаем отступы */
         --padding-md: calc(0.7rem * var(--scale-factor));
         --padding-lg: calc(1rem * var(--scale-factor));
     }
@@ -159,13 +150,9 @@
 
 @media screen and (max-height: 400px) {
     :root {
-        --scale-factor: 0.55;
-        /* Критически маленькие экраны */
         --circle-medium: calc(18vw * var(--scale-factor));
         --circle-large: calc(25vw * var(--scale-factor));
         --circle-avatar: calc(27vw * var(--scale-factor));
-
-        /* Минимальные отступы */
         --padding-md: calc(0.5rem * var(--scale-factor));
         --padding-lg: calc(0.8rem * var(--scale-factor));
     }
@@ -174,30 +161,15 @@
 /* Переменные для планшетов в ландшафте */
 @media (min-width: 768px) and (max-height: 600px) {
     :root {
-        --scale-factor: 0.8;
-        /* Оптимизируем для ландшафтной ориентации планшетов */
         --circle-medium: calc(15vw * var(--scale-factor));
         --circle-large: calc(20vw * var(--scale-factor));
         --circle-avatar: calc(22vw * var(--scale-factor));
     }
 }
 
-/* Темная тема переменные */
-/*@media (prefers-color-scheme: dark) {*/
-/*    :root {*/
-/*        !* Инвертируем основные цвета для темной темы *!*/
-/*        --white: #1a1a1a;*/
-/*        --black: #ffffff;*/
-/*        --tg-bg-color: #1a1a1a;*/
-/*        --tg-text-color: #ffffff;*/
-/*        --tg-hint-color: #666666;*/
-/*    }*/
-/*}*/
-
 /* Высокое DPI дисплеи */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     :root {
-        /* Настройки для Retina дисплеев */
         --border-radius: calc(max(1.2rem, 10%) * var(--scale-factor));
         --shadow-card: 0 calc(0.25rem * var(--scale-factor)) calc(0.5rem * var(--scale-factor)) calc(0.125rem * var(--scale-factor)) rgba(0, 0, 0, 0.15);
     }

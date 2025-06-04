@@ -18,7 +18,52 @@ export const getViewportHeight = () => {
     return window.innerHeight;
 };
 
-// Инициализация Telegram WebApp
+// Получаем доступную ширину viewport
+export const getViewportWidth = () => {
+    return window.innerWidth;
+};
+
+// Определяем коэффициент масштабирования на основе размеров экрана
+export const calculateScaleFactor = () => {
+    const height = getViewportHeight();
+    const width = getViewportWidth();
+
+    // МЕНЕЕ АГРЕССИВНАЯ ЛОГИКА: уменьшаем только действительно маленькие экраны
+
+    // Экстремально маленькие экраны (оба измерения меньше 300)
+    if (width <= 300 && height <= 300) {
+        console.log(`Экстремально маленький экран: ${width}x${height}, scale: 0.5`);
+        return 0.5;
+    }
+
+    // Очень маленькие экраны (оба измерения меньше 320)
+    if (width <= 320 && height <= 320) {
+        console.log(`Очень маленький экран: ${width}x${height}, scale: 0.6`);
+        return 0.6;
+    }
+
+    // Маленькие экраны по высоте (но только если высота действительно маленькая)
+    if (height <= 400) {
+        console.log(`Маленький экран по высоте: ${width}x${height}, scale: 0.7`);
+        return 0.7;
+    }
+
+    if (height <= 500) {
+        console.log(`Средне-маленький экран: ${width}x${height}, scale: 0.8`);
+        return 0.8;
+    }
+
+    if (height <= 600) {
+        console.log(`Средний экран: ${width}x${height}, scale: 0.9`);
+        return 0.9;
+    }
+
+    // ВСЕ ОСТАЛЬНЫЕ ЭКРАНЫ получают полный размер
+    console.log(`Нормальный экран: ${width}x${height}, scale: 1.0`);
+    return 1.0;
+};
+
+// Инициализация Telegram WebApp - только светлая тема
 export const initTelegramWebApp = () => {
     if (!isTelegramWebApp()) return null;
 
@@ -27,9 +72,13 @@ export const initTelegramWebApp = () => {
     // Расширяем приложение на весь экран
     tg.expand();
 
-    // Настраиваем цвета темы
-    tg.setHeaderColor('#0A4589');
-    tg.setBackgroundColor('#062A55');
+    // Принудительно устанавливаем светлую тему
+    try {
+        tg.setHeaderColor('#4A90E2');
+        tg.setBackgroundColor('#ffffff');
+    } catch (error) {
+        console.log('Не удалось установить цвета Telegram:', error);
+    }
 
     // Отключаем вертикальные свайпы если доступно
     if (tg.disableVerticalSwipes) {
@@ -39,30 +88,50 @@ export const initTelegramWebApp = () => {
     return tg;
 };
 
-// Устанавливаем CSS переменные для высоты
+// Устанавливаем CSS переменные для высоты и масштабирования
 export const setViewportHeightCSS = () => {
     const height = getViewportHeight();
-    const safeAreaTop = isTelegramWebApp() ? 0 : 0; // Telegram обычно не имеет status bar
+    const width = getViewportWidth();
+    const scaleFactor = calculateScaleFactor();
+
+    const safeAreaTop = isTelegramWebApp() ? 0 : 0;
     const safeAreaBottom = isTelegramWebApp() ? 0 : 0;
 
+    // Устанавливаем основные переменные
     document.documentElement.style.setProperty('--app-height', `${height}px`);
     document.documentElement.style.setProperty('--tg-viewport-height', `${height}px`);
     document.documentElement.style.setProperty('--tg-safe-area-top', `${safeAreaTop}px`);
     document.documentElement.style.setProperty('--tg-safe-area-bottom', `${safeAreaBottom}px`);
+
+    // Устанавливаем коэффициент масштабирования
+    document.documentElement.style.setProperty('--scale-factor', scaleFactor);
 
     // Добавляем класс для Telegram WebApp
     if (isTelegramWebApp()) {
         document.body.classList.add('telegram-webapp');
     }
 
-    // Определяем коэффициент масштабирования на основе высоты
-    let scaleFactor = 1;
-    if (height <= 400) scaleFactor = 0.55;
-    else if (height <= 500) scaleFactor = 0.65;
-    else if (height <= 600) scaleFactor = 0.75;
-    else if (height <= 700) scaleFactor = 0.85;
+    // Добавляем классы для экстремально маленьких экранов
+    // Удаляем все предыдущие классы размеров
+    document.body.classList.remove(
+        'screen-tiny',
+        'screen-very-small',
+        'screen-small',
+        'screen-square',
+        'screen-extreme-small'
+    );
 
-    document.documentElement.style.setProperty('--scale-factor', scaleFactor);
+    // Добавляем классы ТОЛЬКО для действительно маленьких экранов
+    if (width <= 300 && height <= 300) {
+        document.body.classList.add('screen-extreme-small');
+        document.body.classList.add('screen-square');
+    } else if (width <= 320 && height <= 320) {
+        document.body.classList.add('screen-very-small');
+    } else if (height <= 400) {
+        document.body.classList.add('screen-small');
+    }
+
+    console.log(`Viewport: ${width}x${height}, Scale Factor: ${scaleFactor}`);
 };
 
 // Обработчик изменения размера viewport
@@ -72,7 +141,9 @@ export const handleViewportResize = () => {
 
         // Обработчик изменения размера
         tg.onEvent('viewportChanged', () => {
-            setViewportHeightCSS();
+            setTimeout(() => {
+                setViewportHeightCSS();
+            }, 100);
         });
 
         // Обработчик изменения темы
@@ -83,42 +154,38 @@ export const handleViewportResize = () => {
 
     // Fallback для обычных браузеров
     window.addEventListener('resize', () => {
-        setViewportHeightCSS();
+        setTimeout(() => {
+            setViewportHeightCSS();
+        }, 100);
     });
 
     // Обработчик orientation change для мобильных
     window.addEventListener('orientationchange', () => {
         setTimeout(() => {
             setViewportHeightCSS();
-        }, 100);
+        }, 300);
     });
 };
 
-// Обновляем цвета темы
+// Обновляем цвета темы - только светлая тема
 export const updateThemeColors = () => {
     if (!isTelegramWebApp()) return;
 
     const tg = window.Telegram.WebApp;
-    const themeParams = tg.themeParams;
 
-    if (themeParams.bg_color) {
-        document.documentElement.style.setProperty('--tg-bg-color', themeParams.bg_color);
-    }
+    // Принудительно устанавливаем светлую тему
+    document.documentElement.style.setProperty('--tg-bg-color', '#ffffff');
+    document.documentElement.style.setProperty('--tg-text-color', '#000000');
+    document.documentElement.style.setProperty('--tg-hint-color', '#999999');
+    document.documentElement.style.setProperty('--tg-button-color', '#4A90E2');
+    document.documentElement.style.setProperty('--tg-button-text-color', '#ffffff');
 
-    if (themeParams.text_color) {
-        document.documentElement.style.setProperty('--tg-text-color', themeParams.text_color);
-    }
-
-    if (themeParams.hint_color) {
-        document.documentElement.style.setProperty('--tg-hint-color', themeParams.hint_color);
-    }
-
-    if (themeParams.button_color) {
-        document.documentElement.style.setProperty('--tg-button-color', themeParams.button_color);
-    }
-
-    if (themeParams.button_text_color) {
-        document.documentElement.style.setProperty('--tg-button-text-color', themeParams.button_text_color);
+    // Устанавливаем светлую тему в Telegram если возможно
+    try {
+        tg.setHeaderColor('#4A90E2');
+        tg.setBackgroundColor('#ffffff');
+    } catch (error) {
+        console.log('Не удалось установить цвета темы Telegram:', error);
     }
 };
 
@@ -205,7 +272,7 @@ const setupTelegramApp = () => {
     // Инициализируем Telegram WebApp
     initTelegramWebApp();
 
-    // Устанавливаем высоту viewport
+    // Устанавливаем высоту viewport и масштабирование
     setViewportHeightCSS();
 
     // Настраиваем обработчики изменения размеров

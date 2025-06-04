@@ -2,7 +2,7 @@
 .game-controls-container {
     display: flex;
     align-items: center;
-    padding: 0.5rem 0.5rem 1rem 0.5rem;
+    padding: calc(0.5rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1)) calc(1rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1));
     margin-top: auto;
 }
 
@@ -12,27 +12,58 @@
     align-items: flex-end;
     flex-direction: row;
     width: 100%;
-    gap: 0.5rem; /* Добавляем отступ между кнопками */
+    gap: calc(0.5rem * var(--scale-factor, 1)); /* Добавляем отступ между кнопками */
 }
 
 /* Для средних экранов */
 @media (min-width: 768px) {
     .game-controls-section {
-        gap: 1rem; /* Увеличиваем отступ на больших экранах */
+        gap: calc(1rem * var(--scale-factor, 1)); /* Увеличиваем отступ на больших экранах */
     }
 
     .game-controls-container {
-        padding: 1rem 0.5rem 1.5rem 0.5rem;
+        padding: calc(1rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1)) calc(1.5rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1));
     }
 }
 
 /* Для больших экранов */
 @media (min-width: 1200px) {
     .game-controls-section {
-        gap: 1.5rem; /* Еще больше увеличиваем отступ */
+        gap: calc(1.5rem * var(--scale-factor, 1)); /* Еще больше увеличиваем отступ */
     }
 
     .game-controls-container {
-        padding: 1.5rem 0.5rem 2rem 0.5rem;
+        padding: calc(1.5rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1)) calc(2rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1));
+    }
+}
+
+/* Компактные режимы для маленьких экранов */
+@media screen and (max-height: 600px) {
+    .game-controls-container {
+        padding: calc(0.3rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1)) calc(0.8rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1));
+    }
+
+    .game-controls-section {
+        gap: calc(0.3rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .game-controls-container {
+        padding: calc(0.2rem * var(--scale-factor, 1)) calc(0.3rem * var(--scale-factor, 1)) calc(0.5rem * var(--scale-factor, 1)) calc(0.3rem * var(--scale-factor, 1));
+    }
+
+    .game-controls-section {
+        gap: calc(0.2rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    .game-controls-container {
+        padding: calc(0.1rem * var(--scale-factor, 1)) calc(0.2rem * var(--scale-factor, 1)) calc(0.3rem * var(--scale-factor, 1)) calc(0.2rem * var(--scale-factor, 1));
+    }
+
+    .game-controls-section {
+        gap: calc(0.1rem * var(--scale-factor, 1));
     }
 }

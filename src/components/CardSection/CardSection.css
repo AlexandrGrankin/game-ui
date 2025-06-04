@@ -5,22 +5,44 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0.5rem;
-    gap: 0.5rem; /* Добавляем отступ между карточками */
+    padding: calc(1rem * var(--scale-factor, 1)) 0;
+    gap: calc(0.5rem * var(--scale-factor, 1)); /* Добавляем отступ между карточками */
 }
 
 /* Для средних экранов увеличиваем отступ между карточками */
 @media (min-width: 768px) {
     .card-section {
-        gap: 1rem;
-        padding: 1.5rem 0;
+        gap: calc(1rem * var(--scale-factor, 1));
+        padding: calc(1.5rem * var(--scale-factor, 1)) 0;
     }
 }
 
 /* Для больших экранов еще больше увеличиваем отступ */
 @media (min-width: 1200px) {
     .card-section {
-        gap: 1.5rem;
-        padding: 2rem 0;
+        gap: calc(1.5rem * var(--scale-factor, 1));
+        padding: calc(2rem * var(--scale-factor, 1)) 0;
+    }
+}
+
+/* Компактные режимы для маленьких экранов */
+@media screen and (max-height: 600px) {
+    .card-section {
+        padding: calc(0.5rem * var(--scale-factor, 1)) 0;
+        gap: calc(0.3rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .card-section {
+        padding: calc(0.3rem * var(--scale-factor, 1)) 0;
+        gap: calc(0.2rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    .card-section {
+        padding: calc(0.2rem * var(--scale-factor, 1)) 0;
+        gap: calc(0.1rem * var(--scale-factor, 1));
     }
 }
