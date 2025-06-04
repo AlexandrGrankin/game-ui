@@ -67,10 +67,15 @@
     align-items: center;
     box-shadow: var(--shadow-inner);
     border-radius: calc(calc(var(--border-radius) * 0.5) * var(--scale-factor, 1));
-    width: 80%;
-    height: 84%;
+    width: 80%; /* Фиксированный размер */
+    height: 84%; /* Фиксированный размер */
     transition: all 0.3s ease;
     backface-visibility: hidden;
+    /* Добавляем ограничения для предотвращения выхода за границы */
+    max-width: 80%;
+    max-height: 84%;
+    min-width: 60%; /* Минимальный размер */
+    min-height: 70%; /* Минимальный размер */
 }
 
 .card-back-inner {
@@ -114,7 +119,7 @@
 .card-back-pattern::after {
     content: '?';
     font-family: var(--font-family);
-    font-size: calc(2rem * var(--scale-factor, 1));
+    font-size: calc(1.8rem * var(--scale-factor, 1)); /* Уменьшили с 2rem */
     font-weight: var(--font-weight-bold);
     color: var(--white);
     text-shadow: calc(2px * var(--scale-factor, 1)) calc(2px * var(--scale-factor, 1)) calc(4px * var(--scale-factor, 1)) rgba(0, 0, 0, 0.5);
@@ -139,12 +144,12 @@
     background: var(--white);
 }
 
-/* ИСПРАВЛЕННАЯ иконка - масштабируется с размером карты */
+/* ИСПРАВЛЕННАЯ иконка - точно помещается в карты */
 .card-icon {
-    width: calc(80% * var(--scale-factor, 1));
+    width: 75%; /* Уменьшили с 80% для гарантии */
     height: auto;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 75%; /* Жесткое ограничение */
+    max-height: 75%; /* Жесткое ограничение */
     object-fit: contain;
 }
 
@@ -200,104 +205,169 @@
 
 /* СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ КАРТ В БИТВЕ */
 
-/* КАРТЫ ИГРОКОВ (внизу) - увеличиваем высоту */
+/* ========== КАРТЫ ИГРОКОВ (внизу) ========== */
 .battle-control .interactive-border-card-outer {
-    max-height: calc(10.5rem * var(--scale-factor, 1)); /* Увеличили с 9rem */
-    aspect-ratio: 3/4.8; /* Сделали выше - было 3/4.4 */
+    max-height: calc(10.5rem * var(--scale-factor, 1));
+    aspect-ratio: 3/4.8;
 }
 
-/* КАРТЫ ПРОТИВНИКА (сверху) - увеличиваем */
+.battle-control .card-icon {
+    width: 75%;
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.battle-control .card-back-pattern::after {
+    font-size: calc(1.8rem * var(--scale-factor, 1));
+}
+
+/* ========== КАРТЫ ПРОТИВНИКА (сверху) ========== */
 .battle-enemy-card .interactive-border-card-outer {
-    max-height: calc(9rem * var(--scale-factor, 1)); /* Увеличили с 6rem */
-    aspect-ratio: 3/4.4; /* Красивые пропорции */
+    max-height: calc(9rem * var(--scale-factor, 1));
+    aspect-ratio: 3/4.4;
 }
 
-/* КАРТЫ В ЦЕНТРЕ БИТВЫ (важные) - значительно увеличиваем */
+.battle-enemy-card .card-icon {
+    width: 75%;
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.battle-enemy-card .card-back-pattern::after {
+    font-size: calc(1.8rem * var(--scale-factor, 1));
+}
+
+/* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ (на столе) ========== */
 .battle-center .interactive-border-card-outer {
-    max-height: calc(12rem * var(--scale-factor, 1)); /* Увеличили с 8rem */
-    aspect-ratio: 3/4.4; /* Красивые пропорции */
+    max-height: calc(12rem * var(--scale-factor, 1));
+    aspect-ratio: 3/4.4;
 }
 
 .battle-center .card-icon {
-    width: calc(80% * var(--scale-factor, 1)); /* Нормальный размер иконок */
-    max-width: 80%;
-    max-height: 80%;
+    width: 75%;
+    max-width: 75%;
+    max-height: 75%;
 }
 
 .battle-center .card-back-pattern::after {
-    font-size: calc(2.5rem * var(--scale-factor, 1)); /* Увеличили символ */
+    font-size: calc(2.5rem * var(--scale-factor, 1));
+}
+
+/* СПЕЦИАЛЬНЫЙ медиа-запрос для iPhone 8 и подобных (около 667px) */
+@media screen and (max-height: 700px) and (min-height: 600px) {
+    /* ========== КАРТЫ ИГРОКОВ ========== */
+    .battle-control .interactive-border-card-outer {
+        max-height: calc(9rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.6;
+    }
+    .battle-control .card-back-pattern::after {
+        font-size: calc(1.7rem * var(--scale-factor, 1));
+    }
+
+    /* ========== КАРТЫ ПРОТИВНИКА ========== */
+    .battle-enemy-card .interactive-border-card-outer {
+        max-height: calc(7rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.6;
+    }
+    .battle-enemy-card .card-back-pattern::after {
+        font-size: calc(1.7rem * var(--scale-factor, 1));
+    }
+
+    /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
+    .battle-center .interactive-border-card-outer {
+        max-height: calc(12rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.6;
+    }
+    .battle-center .card-back-pattern::after {
+        font-size: calc(2.1rem * var(--scale-factor, 1));
+    }
 }
 
 /* Для экранов с малой высотой - ПЛАВНОЕ пропорциональное уменьшение */
 @media screen and (max-height: 600px) {
-    /* Карты игроков - просто немного меньше, пропорции сохраняем */
+    /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
-        max-height: calc(9rem * var(--scale-factor, 1)); /* Немного меньше с 10.5rem */
-        aspect-ratio: 3/4.8; /* Сохраняем те же пропорции */
+        max-height: calc(10rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.5;
+    }
+    .battle-control .card-back-pattern::after {
+        font-size: calc(1.6rem * var(--scale-factor, 1));
     }
 
-    /* Карты противника - тоже немного меньше */
+    /* ========== КАРТЫ ПРОТИВНИКА ========== */
     .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(8rem * var(--scale-factor, 1)); /* Немного меньше с 9rem */
-        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+        max-height: calc(8rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.6;
+    }
+    .battle-enemy-card .card-back-pattern::after {
+        font-size: calc(1.6rem * var(--scale-factor, 1));
     }
 
-    /* Центральные карты - тоже немного меньше */
+    /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(10rem * var(--scale-factor, 1)); /* Немного меньше с 12rem */
-        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+        max-height: calc(10rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.4;
     }
-
-    .battle-center .card-back-pattern::after {
-        font-size: calc(2.2rem * var(--scale-factor, 1));
-    }
-}
-
-@media screen and (max-height: 500px) {
-    /* Карты игроков - еще немного меньше */
-    .battle-control .interactive-border-card-outer {
-        max-height: calc(8rem * var(--scale-factor, 1)); /* Еще немного меньше */
-        aspect-ratio: 3/4.8; /* Сохраняем те же пропорции */
-    }
-
-    /* Карты противника */
-    .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(7rem * var(--scale-factor, 1)); /* Еще немного меньше */
-        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
-    }
-
-    /* Центральные карты */
-    .battle-center .interactive-border-card-outer {
-        max-height: calc(8.5rem * var(--scale-factor, 1)); /* Еще немного меньше */
-        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
-    }
-
     .battle-center .card-back-pattern::after {
         font-size: calc(2rem * var(--scale-factor, 1));
     }
 }
 
-@media screen and (max-height: 400px) {
-    /* Карты игроков - компактнее для очень маленьких экранов */
+@media screen and (max-height: 500px) {
+    /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
-        max-height: calc(6.5rem * var(--scale-factor, 1)); /* Компактнее */
-        aspect-ratio: 3/4.6; /* Чуть менее высокие */
+        max-height: calc(12rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.8;
+    }
+    .battle-control .card-back-pattern::after {
+        font-size: calc(1.4rem * var(--scale-factor, 1));
     }
 
-    /* Карты противника */
+    /* ========== КАРТЫ ПРОТИВНИКА ========== */
     .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(6rem * var(--scale-factor, 1)); /* Компактнее */
-        aspect-ratio: 3/4.2; /* Чуть менее высокие */
+        max-height: calc(9rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.4;
+    }
+    .battle-enemy-card .card-back-pattern::after {
+        font-size: calc(1.4rem * var(--scale-factor, 1));
     }
 
-    /* Центральные карты */
+    /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(7rem * var(--scale-factor, 1)); /* Компактнее */
-        aspect-ratio: 3/4.2; /* Чуть менее высокие */
+        max-height: calc(11.5rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.4;
+    }
+    .battle-center .card-back-pattern::after {
+        font-size: calc(1.8rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    /* ========== КАРТЫ ИГРОКОВ ========== */
+    .battle-control .interactive-border-card-outer {
+        max-height: calc(14.5rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.6;
+    }
+    .battle-control .card-back-pattern::after {
+        font-size: calc(1.2rem * var(--scale-factor, 1));
     }
 
+    /* ========== КАРТЫ ПРОТИВНИКА ========== */
+    .battle-enemy-card .interactive-border-card-outer {
+        max-height: calc(11rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.2;
+    }
+    .battle-enemy-card .card-back-pattern::after {
+        font-size: calc(1.2rem * var(--scale-factor, 1));
+    }
+
+    /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
+    .battle-center .interactive-border-card-outer {
+        max-height: calc(15rem * var(--scale-factor, 1));
+        aspect-ratio: 3/4.2;
+    }
     .battle-center .card-back-pattern::after {
-        font-size: calc(1.7rem * var(--scale-factor, 1));
+        font-size: calc(1.5rem * var(--scale-factor, 1));
     }
 }
 
@@ -364,7 +434,7 @@
 @media screen and (max-width: 320px) {
     .interactive-border-card {
         min-width: calc(2.8rem * var(--scale-factor, 1));
-        max-width: calc(6.5rem * var(--scale-factor, 1));
+        max-width: calc(4.5rem * var(--scale-factor, 1));
     }
 
     .card-icon {
