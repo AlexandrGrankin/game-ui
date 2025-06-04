@@ -198,6 +198,109 @@
     }
 }
 
+/* СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ КАРТ В БИТВЕ */
+
+/* КАРТЫ ИГРОКОВ (внизу) - увеличиваем высоту */
+.battle-control .interactive-border-card-outer {
+    max-height: calc(10.5rem * var(--scale-factor, 1)); /* Увеличили с 9rem */
+    aspect-ratio: 3/4.8; /* Сделали выше - было 3/4.4 */
+}
+
+/* КАРТЫ ПРОТИВНИКА (сверху) - увеличиваем */
+.battle-enemy-card .interactive-border-card-outer {
+    max-height: calc(9rem * var(--scale-factor, 1)); /* Увеличили с 6rem */
+    aspect-ratio: 3/4.4; /* Красивые пропорции */
+}
+
+/* КАРТЫ В ЦЕНТРЕ БИТВЫ (важные) - значительно увеличиваем */
+.battle-center .interactive-border-card-outer {
+    max-height: calc(12rem * var(--scale-factor, 1)); /* Увеличили с 8rem */
+    aspect-ratio: 3/4.4; /* Красивые пропорции */
+}
+
+.battle-center .card-icon {
+    width: calc(80% * var(--scale-factor, 1)); /* Нормальный размер иконок */
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.battle-center .card-back-pattern::after {
+    font-size: calc(2.5rem * var(--scale-factor, 1)); /* Увеличили символ */
+}
+
+/* Для экранов с малой высотой - ПЛАВНОЕ пропорциональное уменьшение */
+@media screen and (max-height: 600px) {
+    /* Карты игроков - просто немного меньше, пропорции сохраняем */
+    .battle-control .interactive-border-card-outer {
+        max-height: calc(9rem * var(--scale-factor, 1)); /* Немного меньше с 10.5rem */
+        aspect-ratio: 3/4.8; /* Сохраняем те же пропорции */
+    }
+
+    /* Карты противника - тоже немного меньше */
+    .battle-enemy-card .interactive-border-card-outer {
+        max-height: calc(8rem * var(--scale-factor, 1)); /* Немного меньше с 9rem */
+        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+    }
+
+    /* Центральные карты - тоже немного меньше */
+    .battle-center .interactive-border-card-outer {
+        max-height: calc(10rem * var(--scale-factor, 1)); /* Немного меньше с 12rem */
+        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+    }
+
+    .battle-center .card-back-pattern::after {
+        font-size: calc(2.2rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 500px) {
+    /* Карты игроков - еще немного меньше */
+    .battle-control .interactive-border-card-outer {
+        max-height: calc(8rem * var(--scale-factor, 1)); /* Еще немного меньше */
+        aspect-ratio: 3/4.8; /* Сохраняем те же пропорции */
+    }
+
+    /* Карты противника */
+    .battle-enemy-card .interactive-border-card-outer {
+        max-height: calc(7rem * var(--scale-factor, 1)); /* Еще немного меньше */
+        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+    }
+
+    /* Центральные карты */
+    .battle-center .interactive-border-card-outer {
+        max-height: calc(8.5rem * var(--scale-factor, 1)); /* Еще немного меньше */
+        aspect-ratio: 3/4.4; /* Сохраняем те же пропорции */
+    }
+
+    .battle-center .card-back-pattern::after {
+        font-size: calc(2rem * var(--scale-factor, 1));
+    }
+}
+
+@media screen and (max-height: 400px) {
+    /* Карты игроков - компактнее для очень маленьких экранов */
+    .battle-control .interactive-border-card-outer {
+        max-height: calc(6.5rem * var(--scale-factor, 1)); /* Компактнее */
+        aspect-ratio: 3/4.6; /* Чуть менее высокие */
+    }
+
+    /* Карты противника */
+    .battle-enemy-card .interactive-border-card-outer {
+        max-height: calc(6rem * var(--scale-factor, 1)); /* Компактнее */
+        aspect-ratio: 3/4.2; /* Чуть менее высокие */
+    }
+
+    /* Центральные карты */
+    .battle-center .interactive-border-card-outer {
+        max-height: calc(7rem * var(--scale-factor, 1)); /* Компактнее */
+        aspect-ratio: 3/4.2; /* Чуть менее высокие */
+    }
+
+    .battle-center .card-back-pattern::after {
+        font-size: calc(1.7rem * var(--scale-factor, 1));
+    }
+}
+
 /* ИСПРАВЛЕННЫЕ АДАПТИВНЫЕ РАЗМЕРЫ - менее агрессивные */
 
 /* Для больших экранов - нормальные размеры */
@@ -261,7 +364,7 @@
 @media screen and (max-width: 320px) {
     .interactive-border-card {
         min-width: calc(2.8rem * var(--scale-factor, 1));
-        max-width: calc(4.5rem * var(--scale-factor, 1));
+        max-width: calc(6.5rem * var(--scale-factor, 1));
     }
 
     .card-icon {
