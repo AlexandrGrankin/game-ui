@@ -226,7 +226,7 @@
 
 /* ========== КАРТЫ ИГРОКОВ (внизу) ========== */
 .battle-control .interactive-border-card-outer {
-    max-height: calc(10.5rem * var(--scale-factor, 1));
+    max-height: calc(11.5rem * var(--scale-factor, 1));
     aspect-ratio: 3/4.8;
 }
 
@@ -242,7 +242,7 @@
 
 /* ========== КАРТЫ ПРОТИВНИКА (сверху) ========== */
 .battle-enemy-card .interactive-border-card-outer {
-    max-height: calc(9rem * var(--scale-factor, 1));
+    max-height: calc(11rem * var(--scale-factor, 1));
     aspect-ratio: 3/4.4;
 }
 
@@ -258,8 +258,8 @@
 
 /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ (на столе) ========== */
 .battle-center .interactive-border-card-outer {
-    max-height: calc(12rem * var(--scale-factor, 1));
-    aspect-ratio: 3/4.4;
+    max-height: calc(14rem * var(--scale-factor, 1));
+    aspect-ratio: 3/5;
 }
 
 .battle-center .card-icon {
@@ -273,7 +273,7 @@
 }
 
 /* СПЕЦИАЛЬНЫЙ медиа-запрос для iPhone 8 и подобных (около 667px) */
-@media screen and (max-height: 700px) and (min-height: 635px) {
+@media screen and (max-height: 700px) and (min-height: 600px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
         max-height: calc(11rem * var(--scale-factor, 1));
