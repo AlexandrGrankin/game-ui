@@ -287,7 +287,7 @@
 @media screen and (max-height: 600px) {
     /* ========== КАРТЫ ИГРОКОВ ========== */
     .battle-control .interactive-border-card-outer {
-        max-height: calc(10rem * var(--scale-factor, 1));
+        max-height: calc(12rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.5;
     }
     .battle-control .card-back-pattern::after {
@@ -296,7 +296,7 @@
 
     /* ========== КАРТЫ ПРОТИВНИКА ========== */
     .battle-enemy-card .interactive-border-card-outer {
-        max-height: calc(8rem * var(--scale-factor, 1));
+        max-height: calc(9rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.6;
     }
     .battle-enemy-card .card-back-pattern::after {
@@ -305,7 +305,7 @@
 
     /* ========== ЦЕНТРАЛЬНЫЕ КАРТЫ ========== */
     .battle-center .interactive-border-card-outer {
-        max-height: calc(10rem * var(--scale-factor, 1));
+        max-height: calc(12rem * var(--scale-factor, 1));
         aspect-ratio: 3/4.4;
     }
     .battle-center .card-back-pattern::after {
